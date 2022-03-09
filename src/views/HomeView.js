@@ -1,11 +1,11 @@
 import React from "react";
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 
 const HomeView = () => {
     return (
         <>
             <Container>
-                <h1>Kalkulator inżynieryjny</h1>
+                <h1>Test API</h1>
             </Container>
 
             <Container>
@@ -27,7 +27,15 @@ const HomeView = () => {
                 <Form.Control type="text" />
               </Form.Group>
                 </Form>
+                <Button
+                  variant="success"
+                  type="button"
+                  className="btn btn-primary"
+                >
+                  Wyślij do BE
+                </Button>
             </Container>
+
         </>
     )
 }
