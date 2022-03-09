@@ -7,7 +7,6 @@ function App() {
     <>
     <Container>
       <HomeView/>
-      
     </Container>
     </>
   );
