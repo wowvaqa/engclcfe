@@ -20,7 +20,7 @@ const HomeView = () => {
 
 
     const sendData = () => {
-        console.log("Send data");
+        console.log(appState);
     };
 
     return (
