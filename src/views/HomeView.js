@@ -2,28 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: `https://django-civil-85.herokuapp.com/comp_data`,
-});
+// const api = axios.create({
+//   baseURL: `https://django-civil-85.herokuapp.com/comp_data`,
+// });
 
-const sendData = async () => {
-  axios
-    .post("https://django-civil-85.herokuapp.com/comp_data", {
-      first_number: 2,
-      second_number: 3,
-    })
-    .then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+// const sendData = async () => {
 
-  // let res = await api.post("/", { first_number: 1, second_number: 2 });
-  // console.log(res);
-};
+//   // let res = await api.post("/", { first_number: 1, second_number: 2 });
+//   // console.log(res);
+// };
 
 const HomeView = () => {
   const apiUrl = "https://django-civil-85.herokuapp.com/comp_data";
@@ -46,15 +33,28 @@ const HomeView = () => {
     }
   };
 
-  // const sendData = () => {
-  //   //fetchTours();
+  const sendData = () => {
+    axios
+      .post("https://django-civil-85.herokuapp.com/comp_data", {
+        first_number: 2,
+        second_number: 3,
+      })
+      .then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-  //   const data = {
-  //     first_number: 1,
-  //     second_number: 2,
-  //   };
+    //fetchTours();
 
-  // };
+    // const data = {
+    //   first_number: 1,
+    //   second_number: 2,
+    // };
+  };
 
   return (
     <>
