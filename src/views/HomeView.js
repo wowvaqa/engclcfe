@@ -7,9 +7,10 @@ const HomeView = () => {
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
+  const [loading, setLoading] = useState();
 
   async function sendData() {
-    axios
+    const response = await axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
         first_number: firstVal,
         second_number: secVal,
@@ -25,6 +26,7 @@ const HomeView = () => {
           console.log(error);
         }
       );
+    setLoading(response.data);
   }
 
   return (
@@ -66,10 +68,12 @@ const HomeView = () => {
         </Button>
         <br></br>
         <br></br>
-        <h4>Wynik: {sum}</h4>
+        <h4>
+          Wynik: {sum}, {loading}
+        </h4>
       </Container>
     </>
   );
-};;
+};
 
 export default HomeView;
