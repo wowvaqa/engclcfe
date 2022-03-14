@@ -6,10 +6,23 @@ const api = axios.create({
   baseURL: `https://django-civil-85.herokuapp.com/comp_data`,
 });
 
-
 const sendData = async () => {
-  let res = await api.post("/", { first_number: 1, second_number: 2 });
-  console.log(res);
+  axios
+    .post("https://django-civil-85.herokuapp.com/comp_data", {
+      first_number: 2,
+      second_number: 3,
+    })
+    .then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  // let res = await api.post("/", { first_number: 1, second_number: 2 });
+  // console.log(res);
 };
 
 const HomeView = () => {
@@ -41,16 +54,15 @@ const HomeView = () => {
   //     second_number: 2,
   //   };
 
-    
   // };
 
   return (
     <>
       <Container>
-        <h1>Test API v. 0.0.1</h1>
+        <h1>Test API v. 0.0.2</h1>
       </Container>
 
-      <Container>        
+      <Container>
         <Form>
           <Form.Group className="mb-3" controlId="a_value">
             <Form.Label>Wartość A:</Form.Label>
