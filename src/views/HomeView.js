@@ -12,13 +12,15 @@ import axios from "axios";
 //   // console.log(res);
 // };
 
+
+
 const HomeView = () => {
   // const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
 
-  const sendData = () => {
+  async function getData() {
     axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
         first_number: firstVal,
@@ -34,6 +36,10 @@ const HomeView = () => {
           console.log(error);
         }
       );
+  }
+
+  const sendData = () => {
+    getData()
   };
 
   return (
