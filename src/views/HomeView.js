@@ -16,6 +16,7 @@ const HomeView = () => {
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
+  const [jsonData, setJsonData] = useState();
 
   const sendData = () => {
     axios
@@ -26,8 +27,8 @@ const HomeView = () => {
       .then(
         (response) => {
           console.log(response);
-          setSum(response.sum);
-          console.log(response.sum);
+          setJsonData(response);
+          jsonData.map((item) => setSum(item.sum));
           console.log(sum);
         },
         (error) => {
