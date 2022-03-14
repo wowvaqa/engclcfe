@@ -8,7 +8,6 @@ const HomeView = () => {
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
-  const [loading, setLoading] = useState(false);
 
   async function sendData() {
     await axios
@@ -24,7 +23,6 @@ const HomeView = () => {
           console.log(jsonData.sum);
           const tempSum = jsonData.sum;
           setSum(tempSum);
-          setLoading(false);
         },
         (error) => {
           console.log(error);
@@ -66,7 +64,6 @@ const HomeView = () => {
           type="button"
           className="btn btn-primary"
           onClick={() => {
-            setLoading(true);
             sendData();
           }}
         >
@@ -75,8 +72,8 @@ const HomeView = () => {
         <br></br>
         <br></br>
 
-        {loading && <h4>Czekam na wynik...</h4>}
-        {!loading && <h4>Wynik: {sum}</h4>}
+        {sum === 0 && <h4>Czekam na wynik...</h4>}
+        {sum !== 0 && <h4>Wynik: {sum}</h4>}
       </Container>
     </>
   );
