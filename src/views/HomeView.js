@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -13,26 +13,6 @@ import axios from "axios";
 // };
 
 const HomeView = () => {
-  const apiUrl = "https://django-civil-85.herokuapp.com/comp_data";
-  //const apiUrl = "/";
-
-  const [loading, setLoading] = useState(false);
-  const [tours, setTours] = useState([]);
-
-  const fetchTours = async () => {
-    setLoading(true);
-
-    try {
-      const response = await fetch(apiUrl);
-      const tours = await response.json();
-      setTours(tours);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  };
-
   const sendData = () => {
     axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
