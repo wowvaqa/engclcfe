@@ -13,7 +13,7 @@ import axios from "axios";
 // };
 
 const HomeView = () => {
-  const [sum, setSum] = useState(0);
+  // const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
@@ -27,9 +27,8 @@ const HomeView = () => {
       .then(
         (response) => {
           console.log(response);
-          setJsonData(response);
-          jsonData.map((item) => setSum(item.sum));
-          console.log(sum);
+          setJsonData(response.data);
+          console.log(jsonData);
         },
         (error) => {
           console.log(error);
@@ -76,7 +75,7 @@ const HomeView = () => {
         </Button>
         <br></br>
         <br></br>
-        <h4>Wynik: {sum}</h4>
+        <h4>Wynik: </h4>
       </Container>
     </>
   );
