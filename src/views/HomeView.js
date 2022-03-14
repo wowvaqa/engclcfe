@@ -2,18 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-// const api = axios.create({
-//   baseURL: `https://django-civil-85.herokuapp.com/comp_data`,
-// });
-
-// const sendData = async () => {
-
-//   // let res = await api.post("/", { first_number: 1, second_number: 2 });
-//   // console.log(res);
-// };
-
 const HomeView = () => {
   const refContainer = useRef(null);
+  const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
@@ -29,6 +20,7 @@ const HomeView = () => {
           console.log(response);
           setJsonData(response.data);
           console.log(jsonData.sum);
+          setSum(jsonData.sum);
         },
         (error) => {
           console.log(error);
@@ -37,11 +29,11 @@ const HomeView = () => {
   }
 
   useEffect(() => {
-    refContainer.current.value = jsonData.sum;
-  }, [jsonData.sum]);
+    refContainer.current.value = sum;
+  }, [sum]);
 
   const sendData = () => {
-    getData()
+    getData();
   };
 
   return (
