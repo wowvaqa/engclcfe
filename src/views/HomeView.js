@@ -3,6 +3,9 @@ import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 const HomeView = () => {
+
+  var state;
+
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
@@ -21,6 +24,7 @@ const HomeView = () => {
           setJsonData(response.data);
           console.log(jsonData.sum);
           const tempSum = jsonData.sum;
+          state = jsonData.sum;
           setSum(tempSum);
           setLoading(false);
         },
@@ -74,7 +78,7 @@ const HomeView = () => {
         <br></br>
 
         {loading && <h4>Czekam na wynik...</h4>}
-        {!loading && <h4>Wynik: {sum}</h4>}
+        {!loading && <h4>Wynik: {sum}, {state}</h4>}
       </Container>
     </>
   );
