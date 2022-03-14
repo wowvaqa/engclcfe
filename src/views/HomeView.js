@@ -7,7 +7,7 @@ const HomeView = () => {
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(0);
 
   async function sendData() {
     const response = await axios
@@ -26,7 +26,7 @@ const HomeView = () => {
           console.log(error);
         }
       );
-    setLoading(response.data);
+    setLoading(response.data.sum);
   }
 
   return (
