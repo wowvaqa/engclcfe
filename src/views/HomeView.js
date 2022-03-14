@@ -76,7 +76,7 @@ const HomeView = () => {
         <br></br>
 
         {loading && <h4>Czekam na wynik...</h4>}
-        {!loading && <h4>Wynik: {sum}, {state}</h4>}
+        {!loading && <h4>Wynik: {sum}</h4>}
       </Container>
     </>
   );
