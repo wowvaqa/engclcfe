@@ -7,10 +7,10 @@ const HomeView = () => {
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
-  const [loading, setLoading] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   async function sendData() {
-    const response = await axios
+    await axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
         first_number: firstVal,
         second_number: secVal,
@@ -21,12 +21,12 @@ const HomeView = () => {
           setJsonData(response.data);
           console.log(jsonData.sum);
           setSum(jsonData.sum);
+          setLoading(false);
         },
         (error) => {
           console.log(error);
         }
       );
-    setLoading(response.data.sum);
   }
 
   return (
@@ -62,15 +62,18 @@ const HomeView = () => {
           variant="success"
           type="button"
           className="btn btn-primary"
-          onClick={() => sendData()}
+          onClick={() => {
+            setLoading(true);
+            sendData();
+          }}
         >
           Wyślij
         </Button>
         <br></br>
         <br></br>
-        <h4>
-          Wynik: {sum}, {loading}
-        </h4>
+
+        {loading && <h4>Czekam na wynik...</h4>}
+        {!loading && <h4>Wynik: {sum}</h4>}
       </Container>
     </>
   );
