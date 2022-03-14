@@ -20,7 +20,8 @@ const HomeView = () => {
           console.log(response);
           setJsonData(response.data);
           console.log(jsonData.sum);
-          setSum(jsonData.sum);
+          const tempSum = jsonData.sum;
+          setSum(tempSum);
           setLoading(false);
         },
         (error) => {
