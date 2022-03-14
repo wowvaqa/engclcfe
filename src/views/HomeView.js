@@ -3,13 +3,13 @@ import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 const HomeView = () => {
-
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
 
-  async function sendData() {
+  async function sendData(event) {
+    event.preventDefault();
     await axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
         first_number: firstVal,
@@ -19,7 +19,7 @@ const HomeView = () => {
         (response) => {
           console.log("Otrzymany response: " + response);
           setJsonData(response.data);
-          console.log("jsonData: " + response.data)
+          console.log("jsonData: " + response.data);
           console.log(jsonData.sum);
           const tempSum = jsonData.sum;
           setSum(tempSum);
@@ -63,8 +63,8 @@ const HomeView = () => {
           variant="success"
           type="button"
           className="btn btn-primary"
-          onClick={() => {
-            sendData();
+          onClick={(event) => {
+            sendData(event);
           }}
         >
           Wyślij
