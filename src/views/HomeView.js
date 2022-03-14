@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-// import axios from "axios";
+import axios from "axios";
 
 // const api = axios.create({
 //   baseURL: `https://django-civil-85.herokuapp.com/comp_data`,
@@ -13,7 +13,7 @@ import { Container, Form, Button } from "react-bootstrap";
 // };
 
 const HomeView = () => {
-
+  
   // const sendData = () => {
   //   axios
   //     .post("https://django-civil-85.herokuapp.com/comp_data", {
@@ -29,13 +29,13 @@ const HomeView = () => {
   //       }
   //     );
 
-    //fetchTours();
+  //   //fetchTours();
 
-    // const data = {
-    //   first_number: 1,
-    //   second_number: 2,
-    // };
-  };
+  //   // const data = {
+  //   //   first_number: 1,
+  //   //   second_number: 2,
+  //   // };
+  // };
 
   return (
     <>
@@ -58,7 +58,7 @@ const HomeView = () => {
           variant="success"
           type="button"
           className="btn btn-primary"
-          onClick={() => sendData()}
+          // onClick={() => sendData()}
         >
           Wyślij
         </Button>
