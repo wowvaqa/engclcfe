@@ -29,6 +29,7 @@ const HomeView = () => {
 
   const sendData = () => {
     getData();
+    getData();
   };
 
   return (
