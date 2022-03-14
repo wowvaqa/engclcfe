@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 const HomeView = () => {
-  const refContainer = useRef(null);
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
@@ -28,10 +27,6 @@ const HomeView = () => {
       );
   }
 
-  useEffect(() => {
-    refContainer.current.value = sum;
-  }, [sum]);
-
   const sendData = () => {
     getData();
   };
@@ -39,7 +34,7 @@ const HomeView = () => {
   return (
     <>
       <Container>
-        <h1>Test API v. 0.0.3</h1>
+        <h1>Test API v. 0.0.4</h1>
       </Container>
 
       <Container>
@@ -75,7 +70,7 @@ const HomeView = () => {
         </Button>
         <br></br>
         <br></br>
-        <h4>Wynik: </h4>
+        <h4>Wynik: {sum}</h4>
       </Container>
     </>
   );
