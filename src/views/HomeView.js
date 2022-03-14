@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -13,7 +13,8 @@ import axios from "axios";
 // };
 
 const HomeView = () => {
-  
+  const [sum, setSum] = useState(0);
+
   const sendData = () => {
     axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
@@ -23,18 +24,13 @@ const HomeView = () => {
       .then(
         (response) => {
           console.log(response);
+          setSum(response.sum);
+          console.log(sum);
         },
         (error) => {
           console.log(error);
         }
       );
-
-  //   //fetchTours();
-
-  //   // const data = {
-  //   //   first_number: 1,
-  //   //   second_number: 2,
-  //   // };
   };
 
   return (
