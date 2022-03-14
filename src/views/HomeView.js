@@ -2,6 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
+const api = axios.create({
+  baseURL: `https://django-civil-85.herokuapp.com/comp_data`,
+});
+
+
+const sendData = async () => {
+  let res = await api.post("/", { first_number: 1, second_number: 2 });
+  console.log(res);
+};
+
 const HomeView = () => {
   const apiUrl = "https://django-civil-85.herokuapp.com/comp_data";
   //const apiUrl = "/";
@@ -23,19 +33,16 @@ const HomeView = () => {
     }
   };
 
-  const sendData = () => {
-    //fetchTours();
+  // const sendData = () => {
+  //   //fetchTours();
 
-    const data = {
-      first_number: 1,
-      second_number: 2,
-    };
+  //   const data = {
+  //     first_number: 1,
+  //     second_number: 2,
+  //   };
 
-    axios.post(apiUrl, { data }).then((res) => {
-      console.log(res);
-      console.log(res.data);
-    });
-  };
+    
+  // };
 
   return (
     <>
