@@ -58,7 +58,7 @@ const HomeView = () => {
           variant="success"
           type="button"
           className="btn btn-primary"
-          // onClick={() => sendData()}
+          onClick={() => sendData()}
         >
           Wyślij
         </Button>
