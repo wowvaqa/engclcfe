@@ -12,8 +12,6 @@ import axios from "axios";
 //   // console.log(res);
 // };
 
-
-
 const HomeView = () => {
   // const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
@@ -30,7 +28,7 @@ const HomeView = () => {
         (response) => {
           console.log(response);
           setJsonData(response.data);
-          console.log(jsonData);
+          console.log(jsonData.sum);
         },
         (error) => {
           console.log(error);
