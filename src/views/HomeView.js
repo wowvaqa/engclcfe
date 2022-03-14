@@ -47,10 +47,10 @@ const HomeView = () => {
   return (
     <>
       <Container>
-        <h1>Test API</h1>
+        <h1>Test API v. 0.0.1</h1>
       </Container>
 
-      <Container>
+      <Container>        
         <Form>
           <Form.Group className="mb-3" controlId="a_value">
             <Form.Label>Wartość A:</Form.Label>
