@@ -14,12 +14,14 @@ import axios from "axios";
 
 const HomeView = () => {
   const [sum, setSum] = useState(0);
+  const [firstVal, setFirstVal] = useState(20);
+  const [secVal, setSecVal] = useState(11);
 
   const sendData = () => {
     axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
-        first_number: 2,
-        second_number: 3,
+        first_number: firstVal,
+        second_number: secVal,
       })
       .then(
         (response) => {
@@ -42,11 +44,23 @@ const HomeView = () => {
 
       <Container>
         <Form>
-          <Form.Group className="mb-3" controlId="a_value">
+          <Form.Group
+            className="mb-3"
+            controlId="a_value"
+            onChange={(e) => {
+              setFirstVal(parseFloat(e.target.value.replace(",", ".")));
+            }}
+          >
             <Form.Label>Wartość A:</Form.Label>
             <Form.Control type="text" />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="b_value">
+          <Form.Group
+            className="mb-3"
+            controlId="b_value"
+            onChange={(e) => {
+              setSecVal(parseFloat(e.target.value.replace(",", ".")));
+            }}
+          >
             <Form.Label>Wartość B:</Form.Label>
             <Form.Control type="text" />
           </Form.Group>
