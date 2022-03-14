@@ -6,7 +6,6 @@ const HomeView = () => {
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
-  // const [jsonData, setJsonData] = useState();
 
   async function sendData(event) {
     event.preventDefault();
@@ -29,7 +28,7 @@ const HomeView = () => {
   return (
     <>
       <Container>
-        <h1>Test API v. 0.0.4</h1>
+        <h1>Test API v. 0.0.5</h1>
       </Container>
 
       <Container>
@@ -68,7 +67,7 @@ const HomeView = () => {
         <br></br>
         <br></br>
 
-        {sum === 0 && <h4>Czekam na wynik...</h4>}
+        {sum === 0 && <h4>Tutaj wyświetlimy wynik działania...</h4>}
         {sum !== 0 && <h4>Wynik: {sum}</h4>}
       </Container>
     </>
