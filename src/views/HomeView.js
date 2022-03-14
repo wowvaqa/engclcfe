@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -7,6 +7,10 @@ const HomeView = () => {
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
+
+  useEffect(() => {
+    setSum(jsonData.data);
+  }, [jsonData]); // <- add the count variable here
 
   async function getData() {
     axios
@@ -75,6 +79,6 @@ const HomeView = () => {
       </Container>
     </>
   );
-};
+};;
 
 export default HomeView;
