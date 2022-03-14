@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Label } from "react-bootstrap";
 import axios from "axios";
 
 // const api = axios.create({
@@ -25,6 +25,7 @@ const HomeView = () => {
         (response) => {
           console.log(response);
           setSum(response.sum);
+          console.log(response.sum);
           console.log(sum);
         },
         (error) => {
@@ -36,7 +37,7 @@ const HomeView = () => {
   return (
     <>
       <Container>
-        <h1>Test API v. 0.0.2</h1>
+        <h1>Test API v. 0.0.3</h1>
       </Container>
 
       <Container>
@@ -58,6 +59,9 @@ const HomeView = () => {
         >
           Wyślij
         </Button>
+        <br></br>
+        <br></br>
+        <h4>Wynik: {sum}</h4>
       </Container>
     </>
   );
