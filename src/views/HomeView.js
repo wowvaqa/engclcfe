@@ -6,7 +6,7 @@ const HomeView = () => {
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
-  const [jsonData, setJsonData] = useState();
+  // const [jsonData, setJsonData] = useState();
 
   async function sendData(event) {
     event.preventDefault();
@@ -17,9 +17,8 @@ const HomeView = () => {
       })
       .then(
         (response) => {
-          setJsonData(response.data);
-          const tempSum = jsonData.sum;
-          setSum(tempSum);
+          //setJsonData(response.data);
+          setSum(response.data.sum);
         },
         (error) => {
           console.log(error);
