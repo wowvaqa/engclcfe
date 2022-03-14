@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import axios from "axios";
 
 // const api = axios.create({
 //   baseURL: `https://django-civil-85.herokuapp.com/comp_data`,
