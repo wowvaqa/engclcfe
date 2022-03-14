@@ -4,8 +4,6 @@ import axios from "axios";
 
 const HomeView = () => {
 
-  var state;
-
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
@@ -20,11 +18,11 @@ const HomeView = () => {
       })
       .then(
         (response) => {
-          console.log(response);
+          console.log("Otrzymany response: " + response);
           setJsonData(response.data);
+          console.log("jsonData: " + response.data)
           console.log(jsonData.sum);
           const tempSum = jsonData.sum;
-          state = jsonData.sum;
           setSum(tempSum);
           setLoading(false);
         },
