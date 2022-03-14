@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -8,11 +8,7 @@ const HomeView = () => {
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
 
-  useEffect(() => {
-    setSum(jsonData.data);
-  }, [jsonData]); // <- add the count variable here
-
-  async function getData() {
+  async function sendData() {
     axios
       .post("https://django-civil-85.herokuapp.com/comp_data", {
         first_number: firstVal,
@@ -30,11 +26,6 @@ const HomeView = () => {
         }
       );
   }
-
-  const sendData = () => {
-    getData();
-    getData();
-  };
 
   return (
     <>
