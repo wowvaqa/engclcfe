@@ -17,10 +17,7 @@ const HomeView = () => {
       })
       .then(
         (response) => {
-          console.log("Otrzymany response: " + response);
           setJsonData(response.data);
-          console.log("jsonData: " + response.data);
-          console.log(jsonData.sum);
           const tempSum = jsonData.sum;
           setSum(tempSum);
         },
