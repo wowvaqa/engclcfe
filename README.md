@@ -2,6 +2,10 @@
 
 In the project directory, you can run:
 
+First time, once:
+### `npm install react-bootstrap bootstrap@5.1.3`
+### `npm install`
+
 ### `npm start`
 
 Runs the app in the development mode.\
