@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ import axios from "axios";
 // };
 
 const HomeView = () => {
-  // const [sum, setSum] = useState(0);
+  const refContainer = useRef(null);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
   const [jsonData, setJsonData] = useState();
@@ -35,6 +35,10 @@ const HomeView = () => {
         }
       );
   }
+
+  useEffect(() => {
+    refContainer.current.value = jsonData.sum;
+  }, [jsonData.sum]);
 
   const sendData = () => {
     getData()
