@@ -46,7 +46,7 @@ const ReinforcedConcreteCalcView = () => {
               className="mb-3"
               controlId="b_value"
               onChange={(e) => {
-                setSecVal(parseFloat(e.target.value.replace(",", ".")));
+                setFirstVal(parseFloat(e.target.value.replace(",", ".")));
               }}
             >
               <Form.Label>b:</Form.Label>
