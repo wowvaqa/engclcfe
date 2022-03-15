@@ -1,13 +1,25 @@
-import { Container } from "react-bootstrap";
+import NavigationBar from "./NavigationBar";
 
-import HomeView from "./views/HomeView"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import HomeView from "./views/HomeView";
+import TestApiView from "./views/TestApiView";
+import ReinforcedConcreteCalcView from "./views/ReinforcedConcreteCalcView";
 
 function App() {
   return (
     <>
-    <Container>
-      <HomeView/>
-    </Container>
+      <Router>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/testapi" element={<TestApiView />} />
+          <Route
+            path="/reinforcedconcretecalc"
+            element={<ReinforcedConcreteCalcView />}
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
