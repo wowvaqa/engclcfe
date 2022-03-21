@@ -5,7 +5,7 @@ const HomeView = () => {
   return (
     <>
       <Container>
-        <h1>Wybierz kalkulator z rozwijanej listy...</h1>
+        <h1>Select a calculator from the drop-down list...</h1>
       </Container>
     </>
   );

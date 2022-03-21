@@ -9,7 +9,7 @@ const ReinforcedConcreteCalcView = () => {
   const [bValue, setBValue] = useState(0.5);
   const [hValue, setHValue] = useState(1);
   const [concreteClassValue, setConcreteClassValue] = useState("C30_37");
-  const [steelTypeValue, setSteelTypeValue] = useState("bst500s");
+  const [steelTypeValue, setSteelTypeValue] = useState("BSt500S");
   const [cValue, setCValue] = useState(30);
   const [fiValue, setFiValue] = useState(32);
   const [noOfBarsValue, setNoOfBarsValue] = useState(8);
@@ -52,7 +52,7 @@ const ReinforcedConcreteCalcView = () => {
   return (
     <>
       <Container>
-        <h1>Kalkulator żelbetu v. 0.0.1</h1>
+        <h3>Reinforced concrete calculator</h3>
       </Container>
       <Container fluid="md">
         <Row>
@@ -65,7 +65,7 @@ const ReinforcedConcreteCalcView = () => {
                   setNameValue(e.target.value);
                 }}
               >
-                <Form.Label>Nazwa:</Form.Label>
+                <Form.Label>Cross section label:</Form.Label>
                 <Form.Control type="text" placeholder="My first cross sect" />
               </Form.Group>
 
@@ -76,7 +76,7 @@ const ReinforcedConcreteCalcView = () => {
                   setBValue(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
-                <Form.Label>b:</Form.Label>
+                <Form.Label>Width 'b' [m]:</Form.Label>
                 <Form.Control type="number" placeholder="0.5" />
               </Form.Group>
               <Form.Group
@@ -86,7 +86,7 @@ const ReinforcedConcreteCalcView = () => {
                   setHValue(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
-                <Form.Label>h:</Form.Label>
+                <Form.Label>Height 'h' [m]:</Form.Label>
                 <Form.Control type="number" placeholder="1.0" />
               </Form.Group>
               <Form.Group
@@ -96,7 +96,7 @@ const ReinforcedConcreteCalcView = () => {
                   setConcreteClassValue(e.target.value);
                 }}
               >
-                <Form.Label>Klasa betonu:</Form.Label>
+                <Form.Label>Concrete class :</Form.Label>
                 <Form.Select aria-label="Default select example">
                   <option value="1">C30_37</option>
                 </Form.Select>
@@ -109,7 +109,7 @@ const ReinforcedConcreteCalcView = () => {
                   setSteelTypeValue(e.target.value);
                 }}
               >
-                <Form.Label>Typ stali:</Form.Label>
+                <Form.Label>Steel class :</Form.Label>
                 <Form.Select aria-label="Default select example">
                   <option value="1">Bst500s</option>
                   <option value="1">B500SP</option>
@@ -123,7 +123,7 @@ const ReinforcedConcreteCalcView = () => {
                   setCValue(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
-                <Form.Label>c:</Form.Label>
+                <Form.Label>Concrete cover 'c' [mm]: </Form.Label>
                 <Form.Control type="number" placeholder="30" />
               </Form.Group>
 
@@ -134,7 +134,7 @@ const ReinforcedConcreteCalcView = () => {
                   setFiValue(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
-                <Form.Label>fi:</Form.Label>
+                <Form.Label>Main reinforcement diameter Ø [mm]: </Form.Label>
                 <Form.Control type="number" placeholder="32" />
               </Form.Group>
 
@@ -147,7 +147,7 @@ const ReinforcedConcreteCalcView = () => {
                   );
                 }}
               >
-                <Form.Label>No of bar:</Form.Label>
+                <Form.Label>Number of main rebars : </Form.Label>
                 <Form.Control type="number" placeholder="8" />
               </Form.Group>
               <Form.Group
@@ -157,7 +157,7 @@ const ReinforcedConcreteCalcView = () => {
                   setFiSValue(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
-                <Form.Label>fi s:</Form.Label>
+                <Form.Label>Diameter of stirrups Øₛ [mm]:</Form.Label>
                 <Form.Control type="number" placeholder="12" />
               </Form.Group>
             </Form>
@@ -183,11 +183,11 @@ const ReinforcedConcreteCalcView = () => {
               sendData(event);
             }}
           >
-            Wyślij
+            Calculate
           </Button>
         </Row>
         <Row>
-          {m_rd === 0 && <h4>Tutaj wyświetlimy wynik...</h4>}
+          <h3>Bending capacity of analyzed cross section:</h3>          
           {m_rd !== 0 && (
             <h4>
               m_rd: {m_rd} ksi_eff: {ksi_eff} x_eff: {x_eff}
