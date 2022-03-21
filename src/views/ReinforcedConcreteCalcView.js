@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Col, Row } from "react-bootstrap";
+import { Container, Form, Button, Col, Row, Table } from "react-bootstrap";
 import axios from "axios";
 import image from "../assets/API_1_pio.png";
 
@@ -157,7 +157,9 @@ const ReinforcedConcreteCalcView = () => {
                   setFiSValue(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
-                <Form.Label>Diameter of stirrups Øₛ [mm]:</Form.Label>
+                <Form.Label>
+                  Diameter of stirrups Ø<sub>s</sub> [mm]:
+                </Form.Label>
                 <Form.Control type="number" placeholder="12" />
               </Form.Group>
             </Form>
@@ -186,14 +188,32 @@ const ReinforcedConcreteCalcView = () => {
             Calculate
           </Button>
         </Row>
+        <br></br>
         <Row>
-          <h3>Bending capacity of analyzed cross section:</h3>          
-          {m_rd !== 0 && (
-            <h4>
-              m_rd: {m_rd} ksi_eff: {ksi_eff} x_eff: {x_eff}
-            </h4>
-          )}
+          <h4>Bending capacity of analyzed cross section:</h4>
         </Row>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>
+                Bending capacity of analyzed cross section 'M<sub>rd</sub>' :
+              </th>
+              <th>
+                Relative height of the compression zone 'ξ<sub>iff</sub>' :
+              </th>
+              <th>
+                Height of the compression zone 'x<sub>eff</sub>' :
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{m_rd !== 0 && <h4>{m_rd} [kN]</h4>}</td>
+              <td>{m_rd !== 0 && <h4>{ksi_eff} [-]</h4>}</td>
+              <td>{m_rd !== 0 && <h4>{x_eff} [m]</h4>}</td>
+            </tr>
+          </tbody>
+        </Table>
       </Container>
     </>
   );
