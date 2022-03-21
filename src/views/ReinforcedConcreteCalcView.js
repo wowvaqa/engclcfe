@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Container, Form, Button, Col, Row, Table } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Col,
+  Row,
+  Table,
+  Collapse,
+} from "react-bootstrap";
 import axios from "axios";
 import image from "../assets/API_1_pio.png";
 
@@ -18,6 +26,8 @@ const ReinforcedConcreteCalcView = () => {
   const [m_rd, setM_rd] = useState(0);
   const [ksi_eff, setKsi_eff] = useState(0);
   const [x_eff, setX_eff] = useState(0);
+  /* Visual - results view collapse*/
+  const [open, setOpen] = useState(false);
 
   /**
    * Send JSON to API
@@ -163,6 +173,19 @@ const ReinforcedConcreteCalcView = () => {
                 <Form.Control type="number" placeholder="12" />
               </Form.Group>
             </Form>
+            <Button
+              variant="primary"
+              type="button"
+              className="btn btn-primary"
+              aria-controls="example-collapse-text"
+              aria-expanded={open}
+              onClick={(event) => {
+                sendData(event);
+                setOpen(true);
+              }}
+            >
+              Calculate
+            </Button>
           </Col>
           <Col>
             <Container>
@@ -176,44 +199,34 @@ const ReinforcedConcreteCalcView = () => {
             </Container>
           </Col>
         </Row>
-        <Row>
-          <Button
-            variant="success"
-            type="button"
-            className="btn btn-primary"
-            onClick={(event) => {
-              sendData(event);
-            }}
-          >
-            Calculate
-          </Button>
-        </Row>
         <br></br>
-        <Row>
-          <h4>Bending capacity of analyzed cross section:</h4>
-        </Row>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>
-                Bending capacity of analyzed cross section 'M<sub>rd</sub>' :
-              </th>
-              <th>
-                Relative height of the compression zone 'ξ<sub>iff</sub>' :
-              </th>
-              <th>
-                Height of the compression zone 'x<sub>eff</sub>' :
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{m_rd !== 0 && <h4>{m_rd} [kN]</h4>}</td>
-              <td>{m_rd !== 0 && <h4>{ksi_eff} [-]</h4>}</td>
-              <td>{m_rd !== 0 && <h4>{x_eff} [m]</h4>}</td>
-            </tr>
-          </tbody>
-        </Table>
+        <Collapse in={open}>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <td colSpan="3">Bending capacity of analyzed cross section</td>
+              </tr>
+              <tr>
+                <th>
+                  Bending capacity of analyzed cross section 'M<sub>rd</sub>' :
+                </th>
+                <th>
+                  Relative height of the compression zone 'ξ<sub>iff</sub>' :
+                </th>
+                <th>
+                  Height of the compression zone 'x<sub>eff</sub>' :
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{m_rd !== 0 && <h4>{m_rd} [kN]</h4>}</td>
+                <td>{m_rd !== 0 && <h4>{ksi_eff} [-]</h4>}</td>
+                <td>{m_rd !== 0 && <h4>{x_eff} [m]</h4>}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Collapse>
       </Container>
     </>
   );
