@@ -6,17 +6,30 @@ import HomeView from "./views/HomeView";
 import TestApiView from "./views/TestApiView";
 import ReinforcedConcreteCalcView from "./views/ReinforcedConcreteCalcView";
 import AppModalInfo from "./modals/AppModalInfo";
+import AppModalInput from "./modals/AppModalInput";
 
 import { useGlobalContext } from "./Context";
 
 function App() {
-  const { modalShow, setModalShow, modalText } = useGlobalContext();
+  const {
+    modalInfoShow,
+    setModalInfoShow,
+    modalInfoText,
+    modalInputShow,
+    setModalInputShow,
+    modalInputText,
+  } = useGlobalContext();
   return (
     <>
       <AppModalInfo
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        text={modalText}
+        show={modalInfoShow}
+        onHide={() => setModalInfoShow(false)}
+        text={modalInfoText}
+      />
+      <AppModalInput
+        show={modalInputShow}
+        onHide={() => setModalInputShow(false)}
+        text={modalInputText}
       />
       <Router>
         <NavigationBar />

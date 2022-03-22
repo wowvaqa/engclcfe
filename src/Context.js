@@ -3,18 +3,24 @@ import React, { useState, useContext } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
-  // Modal window view to show messages
-  const [modalShow, setModalShow] = useState(false);
-  // Text to show in modal window
-  const [modalText, setModalText] = useState("no text");  
+  /* Modal to show text */
+  const [modalInfoShow, setModalInfoShow] = useState(false);
+  const [modalInfoText, setModalInfoText] = useState("no text");
+  /* Promp modal to accept value*/
+  const [modalInputShow, setModalInputShow] = useState(false);
+  const [modalInputText, setModalInputText] = useState("no text");
 
   return (
     <AppContext.Provider
       value={{
-        modalShow,
-        setModalShow,
-        modalText,
-        setModalText,
+        modalInfoShow,
+        setModalInfoShow,
+        modalInfoText,
+        setModalInfoText,
+        modalInputShow,
+        setModalInputShow,
+        modalInputText,
+        setModalInputText,
       }}
     >
       {children}

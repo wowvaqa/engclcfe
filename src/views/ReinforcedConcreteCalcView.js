@@ -13,7 +13,8 @@ import axios from "axios";
 import image from "../assets/API_1_pio.png";
 
 const ReinforcedConcreteCalcView = () => {
-  const { setModalShow, setModalText } = useGlobalContext();
+  const { setModalInfoShow, setModalInfoText } = useGlobalContext();
+  const { setModalInputShow, setModalInputText } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
   const [bValue, setBValue] = useState(0.5);
@@ -64,46 +65,46 @@ const ReinforcedConcreteCalcView = () => {
 
   const handleError = () => {
     if (Number.isNaN(bValue) || Number.isNaN(bValue)) {
-      setModalText("Invalid value : 'b'");
-      setModalShow(true);
+      setModalInfoText("Invalid value : 'b'");
+      setModalInfoShow(true);
     }
 
     if (Number.isNaN(hValue) || Number.isNaN(hValue)) {
-      setModalText("Invalid value : 'h'");
-      setModalShow(true);
+      setModalInfoText("Invalid value : 'h'");
+      setModalInfoShow(true);
     }
 
     if (bValue > 2) {
-      setModalText(
+      setModalInputText(
         "Value 'b', are you sure you entered the given values in meters?"
       );
-      setModalShow(true);
+      setModalInputShow(true);
     }
 
     if (hValue > 4) {
-      setModalText(
+      setModalInputText(
         "Value 'h', are you sure you entered the given values in meters?"
       );
-      setModalShow(true);
+      setModalInputShow(true);
     }
 
     if (Number.isNaN(cValue) || Number.isNaN(cValue)) {
-      setModalText("Invalid value : 'c'");
-      setModalShow(true);
+      setModalInfoText("Invalid value : 'c'");
+      setModalInfoShow(true);
     }
 
     if (cValue < 20) {
-      setModalText(
+      setModalInputText(
         "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
       );
-      setModalShow(true);
+      setModalInputShow(true);
     }
 
     if (cValue > 70) {
-      setModalText(
+      setModalInputText(
         "the concrete cover is rarely grater than 70 mm, are you sure of this decision?"
       );
-      setModalShow(true);
+      setModalInputShow(true);
     }
   };
 

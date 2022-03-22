@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 const AppModalInput = (props) => {
@@ -18,7 +17,10 @@ const AppModalInput = (props) => {
         <p>{props.text}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button variant="success" onClick={props.onHide}>
+          OK
+        </Button>
+        <Button onClick={props.onHide}>Cancel</Button>
       </Modal.Footer>
     </Modal>
   );
