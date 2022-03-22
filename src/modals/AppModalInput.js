@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const AppModal = (props) => {
+const AppModalInput = (props) => {
   return (
     <Modal
       {...props}
@@ -11,17 +11,17 @@ const AppModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Sprawdź dane
+          Check input values
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>{props.text}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Zamknij</Button>
+        <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AppModal;
+export default AppModalInput;

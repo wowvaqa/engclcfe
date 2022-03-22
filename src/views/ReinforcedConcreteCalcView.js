@@ -8,10 +8,12 @@ import {
   Table,
   Collapse,
 } from "react-bootstrap";
+import { useGlobalContext } from "../Context";
 import axios from "axios";
 import image from "../assets/API_1_pio.png";
 
 const ReinforcedConcreteCalcView = () => {
+  const { setModalShow, setModalText } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
   const [bValue, setBValue] = useState(0.5);
@@ -35,6 +37,7 @@ const ReinforcedConcreteCalcView = () => {
    */
   async function sendData(event) {
     event.preventDefault();
+    handleError();
     await axios
       .post("https://django-civil-85.herokuapp.com/rect_sing_reinf", {
         name: nameValue,
@@ -58,6 +61,51 @@ const ReinforcedConcreteCalcView = () => {
         }
       );
   }
+
+  const handleError = () => {
+    if (Number.isNaN(bValue) || Number.isNaN(bValue)) {
+      setModalText("Invalid value : 'b'");
+      setModalShow(true);
+    }
+
+    if (Number.isNaN(hValue) || Number.isNaN(hValue)) {
+      setModalText("Invalid value : 'h'");
+      setModalShow(true);
+    }
+
+    if (bValue > 2) {
+      setModalText(
+        "Value 'b', are you sure you entered the given values in meters?"
+      );
+      setModalShow(true);
+    }
+
+    if (hValue > 4) {
+      setModalText(
+        "Value 'h', are you sure you entered the given values in meters?"
+      );
+      setModalShow(true);
+    }
+
+    if (Number.isNaN(cValue) || Number.isNaN(cValue)) {
+      setModalText("Invalid value : 'c'");
+      setModalShow(true);
+    }
+
+    if (cValue < 20) {
+      setModalText(
+        "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
+      );
+      setModalShow(true);
+    }
+
+    if (cValue > 70) {
+      setModalText(
+        "the concrete cover is rarely grater than 70 mm, are you sure of this decision?"
+      );
+      setModalShow(true);
+    }
+  };
 
   return (
     <>
@@ -145,7 +193,20 @@ const ReinforcedConcreteCalcView = () => {
                 }}
               >
                 <Form.Label>Main reinforcement diameter Ø [mm]: </Form.Label>
-                <Form.Control type="number" placeholder="32" />
+                <Form.Select
+                  aria-label="Default select example"
+                  placeholder="32"
+                >
+                  <option value="32">32</option>
+                  <option value="25">25</option>
+                  <option value="20">20</option>
+                  <option value="18">18</option>
+                  <option value="16">16</option>
+                  <option value="12">12</option>
+                  <option value="10">10</option>
+                  <option value="8">8</option>
+                  <option value="6">6</option>
+                </Form.Select>
               </Form.Group>
 
               <Form.Group
@@ -170,7 +231,20 @@ const ReinforcedConcreteCalcView = () => {
                 <Form.Label>
                   Diameter of stirrups Ø<sub>s</sub> [mm]:
                 </Form.Label>
-                <Form.Control type="number" placeholder="12" />
+                <Form.Select
+                  aria-label="Default select example"
+                  placeholder="32"
+                >
+                  <option value="32">32</option>
+                  <option value="25">25</option>
+                  <option value="20">20</option>
+                  <option value="18">18</option>
+                  <option value="16">16</option>
+                  <option value="12">12</option>
+                  <option value="10">10</option>
+                  <option value="8">8</option>
+                  <option value="6">6</option>
+                </Form.Select>
               </Form.Group>
             </Form>
             <Button
