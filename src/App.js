@@ -7,6 +7,7 @@ import TestApiView from "./views/TestApiView";
 import ReinforcedConcreteCalcView from "./views/ReinforcedConcreteCalcView";
 import AppModalInfo from "./modals/AppModalInfo";
 import AppModalInput from "./modals/AppModalInput";
+import AppModalWait from "./modals/AppModalWait";
 
 import { useGlobalContext } from "./Context";
 
@@ -18,6 +19,9 @@ function App() {
     modalInputShow,
     setModalInputShow,
     modalInputText,
+    modalWaitShow,
+    modalWaitText,
+    setModalWaitShow,
   } = useGlobalContext();
   return (
     <>
@@ -30,6 +34,11 @@ function App() {
         show={modalInputShow}
         onHide={() => setModalInputShow(false)}
         text={modalInputText}
+      />
+      <AppModalWait
+        show={modalWaitShow}
+        onHide={() => setModalWaitShow(false)}
+        text={modalWaitText}
       />
       <Router>
         <NavigationBar />

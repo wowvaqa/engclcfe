@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Container,
   Form,
@@ -15,6 +15,7 @@ import image from "../assets/API_1_pio.png";
 const ReinforcedConcreteCalcView = () => {
   const { setModalInfoShow, setModalInfoText } = useGlobalContext();
   const { setModalInputShow, setModalInputText } = useGlobalContext();
+  const { setModalWaitShow, setModalWaitText } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
   const [bValue, setBValue] = useState(0.5);
@@ -30,32 +31,56 @@ const ReinforcedConcreteCalcView = () => {
   const [ksi_eff, setKsi_eff] = useState(0);
   const [x_eff, setX_eff] = useState(0);
   /* Visual - results view collapse*/
-  const [open, setOpen] = useState(false);
+  const [isCollapseOpen, setIsCollapseOpen] = useState(false);
+  /* Handling errors */
+  const isErr = useRef(false);
+
+  useEffect(() => {
+    if (isErr.current === true) {
+      console.log("IsERR IS TRUE: " + isErr.current);
+    } else {
+      console.log("IsERR IS FALSE: " + isErr.current);
+    }
+  });
 
   /**
    * Send JSON to API
    * @param {*} event event fo pervent default action
    */
-  async function sendData(event) {
-    event.preventDefault();
+  const sendData = (event) => {
+    console.log("b: " + bValue + " h: " + hValue + " c: " + cValue);
     handleError();
+    if (!isErr.current) initSendData();
+    isErr.current = false;
+    event.preventDefault();
+  };
+
+  async function initSendData() {
+    console.log("ERR: " + isErr.current);
+    setModalWaitShow(true);
+    setModalWaitText("Please wait...");
     await axios
-      .post("https://django-civil-85.herokuapp.com/rect_sing_reinf", {
-        name: nameValue,
-        b: bValue,
-        h: hValue,
-        cl_conc: concreteClassValue,
-        cl_steel: steelTypeValue,
-        c: cValue,
-        fi: fiValue,
-        no_of_bars: noOfBarsValue,
-        fi_s: fiSValue,
-      })
+      .post(
+        "https://django-civil-85.herokuapp.com/api/civil_calcs/rect_sing_reinf",
+        {
+          name: nameValue,
+          b: bValue,
+          h: hValue,
+          cl_conc: concreteClassValue,
+          cl_steel: steelTypeValue,
+          c: cValue,
+          fi: fiValue,
+          no_of_bars: noOfBarsValue,
+          fi_s: fiSValue,
+        }
+      )
       .then(
         (response) => {
           setM_rd(response.data.m_rd);
           setKsi_eff(response.data.ksi_eff);
           setX_eff(response.data.x_eff);
+          setModalWaitShow(false);
+          setIsCollapseOpen(true);
         },
         (error) => {
           console.log(error);
@@ -64,14 +89,18 @@ const ReinforcedConcreteCalcView = () => {
   }
 
   const handleError = () => {
-    if (Number.isNaN(bValue) || Number.isNaN(bValue)) {
+    if (Number.isNaN(bValue) || bValue <= 0) {
       setModalInfoText("Invalid value : 'b'");
       setModalInfoShow(true);
+      isErr.current = true;
+      console.log("B is NAN or b value <= 0 isErr: " + isErr.current);
     }
 
-    if (Number.isNaN(hValue) || Number.isNaN(hValue)) {
+    if (Number.isNaN(hValue) || hValue <= 0) {
       setModalInfoText("Invalid value : 'h'");
       setModalInfoShow(true);
+      isErr.current = true;
+      console.log("h is NAN or h value <= 0 isErr: " + isErr.current);
     }
 
     if (bValue > 2) {
@@ -88,9 +117,11 @@ const ReinforcedConcreteCalcView = () => {
       setModalInputShow(true);
     }
 
-    if (Number.isNaN(cValue) || Number.isNaN(cValue)) {
+    if (Number.isNaN(cValue) || cValue <= 0) {
       setModalInfoText("Invalid value : 'c'");
       setModalInfoShow(true);
+      isErr.current = true;
+      console.log("c is NAN or c value <= 0 isErr: " + isErr.current);
     }
 
     if (cValue < 20) {
@@ -253,10 +284,9 @@ const ReinforcedConcreteCalcView = () => {
               type="button"
               className="btn btn-primary"
               aria-controls="example-collapse-text"
-              aria-expanded={open}
+              aria-expanded={isCollapseOpen}
               onClick={(event) => {
                 sendData(event);
-                setOpen(true);
               }}
             >
               Calculate
@@ -275,7 +305,7 @@ const ReinforcedConcreteCalcView = () => {
           </Col>
         </Row>
         <br></br>
-        <Collapse in={open}>
+        <Collapse in={isCollapseOpen}>
           <Table striped bordered hover>
             <thead>
               <tr>

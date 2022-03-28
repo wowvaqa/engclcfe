@@ -9,6 +9,11 @@ const AppProvider = ({ children }) => {
   /* Promp modal to accept value*/
   const [modalInputShow, setModalInputShow] = useState(false);
   const [modalInputText, setModalInputText] = useState("no text");
+  /* Loading modal */
+  const [modalWaitShow, setModalWaitShow] = useState(false);
+  const [modalWaitText, setModalWaitText] = useState(false);
+  /* Error handling */
+  const [err, setErr] = useState(false);
 
   return (
     <AppContext.Provider
@@ -21,6 +26,12 @@ const AppProvider = ({ children }) => {
         setModalInputShow,
         modalInputText,
         setModalInputText,
+        modalWaitShow,
+        setModalWaitShow,
+        modalWaitText,
+        setModalWaitText,
+        err,
+        setErr,
       }}
     >
       {children}
