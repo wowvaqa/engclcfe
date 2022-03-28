@@ -13,9 +13,14 @@ import axios from "axios";
 import image from "../assets/API_1_pio.png";
 
 const ReinforcedConcreteCalcView = () => {
-  const { setModalInfoShow, setModalInfoText } = useGlobalContext();
-  const { setModalInputShow, setModalInputText } = useGlobalContext();
-  const { setModalWaitShow, setModalWaitText } = useGlobalContext();
+  const {
+    setModalInfoShow,
+    setModalInfoText,
+    setModalInputShow,
+    setModalInputText,
+    setModalWaitShow,
+    setModalWaitText,
+  } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
   const [bValue, setBValue] = useState(0.5);
@@ -34,13 +39,15 @@ const ReinforcedConcreteCalcView = () => {
   const [isCollapseOpen, setIsCollapseOpen] = useState(false);
   /* Handling errors */
   const isErr = useRef(false);
+  const waitUntilUserInput = useRef(false);
 
   useEffect(() => {
-    if (isErr.current === true) {
-      console.log("IsERR IS TRUE: " + isErr.current);
-    } else {
-      console.log("IsERR IS FALSE: " + isErr.current);
-    }
+    // if (isErr.current === true) {
+    //   console.log("IsERR IS TRUE: " + isErr.current);
+    // } else {
+    //   console.log("IsERR IS FALSE: " + isErr.current);
+    // }
+   
   });
 
   /**
@@ -50,7 +57,7 @@ const ReinforcedConcreteCalcView = () => {
   const sendData = (event) => {
     console.log("b: " + bValue + " h: " + hValue + " c: " + cValue);
     handleError();
-    if (!isErr.current) initSendData();
+    if (!isErr.current && !waitUntilUserInput.current) initSendData();
     isErr.current = false;
     event.preventDefault();
   };

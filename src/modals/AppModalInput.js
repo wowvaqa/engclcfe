@@ -1,6 +1,21 @@
 import { Modal, Button } from "react-bootstrap";
+import { useGlobalContext } from "../Context";
 
 const AppModalInput = (props) => {
+  const { setModalInputOk, setModalInputCancel } = useGlobalContext();
+
+  const okEvent = (event) => {
+    props.onHide();
+    setModalInputOk(true);
+    event.preventDefault();
+  };
+
+  const cancelEvent = (event) => {
+    props.onHide();
+    setModalInputCancel(true);
+    event.preventDefault();
+  };
+
   return (
     <Modal
       {...props}
@@ -17,10 +32,21 @@ const AppModalInput = (props) => {
         <p>{props.text}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="success" onClick={props.onHide}>
+        <Button
+          variant="success"
+          onClick={(event) => {
+            okEvent(event);
+          }}
+        >
           OK
         </Button>
-        <Button onClick={props.onHide}>Cancel</Button>
+        <Button
+          onClick={(event) => {
+            cancelEvent(event);
+          }}
+        >
+          Cancel
+        </Button>
       </Modal.Footer>
     </Modal>
   );
