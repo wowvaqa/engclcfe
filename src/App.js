@@ -22,6 +22,7 @@ function App() {
     modalWaitShow,
     modalWaitText,
     setModalWaitShow,
+    modalInputFunction
   } = useGlobalContext();
   return (
     <>
@@ -39,6 +40,7 @@ function App() {
         show={modalWaitShow}
         onHide={() => setModalWaitShow(false)}
         text={modalWaitText}
+        sendDataToApi = {modalInputFunction}
       />
       <Router>
         <NavigationBar />

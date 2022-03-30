@@ -35,6 +35,7 @@ const AppModalInput = (props) => {
         <Button
           variant="success"
           onClick={(event) => {
+            props.initSendData();
             okEvent(event);
           }}
         >
