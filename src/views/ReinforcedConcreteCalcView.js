@@ -20,6 +20,7 @@ const ReinforcedConcreteCalcView = () => {
     setModalInputText,
     setModalWaitShow,
     setModalWaitText,
+    setModalInputFunction
   } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
@@ -39,7 +40,6 @@ const ReinforcedConcreteCalcView = () => {
   const [isCollapseOpen, setIsCollapseOpen] = useState(false);
   /* Handling errors */
   const isErr = useRef(false);
-  const waitUntilUserInput = useRef(false);
 
   useEffect(() => {
     // if (isErr.current === true) {
@@ -47,7 +47,6 @@ const ReinforcedConcreteCalcView = () => {
     // } else {
     //   console.log("IsERR IS FALSE: " + isErr.current);
     // }
-   
   });
 
   /**
@@ -57,10 +56,14 @@ const ReinforcedConcreteCalcView = () => {
   const sendData = (event) => {
     console.log("b: " + bValue + " h: " + hValue + " c: " + cValue);
     handleError();
-    if (!isErr.current && !waitUntilUserInput.current) initSendData();
+    if (!isErr.current) initSendData();
     isErr.current = false;
     event.preventDefault();
   };
+
+  const sendFunc = () => {
+    initSendData();
+  }
 
   async function initSendData() {
     console.log("ERR: " + isErr.current);
@@ -135,6 +138,7 @@ const ReinforcedConcreteCalcView = () => {
       setModalInputText(
         "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
       );
+      setModalInputFunction(this.sendFunc())
       setModalInputShow(true);
     }
 
