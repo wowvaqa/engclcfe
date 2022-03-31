@@ -9,7 +9,6 @@ const AppProvider = ({ children }) => {
   /* Promp modal to accept value*/
   const [modalInputShow, setModalInputShow] = useState(false);
   const [modalInputText, setModalInputText] = useState("no text");
-  const [modalInputFunction, setModalInputFunction] = useState();
   /* Loading modal */
   const [modalWaitShow, setModalWaitShow] = useState(false);
   const [modalWaitText, setModalWaitText] = useState(false);
@@ -28,9 +27,7 @@ const AppProvider = ({ children }) => {
         modalWaitShow,
         setModalWaitShow,
         modalWaitText,
-        setModalWaitText,
-        modalInputFunction,
-        setModalInputFunction
+        setModalWaitText
       }}
     >
       {children}

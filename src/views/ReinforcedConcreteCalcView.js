@@ -20,7 +20,6 @@ const ReinforcedConcreteCalcView = () => {
     setModalInputText,
     setModalWaitShow,
     setModalWaitText,
-    setModalInputFunction
   } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
@@ -60,10 +59,6 @@ const ReinforcedConcreteCalcView = () => {
     isErr.current = false;
     event.preventDefault();
   };
-
-  const sendFunc = () => {
-    initSendData();
-  }
 
   async function initSendData() {
     console.log("ERR: " + isErr.current);
@@ -138,7 +133,6 @@ const ReinforcedConcreteCalcView = () => {
       setModalInputText(
         "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
       );
-      setModalInputFunction(this.sendFunc())
       setModalInputShow(true);
     }
 

@@ -40,7 +40,6 @@ function App() {
         show={modalWaitShow}
         onHide={() => setModalWaitShow(false)}
         text={modalWaitText}
-        sendDataToApi = {modalInputFunction}
       />
       <Router>
         <NavigationBar />
