@@ -23,6 +23,7 @@ function App() {
     modalWaitText,
     setModalWaitShow
   } = useGlobalContext();
+
   return (
     <>
       <AppModalInfo
