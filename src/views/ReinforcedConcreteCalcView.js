@@ -44,6 +44,9 @@ const ReinforcedConcreteCalcView = () => {
   const isErr = useRef(false);
   /* Ok button pressed flag from Input modal reference*/
   const isModalInputButtonOkClicked = useRef(false);
+  /* Reference to function input modal OK button change state */
+  const inputModalOkButtonClickRef = useRef();
+  inputModalOkButtonClickRef.current = inputModalOkButtonClick;
 
   useEffect(() => {
     if (modalInputShow) {
@@ -57,10 +60,10 @@ const ReinforcedConcreteCalcView = () => {
     if (modalInputOkState) {
       isModalInputButtonOkClicked.current = false;
       initSendData();
-      inputModalOkButtonClick();
+      inputModalOkButtonClickRef.current();
       console.log("OK_PRESSED: is TRUE");
     }
-  }, [modalInputOkState]);
+  }, [modalInputOkState, inputModalOkButtonClickRef]);
 
   /**
    * Send JSON to API

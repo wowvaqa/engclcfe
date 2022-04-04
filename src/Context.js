@@ -9,7 +9,7 @@ const AppProvider = ({ children }) => {
   /* Promp modal to accept value*/
   const [modalInputShow, setModalInputShow] = useState(false);
   const [modalInputText, setModalInputText] = useState("no text");
-  /* Input modal OK button state */
+  /* Input modal OK button state*/
   const [modalInputOkState, setModalInputOkState] = useState(false);
   /* Loading modal */
   const [modalWaitShow, setModalWaitShow] = useState(false);

@@ -26,7 +26,7 @@ const NavigationBar = () => {
             {logUser === "" && (
               <Navbar.Text>
                 {" "}
-                <a href="/login">Sign in</a>
+                <a href="/login">Sign In</a>
               </Navbar.Text>
             )}
             {logUser !== "" && (
