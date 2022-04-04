@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
   const [modalInputShow, setModalInputShow] = useState(false);
   const [modalInputText, setModalInputText] = useState("no text");
   /* Input modal OK button state */
-  const [modalInputOkPressed, setModalInputOkPressed] = useState(false);
+  const [modalInputOkState, setModalInputOkState] = useState(false);
   /* Loading modal */
   const [modalWaitShow, setModalWaitShow] = useState(false);
   const [modalWaitText, setModalWaitText] = useState(false);
@@ -19,7 +19,7 @@ const AppProvider = ({ children }) => {
    * Change flag of input modal OK button state
    */
   const inputModalOkButtonClick = () => {
-    setModalInputOkPressed(!modalInputOkPressed);
+    setModalInputOkState(!modalInputOkState);
   };
 
   return (
@@ -37,7 +37,7 @@ const AppProvider = ({ children }) => {
         setModalWaitShow,
         modalWaitText,
         setModalWaitText,
-        modalInputOkPressed,
+        modalInputOkState,
         inputModalOkButtonClick,
       }}
     >

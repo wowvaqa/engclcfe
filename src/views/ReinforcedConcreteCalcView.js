@@ -21,7 +21,7 @@ const ReinforcedConcreteCalcView = () => {
     modalInputShow,
     setModalWaitShow,
     setModalWaitText,
-    modalInputOkPressed,
+    modalInputOkState,
     inputModalOkButtonClick,
   } = useGlobalContext();
   /* JSON Input data */
@@ -43,7 +43,7 @@ const ReinforcedConcreteCalcView = () => {
   /* Handling errors */
   const isErr = useRef(false);
   /* Ok button pressed flag from Input modal reference*/
-  const isModalInputButtonOkPressed = useRef(false);
+  const isModalInputButtonOkClicked = useRef(false);
 
   useEffect(() => {
     if (modalInputShow) {
@@ -54,13 +54,13 @@ const ReinforcedConcreteCalcView = () => {
   }, [modalInputShow]);
 
   useEffect(() => {
-    if (modalInputOkPressed) {
-      isModalInputButtonOkPressed.current = false;
+    if (modalInputOkState) {
+      isModalInputButtonOkClicked.current = false;
       initSendData();
       inputModalOkButtonClick();
       console.log("OK_PRESSED: is TRUE");
     }
-  }, [modalInputOkPressed]);
+  }, [modalInputOkState]);
 
   /**
    * Send JSON to API
@@ -70,7 +70,7 @@ const ReinforcedConcreteCalcView = () => {
     isErr.current = false;
     handleError();
     console.log("(sendData) Error: " + isErr.current);
-    if (!isModalInputButtonOkPressed.current && !isErr.current) {
+    if (!isModalInputButtonOkClicked.current && !isErr.current) {
       initSendData();
       console.log(
         "b: " +
@@ -135,7 +135,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (bValue > 2) {
-      isModalInputButtonOkPressed.current = true;
+      isModalInputButtonOkClicked.current = true;
       setModalInputText(
         "Value 'b', are you sure you entered the given values in meters?"
       );
@@ -143,7 +143,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (hValue > 4) {
-      isModalInputButtonOkPressed.current = true;
+      isModalInputButtonOkClicked.current = true;
       setModalInputText(
         "Value 'h', are you sure you entered the given values in meters?"
       );
@@ -158,7 +158,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (cValue < 20) {
-      isModalInputButtonOkPressed.current = true;
+      isModalInputButtonOkClicked.current = true;
       setModalInputText(
         "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
       );
@@ -166,7 +166,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (cValue > 70) {
-      isModalInputButtonOkPressed.current = true;
+      isModalInputButtonOkClicked.current = true;
       setModalInputText(
         "the concrete cover is rarely grater than 70 mm, are you sure of this decision?"
       );
