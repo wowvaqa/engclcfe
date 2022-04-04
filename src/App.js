@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import TestApiView from "./views/TestApiView";
 import ReinforcedConcreteCalcView from "./views/ReinforcedConcreteCalcView";
+import LogView from "./views/LogView";
 import AppModalInfo from "./modals/AppModalInfo";
 import AppModalInput from "./modals/AppModalInput";
 import AppModalWait from "./modals/AppModalWait";
@@ -50,6 +51,7 @@ function App() {
             path="/reinforcedconcretecalc"
             element={<ReinforcedConcreteCalcView />}
           />
+          <Route path="/login" element={<LogView />} />
         </Routes>
       </Router>
     </>

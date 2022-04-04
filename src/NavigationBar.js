@@ -1,7 +1,11 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 
+import { useGlobalContext } from "./Context";
+
 const NavigationBar = () => {
+  const { logUser } = useGlobalContext();
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -19,9 +23,18 @@ const NavigationBar = () => {
           </Nav>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as: <a href="#login">Wowvaqa</a>
-            </Navbar.Text>
+            {logUser === "" && (
+              <Navbar.Text>
+                {" "}
+                <a href="/login">Sign in</a>
+              </Navbar.Text>
+            )}
+            {logUser !== "" && (
+              <Navbar.Text> Zalogowany: 
+                {" "}
+                <a href="/login">{logUser}</a>
+              </Navbar.Text>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

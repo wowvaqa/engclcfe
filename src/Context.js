@@ -14,6 +14,8 @@ const AppProvider = ({ children }) => {
   /* Loading modal */
   const [modalWaitShow, setModalWaitShow] = useState(false);
   const [modalWaitText, setModalWaitText] = useState(false);
+  /* User loging & registration */
+  const [logUser, setLogUser] = useState("");
 
   /**
    * Change flag of input modal OK button state
@@ -39,6 +41,8 @@ const AppProvider = ({ children }) => {
         setModalWaitText,
         modalInputOkState,
         inputModalOkButtonClick,
+        logUser,
+        setLogUser,
       }}
     >
       {children}
