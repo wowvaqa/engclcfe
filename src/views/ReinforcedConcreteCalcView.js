@@ -23,7 +23,6 @@ const ReinforcedConcreteCalcView = () => {
     setModalWaitText,
     modalInputOkPressed,
     okPressedModalInput,
-
   } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
@@ -46,7 +45,7 @@ const ReinforcedConcreteCalcView = () => {
   const waitUntilOk = useRef(false);
 
   useEffect(() => {
-    if (modalInputShow){    
+    if (modalInputShow) {
       console.log("Modal input show is " + modalInputShow);
     } else {
       console.log("Modal input show is " + modalInputShow);
@@ -54,26 +53,35 @@ const ReinforcedConcreteCalcView = () => {
   }, [modalInputShow]);
 
   useEffect(() => {
-    if (modalInputOkPressed){
+    if (modalInputOkPressed) {
       waitUntilOk.current = false;
       initSendData();
-      isErr.current = false;
       okPressedModalInput();
       console.log("OK_PRESSED: is TRUE");
-    } 
-  }, [modalInputOkPressed]);
+    }
+  }, [modalInputOkPressed, okPressedModalInput]);
 
   /**
    * Send JSON to API
    * @param {*} event event fo pervent default action
    */
   const sendData = (event) => {
+    isErr.current = false;
     handleError();
+    console.log("(sendData) Error: " + isErr.current);
     if (!waitUntilOk.current && !isErr.current) {
       initSendData();
-      console.log("b: " + bValue + " h: " + hValue + " c: " + cValue + " modalOkPressed:" + modalInputShow);
-      isErr.current = false;
-    }    
+      console.log(
+        "b: " +
+          bValue +
+          " h: " +
+          hValue +
+          " c: " +
+          cValue +
+          " modalOkPressed:" +
+          modalInputShow
+      );
+    }
     event.preventDefault();
   };
 
@@ -103,6 +111,7 @@ const ReinforcedConcreteCalcView = () => {
           setX_eff(response.data.x_eff);
           setModalWaitShow(false);
           setIsCollapseOpen(true);
+          isErr.current = false;
         },
         (error) => {
           console.log(error);
