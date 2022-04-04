@@ -21,8 +21,7 @@ function App() {
     modalInputText,
     modalWaitShow,
     modalWaitText,
-    setModalWaitShow,
-    modalInputFunction
+    setModalWaitShow
   } = useGlobalContext();
   return (
     <>

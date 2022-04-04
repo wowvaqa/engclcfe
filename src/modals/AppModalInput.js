@@ -2,17 +2,17 @@ import { Modal, Button } from "react-bootstrap";
 import { useGlobalContext } from "../Context";
 
 const AppModalInput = (props) => {
-  const { setModalInputOk, setModalInputCancel } = useGlobalContext();
+  const { setModalInputWaitUntilOk } = useGlobalContext();
 
   const okEvent = (event) => {
     props.onHide();
-    setModalInputOk(true);
+    setModalInputWaitUntilOk(true);
     event.preventDefault();
   };
 
   const cancelEvent = (event) => {
     props.onHide();
-    setModalInputCancel(true);
+    setModalInputWaitUntilOk(true);    
     event.preventDefault();
   };
 
@@ -36,14 +36,14 @@ const AppModalInput = (props) => {
           variant="success"
           onClick={(event) => {
             okEvent(event);
-          }}
+          }}          
         >
           OK
         </Button>
         <Button
           onClick={(event) => {
             cancelEvent(event);
-          }}
+          }}          
         >
           Cancel
         </Button>

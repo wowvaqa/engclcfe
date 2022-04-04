@@ -18,8 +18,11 @@ const ReinforcedConcreteCalcView = () => {
     setModalInfoText,
     setModalInputShow,
     setModalInputText,
+    modalInputShow,
     setModalWaitShow,
     setModalWaitText,
+    modalInputWaitUntilOk,
+    setModalInputWaitUntilOk
   } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
@@ -41,6 +44,9 @@ const ReinforcedConcreteCalcView = () => {
   const isErr = useRef(false);
 
   useEffect(() => {
+    if (modalInputShow){
+      console.log("Modal input show is TRUE");
+    }
     // if (isErr.current === true) {
     //   console.log("IsERR IS TRUE: " + isErr.current);
     // } else {
