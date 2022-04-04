@@ -22,7 +22,7 @@ const ReinforcedConcreteCalcView = () => {
     setModalWaitShow,
     setModalWaitText,
     modalInputOkPressed,
-    okPressedModalInput,
+    inputModalOkButtonClick,
   } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
@@ -42,7 +42,8 @@ const ReinforcedConcreteCalcView = () => {
   const [isCollapseOpen, setIsCollapseOpen] = useState(false);
   /* Handling errors */
   const isErr = useRef(false);
-  const waitUntilOk = useRef(false);
+  /* Ok button pressed flag from Input modal reference*/
+  const isModalInputButtonOkPressed = useRef(false);
 
   useEffect(() => {
     if (modalInputShow) {
@@ -54,12 +55,12 @@ const ReinforcedConcreteCalcView = () => {
 
   useEffect(() => {
     if (modalInputOkPressed) {
-      waitUntilOk.current = false;
+      isModalInputButtonOkPressed.current = false;
       initSendData();
-      okPressedModalInput();
+      inputModalOkButtonClick();
       console.log("OK_PRESSED: is TRUE");
     }
-  }, [modalInputOkPressed, okPressedModalInput]);
+  }, [modalInputOkPressed]);
 
   /**
    * Send JSON to API
@@ -69,7 +70,7 @@ const ReinforcedConcreteCalcView = () => {
     isErr.current = false;
     handleError();
     console.log("(sendData) Error: " + isErr.current);
-    if (!waitUntilOk.current && !isErr.current) {
+    if (!isModalInputButtonOkPressed.current && !isErr.current) {
       initSendData();
       console.log(
         "b: " +
@@ -86,7 +87,6 @@ const ReinforcedConcreteCalcView = () => {
   };
 
   async function initSendData() {
-    console.log("ERR: " + isErr.current);
     setModalWaitShow(true);
     setModalWaitText("Please wait...");
     await axios
@@ -135,7 +135,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (bValue > 2) {
-      waitUntilOk.current = true;
+      isModalInputButtonOkPressed.current = true;
       setModalInputText(
         "Value 'b', are you sure you entered the given values in meters?"
       );
@@ -143,7 +143,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (hValue > 4) {
-      waitUntilOk.current = true;
+      isModalInputButtonOkPressed.current = true;
       setModalInputText(
         "Value 'h', are you sure you entered the given values in meters?"
       );
@@ -158,7 +158,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (cValue < 20) {
-      waitUntilOk.current = true;
+      isModalInputButtonOkPressed.current = true;
       setModalInputText(
         "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
       );
@@ -166,7 +166,7 @@ const ReinforcedConcreteCalcView = () => {
     }
 
     if (cValue > 70) {
-      waitUntilOk.current = true;
+      isModalInputButtonOkPressed.current = true;
       setModalInputText(
         "the concrete cover is rarely grater than 70 mm, are you sure of this decision?"
       );

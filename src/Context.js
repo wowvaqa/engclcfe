@@ -9,15 +9,18 @@ const AppProvider = ({ children }) => {
   /* Promp modal to accept value*/
   const [modalInputShow, setModalInputShow] = useState(false);
   const [modalInputText, setModalInputText] = useState("no text");
+  /* Input modal OK button state */
+  const [modalInputOkPressed, setModalInputOkPressed] = useState(false);
   /* Loading modal */
   const [modalWaitShow, setModalWaitShow] = useState(false);
   const [modalWaitText, setModalWaitText] = useState(false);
-  
-  const [modalInputOkPressed, setModalInputOkPressed] = useState(false)
 
-  const okPressedModalInput = () => {
-    setModalInputOkPressed(!modalInputOkPressed)
-  }
+  /**
+   * Change flag of input modal OK button state
+   */
+  const inputModalOkButtonClick = () => {
+    setModalInputOkPressed(!modalInputOkPressed);
+  };
 
   return (
     <AppContext.Provider
@@ -35,7 +38,7 @@ const AppProvider = ({ children }) => {
         modalWaitText,
         setModalWaitText,
         modalInputOkPressed,
-        okPressedModalInput
+        inputModalOkButtonClick,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { useGlobalContext } from "../Context";
 const AppModalInput = (props) => {
 
   const {
-    okPressedModalInput,
+    inputModalOkButtonClick,
   } = useGlobalContext();
   
   const okEvent = (event) => {
@@ -38,7 +38,7 @@ const AppModalInput = (props) => {
           variant="success"
           onClick={(event) => {
             okEvent(event);
-            okPressedModalInput();
+            inputModalOkButtonClick();
           }}          
         >
           OK
