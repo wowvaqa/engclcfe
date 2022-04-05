@@ -1,16 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Container,
-  Form,
-  Button,
-  Col,
-  Row,
-  Table,
-  Collapse,
-} from "react-bootstrap";
+import { Container, Form, Button, Col, Row } from "react-bootstrap";
 import { useGlobalContext } from "../Context";
 import axios from "axios";
 import image from "../assets/API_1_pio.png";
+
+import ReinforcedConcreteResultView from "../views/ReinforcedConcreteResultView";
 
 const ReinforcedConcreteCalcView = () => {
   const {
@@ -344,33 +338,12 @@ const ReinforcedConcreteCalcView = () => {
           </Col>
         </Row>
         <br></br>
-        <Collapse in={isCollapseOpen}>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <td colSpan="3">Bending capacity of analyzed cross section</td>
-              </tr>
-              <tr>
-                <th>
-                  Bending capacity of analyzed cross section 'M<sub>rd</sub>' :
-                </th>
-                <th>
-                  Relative height of the compression zone 'ξ<sub>iff</sub>' :
-                </th>
-                <th>
-                  Height of the compression zone 'x<sub>eff</sub>' :
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{m_rd !== 0 && <h4>{m_rd} [kN]</h4>}</td>
-                <td>{m_rd !== 0 && <h4>{ksi_eff} [-]</h4>}</td>
-                <td>{m_rd !== 0 && <h4>{x_eff} [m]</h4>}</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Collapse>
+        <ReinforcedConcreteResultView
+          isCollapseOpen={true}
+          m_rd={m_rd}
+          ksi_eff={ksi_eff}
+          x_eff={x_eff}
+        />
       </Container>
     </>
   );
