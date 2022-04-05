@@ -1,19 +1,33 @@
-import { useRef, useState, useEffect, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import { useRef, useState, useEffect } from "react";
+// import AuthContext from "../context/AuthProvider";
+import { useGlobalContext } from "../Context";
+import { useCookies } from "react-cookie";
 
 import axios from "axios";
 import { Button, Container, Form } from "react-bootstrap";
 const LOGIN_URL = "/auth";
 
 const LogView = () => {
-  const { setAuth } = useContext(AuthContext);
+  // const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth, setIsLogged } = useGlobalContext();
   const userRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [user, setUser] = useState("test11@test.pl");
+  const [pwd, setPwd] = useState("test11");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const [cookies, setCookie] = useCookies(["member"]);
+
+  function createCookie(userName, token) {
+    setCookie("member", userName, {
+      path: "/",
+    });
+    setCookie("token", token, {
+      path: "/",
+    });
+    console.log("Utworzono cookie: " + cookies);
+  }
 
   useEffect(() => {
     userRef.current.focus();
@@ -25,27 +39,39 @@ const LogView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login");
+    console.log("Login: " + LOGIN_URL);
 
     try {
+      // const response = await axios.post(
+      //   "https://django-civil-85.herokuapp.com/api/users/login",
+      //   JSON.stringify({ user, pwd }),
+      //   {
+      //     headers: { "Content-Type": "application/json" },
+      //     withCredentials: true,
+      //   }
+      // );
       const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ user, pwd }),
+        "https://django-civil-85.herokuapp.com/api/users/login",
         {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          username: user,
+          password: pwd,
         }
       );
+
       console.log(JSON.stringify(response?.data));
       //console.log(JSON.stringify(response));
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({ user, pwd, roles, accessToken });
+      const accessToken = response?.data?.token;
+      //const roles = response?.data?.roles;
+      setAuth({ user, pwd, accessToken });
+      createCookie(user, accessToken);
+      setIsLogged(true);
       setUser("");
       setPwd("");
       setSuccess(true);
     } catch (err) {
       if (!err?.response) {
+        console.log("err: " + err);
+        console.log("err.response: " + err.response);
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
         setErrMsg("Missing Username or Password");
@@ -111,6 +137,7 @@ const LogView = () => {
               Submit
             </Button>
           </Form>
+          <br />
           <p>
             Need an Account?
             <br />

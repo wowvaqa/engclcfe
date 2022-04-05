@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+
+import { useCookies } from "react-cookie";
 
 import { useGlobalContext } from "./Context";
 
 const NavigationBar = () => {
-  const { logUser } = useGlobalContext();
+  const [cookies, setCookie] = useCookies();
+
+  const { isLogged, setIsLogged } = useGlobalContext();
+
+  useEffect(() => {
+    console.log(cookies);
+    if (cookies.member !== undefined) {
+      console.log(cookies.member.length);
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -23,16 +39,16 @@ const NavigationBar = () => {
           </Nav>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
-            {logUser === "" && (
+            {isLogged === false && (
               <Navbar.Text>
                 {" "}
                 <a href="/login">Sign In</a>
               </Navbar.Text>
             )}
-            {logUser !== "" && (
-              <Navbar.Text> Zalogowany: 
+            {cookies.member !== "" && (
+              <Navbar.Text>
                 {" "}
-                <a href="/login">{logUser}</a>
+                <a href="/login">{cookies.member}</a>
               </Navbar.Text>
             )}
           </Navbar.Collapse>

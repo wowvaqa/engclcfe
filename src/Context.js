@@ -15,7 +15,8 @@ const AppProvider = ({ children }) => {
   const [modalWaitShow, setModalWaitShow] = useState(false);
   const [modalWaitText, setModalWaitText] = useState(false);
   /* User loging & registration */
-  const [logUser, setLogUser] = useState("");
+  const [auth, setAuth] = useState({});
+  const [isLogged, setIsLogged] = useState(false);
 
   /**
    * Change flag of input modal OK button state
@@ -41,8 +42,10 @@ const AppProvider = ({ children }) => {
         setModalWaitText,
         modalInputOkState,
         inputModalOkButtonClick,
-        logUser,
-        setLogUser,
+        setAuth,
+        auth,
+        isLogged,
+        setIsLogged,
       }}
     >
       {children}

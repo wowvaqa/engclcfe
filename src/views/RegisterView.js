@@ -201,12 +201,12 @@ const RegisterView = () => {
                 Sign Up
               </Button>
             </Form>
-
+            <br />
             <p>
               Already registered?
               <br />
               <span className="line">
-                <a href="/register">Sign In</a>
+                <a href="/login">Sign In</a>
               </span>
             </p>
           </Container>
