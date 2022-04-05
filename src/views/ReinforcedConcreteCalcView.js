@@ -63,6 +63,7 @@ const ReinforcedConcreteCalcView = () => {
       inputModalOkButtonClickRef.current();
       console.log("OK_PRESSED: is TRUE");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modalInputOkState, inputModalOkButtonClickRef]);
 
   /**
