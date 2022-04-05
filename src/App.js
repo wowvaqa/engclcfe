@@ -9,6 +9,7 @@ import LogView from "./views/LogView";
 import AppModalInfo from "./modals/AppModalInfo";
 import AppModalInput from "./modals/AppModalInput";
 import AppModalWait from "./modals/AppModalWait";
+import RegisterView from "./views/RegisterView";
 
 import { useGlobalContext } from "./Context";
 
@@ -22,7 +23,7 @@ function App() {
     modalInputText,
     modalWaitShow,
     modalWaitText,
-    setModalWaitShow
+    setModalWaitShow,
   } = useGlobalContext();
 
   return (
@@ -52,6 +53,7 @@ function App() {
             element={<ReinforcedConcreteCalcView />}
           />
           <Route path="/login" element={<LogView />} />
+          <Route path="/register" element={<RegisterView />} />
         </Routes>
       </Router>
     </>
