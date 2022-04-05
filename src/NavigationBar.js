@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import { useGlobalContext } from "./Context";
 
 const NavigationBar = () => {
+  // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie] = useCookies();
 
   const { isLogged, setIsLogged } = useGlobalContext();
