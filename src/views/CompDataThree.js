@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useGlobalContext } from "../Context";
 
 const CompDataThree = () => {
-  const {
-    setModalInfoShow,
-    setModalInfoText
-  } = useGlobalContext();
+  const { setModalInfoShow, setModalInfoText } = useGlobalContext();
 
   const [sum, setSum] = useState(0);
   const [firstVal, setFirstVal] = useState(20);
   const [secVal, setSecVal] = useState(11);
-  const [thirdVal, setThirdVal] = useState(20)
+  const [thirdVal, setThirdVal] = useState(20);
   // eslint-disable-next-line no-unused-vars
-  const [token, setToken] = useState()
-   // eslint-disable-next-line no-unused-vars
-   const [cookies, setCookie] = useCookies();
+  const [token, setToken] = useState();
+  // eslint-disable-next-line no-unused-vars
+  const [cookies, setCookie] = useCookies();
 
   async function sendData(event) {
     event.preventDefault();
@@ -27,21 +24,22 @@ const CompDataThree = () => {
     //   path: "/",
     // });
 
-    setToken(cookies.token)
-    console.log("Token: " + cookies.token)
+    setToken(cookies.token);
+    console.log("Token: " + cookies.token);
 
     axios.defaults.headers = {
-      'Content-Type': 'application/json',
-      Authorization: "Token " + cookies.token
-  }
+      "Content-Type": "application/json",
+      Authorization: "Token " + cookies.token,
+    };
 
     await axios
-      .post("https://django-civil-85.herokuapp.com/api/civil_calcs/comp_data_three", {
-        first_number: firstVal,
-        second_number: secVal,
-        third_number: thirdVal,
-  }
-        
+      .post(
+        "https://django-civil-85.herokuapp.com/api/civil_calcs/comp_data_three",
+        {
+          first_number: firstVal,
+          second_number: secVal,
+          third_number: thirdVal,
+        }
       )
       .then(
         (response) => {
@@ -56,48 +54,52 @@ const CompDataThree = () => {
       );
   }
 
-  const handleError = () => {
-    
-  }
-
+  const handleError = () => {};
   return (
     <>
       <Container>
         <h1>Token access data test</h1>
       </Container>
-
       <Container>
         <Form>
-          <Form.Group
-            className="mb-3"
-            controlId="a_value"
-            onChange={(e) => {
-              setFirstVal(parseFloat(e.target.value.replace(",", ".")));
-            }}
-          >
-            <Form.Label>Wartość A:</Form.Label>
-            <Form.Control type="number" />
-          </Form.Group>
-          <Form.Group
-            className="mb-3"
-            controlId="b_value"
-            onChange={(e) => {
-              setSecVal(parseFloat(e.target.value.replace(",", ".")));
-            }}
-          >
-            <Form.Label>Wartość B:</Form.Label>
-            <Form.Control type="number" />
-          </Form.Group>
-          <Form.Group
-            className="mb-3"
-            controlId="c_value"
-            onChange={(e) => {
-              setThirdVal(parseFloat(e.target.value.replace(",", ".")));
-            }}
-          >
-            <Form.Label>Wartość c:</Form.Label>
-            <Form.Control type="number" />
-          </Form.Group>
+          <Row>
+            <Col>
+              <Form.Group
+                className="mb-3"
+                controlId="a_value"
+                onChange={(e) => {
+                  setFirstVal(parseFloat(e.target.value.replace(",", ".")));
+                }}
+              >
+                <Form.Label>Wartość A:</Form.Label>
+                <Form.Control type="number" />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group
+                className="mb-3"
+                controlId="b_value"
+                onChange={(e) => {
+                  setSecVal(parseFloat(e.target.value.replace(",", ".")));
+                }}
+              >
+                <Form.Label>Wartość B:</Form.Label>
+                <Form.Control type="number" />
+              </Form.Group>
+            </Col>
+            <Col>
+              <Form.Group
+                className="mb-3"
+                controlId="c_value"
+                onChange={(e) => {
+                  setThirdVal(parseFloat(e.target.value.replace(",", ".")));
+                }}
+              >
+                <Form.Label>Wartość C:</Form.Label>
+                <Form.Control type="number" />
+              </Form.Group>
+            </Col>
+          </Row>
         </Form>
         <Button
           variant="success"
