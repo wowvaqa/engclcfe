@@ -7,7 +7,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const RegisterView = () => {
-  const userRef = useRef();
+  const emailRef = useRef();
   const errRef = useRef();
 
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ const RegisterView = () => {
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
-    userRef.current.focus();
+    emailRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -122,6 +122,7 @@ const RegisterView = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
+                  ref={emailRef}
                   autoComplete="off"
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -148,7 +149,6 @@ const RegisterView = () => {
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
-                  ref={userRef}
                   autoComplete="off"
                   onChange={(e) => setUser(e.target.value)}
                   value={user}
@@ -162,9 +162,7 @@ const RegisterView = () => {
               <p
                 id="uidnote"
                 className={
-                  userFocus && email && !validEmail
-                    ? "instructions"
-                    : "offscreen"
+                  userFocus && user && !validName ? "instructions" : "offscreen"
                 }
               >
                 4 to 24 characters.
