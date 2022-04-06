@@ -19,11 +19,6 @@ const CompDataThree = () => {
   async function sendData(event) {
     event.preventDefault();
 
-    handleError();
-    // setCookie("token", "871ada39b44e1e0e64518104db630e2062e040c3", {
-    //   path: "/",
-    // });
-
     setToken(cookies.token);
     console.log("Token: " + cookies.token);
 
@@ -54,7 +49,6 @@ const CompDataThree = () => {
       );
   }
 
-  const handleError = () => {};
   return (
     <>
       <Container>

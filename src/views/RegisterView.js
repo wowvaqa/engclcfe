@@ -2,13 +2,17 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Container, Form } from "react-bootstrap";
 
+const EMAIL_REGEX = /^(?=.*[a-z])(?=.*[@]).{8,50}$/;
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = "/register";
 
 const RegisterView = () => {
   const userRef = useRef();
   const errRef = useRef();
+
+  const [email, setEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
@@ -39,6 +43,10 @@ const RegisterView = () => {
   }, [pwd, matchPwd]);
 
   useEffect(() => {
+    setValidEmail(EMAIL_REGEX.test(email));
+  }, [email]);
+
+  useEffect(() => {
     setErrMsg("");
   }, [user, pwd, matchPwd]);
 
@@ -47,24 +55,28 @@ const RegisterView = () => {
     // if button enabled with JS hack
     const v1 = USER_REGEX.test(user);
     const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
+    const v3 = EMAIL_REGEX.test(email);
+    if (!v1 || !v2 || !v3) {
       setErrMsg("Invalid Entry");
       return;
     }
     try {
       const response = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ user, pwd }),
+        "https://django-civil-85.herokuapp.com/api/users/register",
         {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          email: email,
+          username: user,
+          password: pwd,
+          password2: pwd,
         }
       );
+
       // TODO: remove console.logs before deployment
       console.log(JSON.stringify(response?.data));
       //console.log(JSON.stringify(response))
       setSuccess(true);
       //clear state and controlled inputs
+      setEmail("");
       setUser("");
       setPwd("");
       setMatchPwd("");
@@ -105,6 +117,32 @@ const RegisterView = () => {
               <Form.Group
                 onSubmit={handleSubmit}
                 className="mb-3"
+                controlId="email"
+              >
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  autoComplete="off"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  aria-invalid={validEmail ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setEmailFocus(true)}
+                  onBlur={() => setEmailFocus(false)}
+                />
+                <p
+                  id="uidnote"
+                  className={
+                    emailFocus && !validEmail ? "instructions" : "offscreen"
+                  }
+                >
+                  8 to 50 characters.
+                  <br />@ required
+                </p>
+              </Form.Group>
+              <Form.Group
+                onSubmit={handleSubmit}
+                className="mb-3"
                 controlId="username"
               >
                 <Form.Label>Username</Form.Label>
@@ -124,7 +162,9 @@ const RegisterView = () => {
               <p
                 id="uidnote"
                 className={
-                  userFocus && user && !validName ? "instructions" : "offscreen"
+                  userFocus && email && !validEmail
+                    ? "instructions"
+                    : "offscreen"
                 }
               >
                 4 to 24 characters.

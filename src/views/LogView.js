@@ -5,7 +5,6 @@ import { useCookies } from "react-cookie";
 
 import axios from "axios";
 import { Button, Container, Form } from "react-bootstrap";
-const LOGIN_URL = "/auth";
 
 const LogView = () => {
   // const { auth, setAuth } = useContext(AuthContext);
@@ -39,8 +38,6 @@ const LogView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login: " + LOGIN_URL);
-
     try {
       // const response = await axios.post(
       //   "https://django-civil-85.herokuapp.com/api/users/login",
