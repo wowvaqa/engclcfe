@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 
 import { useCookies } from "react-cookie";
 
@@ -7,20 +7,27 @@ import { useGlobalContext } from "./Context";
 
 const NavigationBar = () => {
   // eslint-disable-next-line no-unused-vars
-  const [cookies, setCookie] = useCookies();
-
+  const [cookies, setCookie, removeCookie] = useCookies();
   const { isLogged, setIsLogged } = useGlobalContext();
 
   useEffect(() => {
     console.log(cookies);
     if (cookies.member !== undefined) {
-      console.log(cookies.member.length);
+      console.log("cookies.member.length:" + cookies.member.length);
       setIsLogged(true);
     } else {
       setIsLogged(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const logout = (event) => {
+    setIsLogged(false);
+    event.preventDefault();
+    removeCookie("member");
+    removeCookie("token");
+    console.log("Nastąpiło wylogowanie");
+  };
 
   return (
     <>
@@ -36,9 +43,10 @@ const NavigationBar = () => {
                 Reinforced concrete calculator
               </NavDropdown.Item>
               {isLogged === true && (
-              <NavDropdown.Item eventKey="4.3" href="/compdatathree">
-                Token access test
-              </NavDropdown.Item>)}
+                <NavDropdown.Item eventKey="4.3" href="/compdatathree">
+                  Token access test
+                </NavDropdown.Item>
+              )}
             </NavDropdown>
           </Nav>
           <Navbar.Toggle />
@@ -52,8 +60,20 @@ const NavigationBar = () => {
             {cookies.member !== "" && (
               <Navbar.Text>
                 {" "}
-                <a href="/login">{cookies.member}</a>
+                <a href="/login">{cookies.member}</a>{" "}
               </Navbar.Text>
+            )}
+            <p>..</p>
+            {isLogged !== false && (
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={(event) => {
+                  logout(event);
+                }}
+              >
+                Wyloguj
+              </Button>
             )}
           </Navbar.Collapse>
         </Container>
