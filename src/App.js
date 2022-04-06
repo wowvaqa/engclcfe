@@ -10,6 +10,7 @@ import AppModalInfo from "./modals/AppModalInfo";
 import AppModalInput from "./modals/AppModalInput";
 import AppModalWait from "./modals/AppModalWait";
 import RegisterView from "./views/RegisterView";
+import CompDataThree from "./views/CompDataThree"
 
 import { useGlobalContext } from "./Context";
 
@@ -54,6 +55,7 @@ function App() {
           />
           <Route path="/login" element={<LogView />} />
           <Route path="/register" element={<RegisterView />} />
+          <Route path="/compdatathree" element={<CompDataThree/>}/>
         </Routes>
       </Router>
     </>

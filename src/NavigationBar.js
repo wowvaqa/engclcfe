@@ -35,6 +35,10 @@ const NavigationBar = () => {
               <NavDropdown.Item eventKey="4.2" href="/reinforcedconcretecalc">
                 Reinforced concrete calculator
               </NavDropdown.Item>
+              {isLogged === true && (
+              <NavDropdown.Item eventKey="4.3" href="/compdatathree">
+                Token access test
+              </NavDropdown.Item>)}
             </NavDropdown>
           </Nav>
           <Navbar.Toggle />
