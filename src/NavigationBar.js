@@ -36,6 +36,9 @@ const NavigationBar = () => {
           <Navbar.Brand href="/">ENGINEERING CALCULATORS</Navbar.Brand>
           <Nav variant="pills" className="me-auto" defaultActiveKey="/">
             <NavDropdown title="Calcs" id="nav-dropdown">
+              <NavDropdown.Item eventKey="4.0" href="/canvastesting">
+                Canvas Testing
+              </NavDropdown.Item>
               <NavDropdown.Item eventKey="4.1" href="/testapi">
                 Test API
               </NavDropdown.Item>
@@ -72,7 +75,7 @@ const NavigationBar = () => {
                   logout(event);
                 }}
               >
-                Wyloguj
+                Logout
               </Button>
             )}
           </Navbar.Collapse>
