@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Container, Form, Button, Col, Row } from "react-bootstrap";
 import { useGlobalContext } from "../Context";
 import axios from "axios";
-import image from "../assets/API_1_pio.png";
+//import image from "../assets/API_1_pio.png";
 
 import ReinforcedConcreteResultView from "../views/ReinforcedConcreteResultView";
+import ReinforcedConcreteDynamicDraw from "../graphics/ReinforcedConcreteDynamicDraw";
 
 const ReinforcedConcreteCalcView = () => {
   const {
@@ -326,7 +327,11 @@ const ReinforcedConcreteCalcView = () => {
             </Button>
           </Col>
           <Col>
-            <Container>
+            <ReinforcedConcreteDynamicDraw
+              bValue={bValue * 100}
+              hValue={hValue * 100}
+            />
+            {/* 
               <img
                 src={image}
                 width={732}
@@ -334,7 +339,7 @@ const ReinforcedConcreteCalcView = () => {
                 alt="cocktail db logo"
                 className="weightElement"
               />
-            </Container>
+              */}
           </Col>
         </Row>
         <br></br>

@@ -1,8 +1,13 @@
 import React from "react";
-import RectTest from "../graphics/RectTest";
+import { Container } from "react-bootstrap";
+import RectTest from "../graphics/ReinforcedConcreteDynamicDraw";
 
 const CanvasTesting = () => {
-  return <RectTest />;
+  return (
+    <Container>
+      <RectTest />
+    </Container>
+  );
 };
 
 export default CanvasTesting;
