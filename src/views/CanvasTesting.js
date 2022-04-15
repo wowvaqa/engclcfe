@@ -1,13 +1,10 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Stage} from "react-konva";
 
 const CanvasTesting = () => {
   return (
-    <>
-      <Container>
-        <h1>Canvas test view</h1>
-      </Container>
-    </>
+    <Stage width={window.innerWidth} height={window.innerHeight}>
+    </Stage>
   );
 };
 
