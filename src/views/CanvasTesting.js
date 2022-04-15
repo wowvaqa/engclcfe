@@ -1,11 +1,8 @@
 import React from "react";
-import { Stage} from "react-konva";
+import RectTest from "../graphics/RectTest";
 
 const CanvasTesting = () => {
-  return (
-    <Stage width={window.innerWidth} height={window.innerHeight}>
-    </Stage>
-  );
+  return <RectTest />;
 };
 
 export default CanvasTesting;
