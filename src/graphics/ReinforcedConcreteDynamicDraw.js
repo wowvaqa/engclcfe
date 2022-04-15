@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Rect, Stage, Layer, Line } from "react-konva";
+import { Rect, Stage, Layer, Line, Circle } from "react-konva";
 
 const ReinforcedConcreteDynamicDraw = (props) => {
   /* Width (b) & height (h) of concrete */
   const [bValue, setBValue] = useState(props.bValue);
   const [hValue, setHValue] = useState(props.hValue);
+  const [noOfBarsValueArray, setNoOfBarsValueArray] = useState([]);
+
+  /* x,y ofsset for drawing */
+  const xyOffset = 10;
+
+  useEffect(() => {
+    var arr = [];
+    for (var i = 0; i < props.noOfBarsValue + 1; i++) {
+      arr.push(i);
+    }
+    setNoOfBarsValueArray(arr);
+  }, [props.noOfBarsValue]);
 
   useEffect(() => {
     setBValue(props.bValue);
@@ -14,18 +26,50 @@ const ReinforcedConcreteDynamicDraw = (props) => {
   return (
     <Stage width={600} height={600}>
       <Layer>
-        <InnerRect bValue={bValue} hValue={hValue} />
-        <OuterRect bValue={bValue} hValue={hValue} />
+        <InnerRect bValue={bValue} hValue={hValue} xyOffset={xyOffset} />
+        <OuterRect bValue={bValue} hValue={hValue} xyOffset={xyOffset} />
+        <ReinforcingBars
+          noOfBarsValueArray={noOfBarsValueArray}
+          bValue={bValue}
+          hValue={hValue}
+          xyOffset={xyOffset}
+        />
       </Layer>
     </Stage>
   );
 };
 
+const ReinforcingBars = (props) => {
+  const y = props.hValue - 10;
+  const odstep = (props.bValue - 30) / props.noOfBarsValueArray.length;
+  console.log("Odstep: " + odstep);
+
+  return (
+    <>
+      {props.noOfBarsValueArray.map((e) => {
+        return (
+          <Circle
+            key={e}
+            x={props.xyOffset + 20 + e * odstep + odstep / 3}
+            y={y}
+            radius={4}
+            fill="black"
+          />
+        );
+      })}
+    </>
+  );
+};
+
+/**
+ * @param {hValue, bValue} props
+ * @returns Konva type object of inline draw for reinforced concrete
+ */
 const InnerRect = (props) => {
   return (
     <Rect
-      x={20}
-      y={20}
+      x={props.xyOffset + 10}
+      y={props.xyOffset + 10}
       width={props.bValue - 20}
       height={props.hValue - 20}
       stroke={"black"}
@@ -35,10 +79,14 @@ const InnerRect = (props) => {
   );
 };
 
+/**
+ * @param {hValue, bValue} props
+ * @returns Konva type object of outline draw for reinforced concrete
+ */
 const OuterRect = (props) => {
   const offset = 10;
-  const x = 10;
-  const y = 10;
+  const x = props.xyOffset;
+  const y = props.xyOffset;
 
   // Lfet upper verticle (v1)
   const v1pAx = x;

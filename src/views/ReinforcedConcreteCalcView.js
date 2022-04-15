@@ -330,6 +330,7 @@ const ReinforcedConcreteCalcView = () => {
             <ReinforcedConcreteDynamicDraw
               bValue={bValue * 100}
               hValue={hValue * 100}
+              noOfBarsValue={noOfBarsValue}
             />
             {/* 
               <img
