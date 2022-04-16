@@ -40,7 +40,7 @@ const ReinforcedConcreteDynamicDraw = (props) => {
   }, [props.b, props.h]);
 
   return (
-    <Stage width={820} height={620}>
+    <Stage width={props.bValue + 200} height={props.hValue + 200}>
       <Layer>
         <ConcreteRect
           bValue={bValue}
@@ -81,7 +81,12 @@ const DimensioningLines = (props) => {
         hValue={props.hValue}
         h={props.h}
       />
-      <DimensionB />
+      <DimensionB
+        concreteOffset={props.concreteOffset}
+        bValue={props.bValue}
+        hValue={props.hValue}
+        b={props.b}
+      />
       <DimensionC />
       <DimensionEff />
     </>
@@ -117,13 +122,13 @@ const DimensionH = (props) => {
         closed={false}
       />
       <Line
-        points={[startX - 20, startY, startX + 100, startY]}
+        points={[startX - 15, startY, startX + 100, startY]}
         stroke={"black"}
         strokeWidth={2}
         dash={[5, 10]}
       />
       <Line
-        points={[startX - 20, endY, startX + 100, endY]}
+        points={[startX - 15, endY, startX + 100, endY]}
         stroke={"black"}
         strokeWidth={2}
         dash={[5, 10]}
@@ -147,7 +152,45 @@ const DimensionH = (props) => {
  * @returns
  */
 const DimensionB = (props) => {
-  return <></>;
+  const startX = props.concreteOffset;
+  const startY = props.concreteOffset + props.hValue + 60;
+  const endX = props.concreteOffset + props.bValue;
+  const endY = props.concreteOffset + props.hValue + 60;
+  const textToDisplay = "b=" + props.b;
+
+  const dataHString = "m" + 0 + "," + 0 + " 350,0";
+
+  return (
+    <>
+      <Line
+        points={[startX, startY, endX, endY]}
+        stroke={"black"}
+        strokeWidth={2}
+        closed={false}
+      />
+      <Line
+        points={[startX, startY + 15, startX, startY - 100]}
+        stroke={"black"}
+        strokeWidth={2}
+        dash={[5, 10]}
+      />
+      <Line
+        points={[endX, startY + 15, endX, startY - 100]}
+        stroke={"black"}
+        strokeWidth={2}
+        dash={[5, 10]}
+      />
+      <TextPath
+        x={(endX - startX) / 2 + props.concreteOffset / 2}
+        y={endY - 15}
+        fontFamily={"Arial"}
+        fontSize={36}
+        fill={"black"}
+        text={textToDisplay}
+        data={dataHString}
+      />
+    </>
+  );
 };
 
 /**
@@ -180,7 +223,7 @@ const ReinforcingBars = (props) => {
   const endX =
     props.concreteOffset + props.bValue - (props.concreteThicness + 10);
   /* y coordinate for drawing ribs */
-  const y = props.concreteOffset + props.hValue - (props.concreteThicness + 10);
+  const y = props.concreteOffset + props.hValue - (props.concreteThicness + 15);
 
   const initialInterspace = (endX - startX) / props.noOfBarsValueArray.length;
   const interspaceMod = initialInterspace / props.noOfBarsValueArray.length;
@@ -208,7 +251,7 @@ const ReinforcingBars = (props) => {
   return (
     <>
       {barsArray.map((e) => {
-        return <Circle key={e.e} x={e.x} y={y} radius={4} fill="black" />;
+        return <Circle key={e.e} x={e.x} y={y} radius={6} fill="black" />;
       })}
     </>
   );
