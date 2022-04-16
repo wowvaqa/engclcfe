@@ -328,8 +328,8 @@ const ReinforcedConcreteCalcView = () => {
           </Col>
           <Col>
             <ReinforcedConcreteDynamicDraw
-              bValue={bValue * 100}
-              hValue={hValue * 100}
+              bValue={350}
+              hValue={500}
               noOfBarsValue={noOfBarsValue}
             />
             {/* 

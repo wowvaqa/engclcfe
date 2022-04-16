@@ -32,7 +32,7 @@ const ReinforcedConcreteDynamicDraw = (props) => {
   }, [props.bValue, props.hValue]);
 
   return (
-    <Stage width={800} height={600}>
+    <Stage width={820} height={620}>
       <Layer>
         <ConcreteRect
           bValue={bValue}
