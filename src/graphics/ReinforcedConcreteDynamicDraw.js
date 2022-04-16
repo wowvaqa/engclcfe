@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Rect, Stage, Layer, Line, Circle } from "react-konva";
 
+/**
+ *
+ * @param {bValue, hValue, noOfBarsValue} props
+ * @returns Draw of reinforced concrete
+ */
 const ReinforcedConcreteDynamicDraw = (props) => {
   /* Width (b) & height (h) of concrete */
   const [bValue, setBValue] = useState(props.bValue);
   const [hValue, setHValue] = useState(props.hValue);
+  /* Amount of bars */
   const [noOfBarsValueArray, setNoOfBarsValueArray] = useState([]);
 
-  /* x,y ofsset for drawing */
-  const xyOffset = 10;
+  /* x,y ofsset for start drawing outline & inline shapes of concrete */
+  const concreteOffset = 100;
+  /* Thicness of reinforced concrete */
+  const concreteThicness = 15;
 
   useEffect(() => {
     var arr = [];
-    for (var i = 0; i < props.noOfBarsValue + 1; i++) {
+    for (var i = 0; i < props.noOfBarsValue; i++) {
       arr.push(i);
     }
     setNoOfBarsValueArray(arr);
@@ -24,54 +32,106 @@ const ReinforcedConcreteDynamicDraw = (props) => {
   }, [props.bValue, props.hValue]);
 
   return (
-    <Stage width={600} height={600}>
+    <Stage width={800} height={600}>
       <Layer>
-        <InnerRect bValue={bValue} hValue={hValue} xyOffset={xyOffset} />
-        <OuterRect bValue={bValue} hValue={hValue} xyOffset={xyOffset} />
+        <ConcreteRect
+          bValue={bValue}
+          hValue={hValue}
+          concreteOffset={concreteOffset}
+          thickness={concreteThicness}
+        />
         <ReinforcingBars
           noOfBarsValueArray={noOfBarsValueArray}
           bValue={bValue}
           hValue={hValue}
-          xyOffset={xyOffset}
+          concreteOffset={concreteOffset}
+          concreteThicness={concreteThicness}
         />
       </Layer>
     </Stage>
   );
 };
 
+/**
+ * Bars
+ * @param {} props
+ * @returns
+ */
 const ReinforcingBars = (props) => {
-  const y = props.hValue - 10;
-  const odstep = (props.bValue - 30) / props.noOfBarsValueArray.length;
-  console.log("Odstep: " + odstep);
+  /* x coordinate in which the first rib will be drawn */
+  const startX = props.concreteOffset + props.concreteThicness + 10;
+  /* x coordinate in which the last rib will be drawn */
+  const endX =
+    props.concreteOffset + props.bValue - (props.concreteThicness + 10);
+  /* y coordinate for drawing ribs */
+  const y = props.concreteOffset + props.hValue - (props.concreteThicness + 10);
+
+  const initialInterspace = (endX - startX) / props.noOfBarsValueArray.length;
+  const interspaceMod = initialInterspace / props.noOfBarsValueArray.length;
+  const finalInterspace =
+    initialInterspace +
+    interspaceMod +
+    interspaceMod / (props.noOfBarsValueArray.length - 1);
+
+  const barsArray = [];
+
+  props.noOfBarsValueArray.map((e) => {
+    if (e === 0 && props.noOfBarsValueArray.length === 1) {
+      const x = startX + (endX - startX) / 2;
+      barsArray.push({ e, x });
+    } else if (e === 0) {
+      const x = startX;
+      barsArray.push({ e, x });
+    } else {
+      const x = startX + finalInterspace * e;
+      barsArray.push({ e, x });
+    }
+    return 0;
+  });
 
   return (
     <>
-      {props.noOfBarsValueArray.map((e) => {
-        return (
-          <Circle
-            key={e}
-            x={props.xyOffset + 20 + e * odstep + odstep / 3}
-            y={y}
-            radius={4}
-            fill="black"
-          />
-        );
+      {barsArray.map((e) => {
+        return <Circle key={e.e} x={e.x} y={y} radius={4} fill="black" />;
       })}
     </>
   );
 };
 
 /**
- * @param {hValue, bValue} props
- * @returns Konva type object of inline draw for reinforced concrete
+ * Overall cross-section of reinforced concrete
+ * @param {hValue, bValue, xyOffset, thickness} props
+ */
+const ConcreteRect = (props) => {
+  return (
+    <>
+      <OuterRect
+        bValue={props.bValue}
+        hValue={props.hValue}
+        concreteOffset={props.concreteOffset}
+        thickness={props.thickness}
+      />
+      <InnerRect
+        bValue={props.bValue}
+        hValue={props.hValue}
+        concreteOffset={props.concreteOffset}
+        thickness={props.thickness}
+      />
+    </>
+  );
+};
+
+/**
+ * @param {hValue, bValue, concreteOffset} props
+ * @returns Rectangle Konva type object of inline draw for reinforced concrete
  */
 const InnerRect = (props) => {
   return (
     <Rect
-      x={props.xyOffset + 10}
-      y={props.xyOffset + 10}
-      width={props.bValue - 20}
-      height={props.hValue - 20}
+      x={props.concreteOffset + props.thickness}
+      y={props.concreteOffset + props.thickness}
+      width={props.bValue - props.thickness * 2}
+      height={props.hValue - props.thickness * 2}
       stroke={"black"}
       strokeWidth={4}
       cornerRadius={10}
@@ -81,36 +141,36 @@ const InnerRect = (props) => {
 
 /**
  * @param {hValue, bValue} props
- * @returns Konva type object of outline draw for reinforced concrete
+ * @returns Plygon Konva type object of outline draw for reinforced concrete
  */
 const OuterRect = (props) => {
-  const offset = 10;
-  const x = props.xyOffset;
-  const y = props.xyOffset;
+  const breakLength = props.thickness;
+  const x = props.concreteOffset;
+  const y = props.concreteOffset;
 
   // Lfet upper verticle (v1)
   const v1pAx = x;
-  const v1pAy = y + offset;
-  const v1pBx = x + offset;
+  const v1pAy = y + breakLength;
+  const v1pBx = x + breakLength;
   const v1pBy = y;
 
   // Right upper verticle (v2)
-  const v2pAx = x + props.bValue - offset;
+  const v2pAx = x + props.bValue - breakLength;
   const v2pAy = y;
   const v2pBx = x + props.bValue;
-  const v2pBy = y + offset;
+  const v2pBy = y + breakLength;
 
   // Rigt bottom verticle (v3)
   const v3pAx = x + props.bValue;
-  const v3pAy = y + props.hValue - offset;
-  const v3pBx = x + props.bValue - offset;
+  const v3pAy = y + props.hValue - breakLength;
+  const v3pBx = x + props.bValue - breakLength;
   const v3pBy = y + props.hValue;
 
   // Left bottom verticle (v4)
-  const v4pAx = x + offset;
+  const v4pAx = x + breakLength;
   const v4pAy = y + props.hValue;
   const v4pBx = x;
-  const v4pBy = y + props.hValue - offset;
+  const v4pBy = y + props.hValue - breakLength;
 
   return (
     <Line
