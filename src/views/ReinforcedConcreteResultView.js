@@ -20,7 +20,7 @@ const ReinforcedConcreteResultView = ({
                 Bending capacity of analyzed cross section 'M<sub>rd</sub>' :
               </th>
               <th>
-                Relative height of the compression zone 'ξ<sub>iff</sub>' :
+                Relative height of the compression zone 'ξ<sub>eff</sub>' :
               </th>
               <th>
                 Height of the compression zone 'x<sub>eff</sub>' :
