@@ -10,9 +10,10 @@ const ReinforcedConcreteDynamicDraw = (props) => {
   /* Width (b) & height (h) of concrete */
   const [bValue, setBValue] = useState(props.bValue);
   const [hValue, setHValue] = useState(props.hValue);
-  /* (b) & (h value from form*/
+  /* (b), (h), (c) value from form*/
   const [b, setB] = useState(props.b);
   const [h, setH] = useState(props.h);
+  const [c, setC] = useState(props.c);
   /* Amount of bars */
   const [noOfBarsValueArray, setNoOfBarsValueArray] = useState([]);
 
@@ -37,10 +38,11 @@ const ReinforcedConcreteDynamicDraw = (props) => {
   useEffect(() => {
     setB(props.b);
     setH(props.h);
-  }, [props.b, props.h]);
+    setC(props.c);
+  }, [props.b, props.h, props.c]);
 
   return (
-    <Stage width={props.bValue + 200} height={props.hValue + 200}>
+    <Stage width={props.bValue + 400} height={props.hValue + 200}>
       <Layer>
         <ConcreteRect
           bValue={bValue}
@@ -57,13 +59,38 @@ const ReinforcedConcreteDynamicDraw = (props) => {
         />
         <DimensioningLines
           concreteOffset={concreteOffset}
+          concreteThicness={concreteThicness}
           bValue={bValue}
           hValue={hValue}
           b={b}
           h={h}
+          c={c}
         />
       </Layer>
     </Stage>
+  );
+};
+
+/**
+ * Overall cross-section of reinforced concrete
+ * @param {hValue, bValue, xyOffset, thickness} props
+ */
+const ConcreteRect = (props) => {
+  return (
+    <>
+      <OuterRect
+        bValue={props.bValue}
+        hValue={props.hValue}
+        concreteOffset={props.concreteOffset}
+        thickness={props.thickness}
+      />
+      <InnerRect
+        bValue={props.bValue}
+        hValue={props.hValue}
+        concreteOffset={props.concreteOffset}
+        thickness={props.thickness}
+      />
+    </>
   );
 };
 
@@ -87,7 +114,13 @@ const DimensioningLines = (props) => {
         hValue={props.hValue}
         b={props.b}
       />
-      <DimensionC />
+      <DimensionC
+        concreteOffset={props.concreteOffset}
+        concreteThicness={props.concreteThicness}
+        bValue={props.bValue}
+        hValue={props.hValue}
+        c={props.c}
+      />
       <DimensionEff />
     </>
   );
@@ -199,7 +232,49 @@ const DimensionB = (props) => {
  * @returns
  */
 const DimensionC = (props) => {
-  return <></>;
+  const startX = props.concreteOffset + props.bValue;
+  const startY = props.concreteOffset + props.hValue;
+  const endX = props.concreteOffset + props.bValue + 50;
+  const endY = props.concreteOffset + props.hValue;
+  const textToDisplay = "c=" + props.c;
+  const concreteThicness = props.concreteThicness;
+  const y =
+    props.concreteOffset +
+    props.hValue -
+    (props.concreteThicness + 15 - props.concreteThicness / 2);
+
+  const dataCString = "m" + (endX - 65) + "," + 2.5 + " 350,0";
+
+  return (
+    <>
+      <Line
+         points={[endX - 15, y, endX - 15, endY]}
+         stroke={"black"}
+         strokeWidth={2}
+      />
+      <Line
+        points={[startX - concreteThicness - 15, y, endX, y]}
+        stroke={"black"}
+        strokeWidth={2}
+        dash={[5, 10]}
+      />
+      <Line
+        points={[startX - concreteThicness - 15, startY, endX, endY]}
+        stroke={"black"}
+        strokeWidth={2}
+        dash={[5, 10]}
+      />
+      <TextPath
+        x={(endX - startX) / 2 + props.concreteOffset / 2}
+        y={endY - 15}
+        fontFamily={"Arial"}
+        fontSize={36}
+        fill={"black"}
+        text={textToDisplay}
+        data={dataCString}
+      />
+    </>
+  );
 };
 
 /**
@@ -253,29 +328,6 @@ const ReinforcingBars = (props) => {
       {barsArray.map((e) => {
         return <Circle key={e.e} x={e.x} y={y} radius={6} fill="black" />;
       })}
-    </>
-  );
-};
-
-/**
- * Overall cross-section of reinforced concrete
- * @param {hValue, bValue, xyOffset, thickness} props
- */
-const ConcreteRect = (props) => {
-  return (
-    <>
-      <OuterRect
-        bValue={props.bValue}
-        hValue={props.hValue}
-        concreteOffset={props.concreteOffset}
-        thickness={props.thickness}
-      />
-      <InnerRect
-        bValue={props.bValue}
-        hValue={props.hValue}
-        concreteOffset={props.concreteOffset}
-        thickness={props.thickness}
-      />
     </>
   );
 };

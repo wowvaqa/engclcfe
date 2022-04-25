@@ -332,6 +332,7 @@ const ReinforcedConcreteCalcView = () => {
               hValue={600}
               b={bValue}
               h={hValue}
+              c={cValue}
               noOfBarsValue={noOfBarsValue}
             />
             {/* 
