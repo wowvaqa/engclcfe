@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import HomeView from "./views/HomeView";
 import TestApiView from "./views/TestApiView";
-import ReinforcedConcreteCalcView from "./views/ReinforcedConcreteCalcView";
-import RectDoubleReinfCalcView from "./views/RectDoubleReinfCalcView";
-import RectFindReinfCalcView from "./views/RectFindReinfCalcView";
-import TsecReinfCalcView from "./views/TsecReinfCalcView";
+import ReinforcedConcreteCalcView from "./calcsViews/ReinforcedConcreteCalcView";
+import RectDoubleReinfCalcView from "./calcsViews/RectDoubleReinfCalcView";
+import RectFindReinfCalcView from "./calcsViews/RectFindReinfCalcView";
+import TsecReinfCalcView from "./calcsViews/TsecReinfCalcView";
 
 import LogView from "./views/LogView";
 import AppModalInfo from "./modals/AppModalInfo";

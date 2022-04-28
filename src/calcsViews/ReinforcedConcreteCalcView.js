@@ -4,7 +4,7 @@ import { useGlobalContext } from "../Context";
 import axios from "axios";
 //import image from "../assets/API_1_pio.png";
 
-import ReinforcedConcreteResultView from "../views/ReinforcedConcreteResultView";
+import ReinforcedConcreteResultView from "../calcsViews/ReinforcedConcreteResultView";
 import ReinforcedConcreteDynamicDraw from "../graphics/ReinforcedConcreteDynamicDraw";
 
 const ReinforcedConcreteCalcView = () => {
