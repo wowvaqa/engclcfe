@@ -42,11 +42,26 @@ const NavigationBar = () => {
               <NavDropdown.Item eventKey="4.1" href="/testapi">
                 Test API
               </NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.2" href="/reinforcedconcretecalc">
+              <NavDropdown.Item
+                eventKey="4.2"
+                href="/calcs/reinforcedconcretecalc"
+              >
                 Reinforced concrete calculator
               </NavDropdown.Item>
+              <NavDropdown.Item
+                eventKey="4.3"
+                href="/calcs/rectdoublereinfcalc"
+              >
+                Double reinforced concrete calculator
+              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="4.4" href="/calcs/rectfindreinfcalc">
+                Selection of reinforcement for single section
+              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="4.5" href="/calcs/tsecreinfcalc">
+                T-section reinforcement calculator
+              </NavDropdown.Item>
               {isLogged === true && (
-                <NavDropdown.Item eventKey="4.3" href="/compdatathree">
+                <NavDropdown.Item eventKey="4.6" href="/compdatathree">
                   Token access test
                 </NavDropdown.Item>
               )}

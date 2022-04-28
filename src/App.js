@@ -5,6 +5,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import TestApiView from "./views/TestApiView";
 import ReinforcedConcreteCalcView from "./views/ReinforcedConcreteCalcView";
+import RectDoubleReinfCalcView from "./views/RectDoubleReinfCalcView";
+import RectFindReinfCalcView from "./views/RectFindReinfCalcView";
+import TsecReinfCalcView from "./views/TsecReinfCalcView";
+
 import LogView from "./views/LogView";
 import AppModalInfo from "./modals/AppModalInfo";
 import AppModalInput from "./modals/AppModalInput";
@@ -51,9 +55,18 @@ function App() {
           <Route path="/" element={<HomeView />} />
           <Route path="/testapi" element={<TestApiView />} />
           <Route
-            path="/reinforcedconcretecalc"
+            path="/calcs/reinforcedconcretecalc"
             element={<ReinforcedConcreteCalcView />}
           />
+          <Route
+            path="/calcs/rectdoublereinfcalc"
+            element={<RectDoubleReinfCalcView />}
+          />
+          <Route
+            path="/calcs/rectfindreinfcalc"
+            element={<RectFindReinfCalcView />}
+          />
+          <Route path="/calcs/tsecreinfcalc" element={<TsecReinfCalcView />} />
           <Route path="/login" element={<LogView />} />
           <Route path="/register" element={<RegisterView />} />
           <Route path="/compdatathree" element={<CompDataThree />} />
