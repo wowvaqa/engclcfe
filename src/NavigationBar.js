@@ -35,7 +35,10 @@ const NavigationBar = () => {
         <Container>
           <Navbar.Brand href="/">ENGINEERING CALCULATORS</Navbar.Brand>
           <Nav variant="pills" className="me-auto" defaultActiveKey="/">
-            <NavDropdown title="Calcs" id="nav-dropdown">
+            <NavDropdown
+              title="Reinforced concrete computations"
+              id="nav-dropdown"
+            >
               <NavDropdown.Item eventKey="4.0" href="/canvastesting">
                 Canvas Testing
               </NavDropdown.Item>
@@ -46,7 +49,7 @@ const NavigationBar = () => {
                 eventKey="4.2"
                 href="/calcs/reinforcedconcretecalc"
               >
-                Reinforced concrete calculator
+                Single reinforced concrete calculator
               </NavDropdown.Item>
               <NavDropdown.Item
                 eventKey="4.3"
@@ -55,7 +58,7 @@ const NavigationBar = () => {
                 Double reinforced concrete calculator
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="4.4" href="/calcs/rectfindreinfcalc">
-                Selection of reinforcement for single section
+                Single-reinforced section dimensioning
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="4.5" href="/calcs/tsecreinfcalc">
                 T-section reinforcement calculator
