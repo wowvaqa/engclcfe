@@ -2,6 +2,8 @@ import React from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_3_pio.png";
 
+import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
+
 const TsecReinfCalcView = () => {
   return (
     <>
@@ -198,6 +200,14 @@ const TsecReinfCalcView = () => {
           </Col>
         </Row>
         <br></br>
+        <TsecReinfResultView
+          isCollapseOpen={true}
+          as1={0}
+          ns1={0}
+          as2={0}
+          ns2={0}
+          remark={0}
+        />
       </Container>
     </>
   );
