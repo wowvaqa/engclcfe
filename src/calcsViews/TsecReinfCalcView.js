@@ -39,26 +39,26 @@ const TsecReinfCalcView = () => {
                 controlId="h_value"
                 onChange={(e) => {}}
               >
-                <Form.Label>b:</Form.Label>
-                <Form.Control type="number" placeholder="0.5" />
+                <Form.Label>h:</Form.Label>
+                <Form.Control type="number" placeholder="1.2" />
               </Form.Group>
               {/* ------------------------ h_sl >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="b_value"
+                controlId="h_sl_value"
                 onChange={(e) => {}}
               >
                 <Form.Label>h_sl:</Form.Label>
-                <Form.Control type="number" placeholder="0.5" />
+                <Form.Control type="number" placeholder="0.2" />
               </Form.Group>
               {/* ------------------------ b_eff >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="b_value"
+                controlId="b_eff_value"
                 onChange={(e) => {}}
               >
                 <Form.Label>b_eff:</Form.Label>
-                <Form.Control type="number" placeholder="0.5" />
+                <Form.Control type="number" placeholder="1" />
               </Form.Group>
               <Row>
                 <Col>
@@ -173,7 +173,7 @@ const TsecReinfCalcView = () => {
                 onChange={(e) => {}}
               >
                 <Form.Label>m_sd: </Form.Label>
-                <Form.Control type="number" placeholder="8000" />
+                <Form.Control type="number" placeholder="3000" />
               </Form.Group>
             </Form>
             <Button
