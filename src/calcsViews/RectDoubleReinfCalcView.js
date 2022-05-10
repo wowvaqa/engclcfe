@@ -2,6 +2,8 @@ import React from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_2_pio.png";
 
+import RectDoubleReinfResultView from "../calcsViews/RectDoubleReinfResultView";
+
 const RectDoubleReinfCalcView = () => {
   return (
     <>
@@ -207,6 +209,12 @@ const RectDoubleReinfCalcView = () => {
           </Col>
         </Row>
         <br></br>
+        <RectDoubleReinfResultView
+          isCollapseOpen={true}
+          m_rd={0}
+          ksi_eff={0}
+          x_eff={0}
+        />
       </Container>
     </>
   );
