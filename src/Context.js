@@ -30,6 +30,10 @@ const AppProvider = ({ children }) => {
   const [tReinforcedConcreteData, setTreinforcedConcreteData] = useState({});
   const [tReinforcedConcreteDataFromApi, setTreinforcedConcreteDataFromApi] =
     useState({});
+  /* Single dimensioning concrete data for API and handle errors & data from API */
+  const [singleDimensioningData, setSingleDimensioningData] = useState({});
+  const [singleDimensioningDataFromApi, setSingleDimensioningDataDataFromApi] =
+    useState({});
 
   /**
    * Change flag of input modal OK button state
@@ -61,14 +65,21 @@ const AppProvider = ({ children }) => {
         setIsLogged,
         reinforcedConcreteData,
         setReinforcedConcreteData,
+        /* Double Reinforced Concrete data for API and handle errors & data from API */
         doubleReinforcedConcreteData,
         setDoubleReinforcedConcreteData,
         doubleReinforcedConcreteDataFromApi,
         setDoubleReinforcedConcreteDataFromApi,
+        /* T Reinforced Concrete data for API and handle errors & data from API */
         tReinforcedConcreteData,
         setTreinforcedConcreteData,
         tReinforcedConcreteDataFromApi,
         setTreinforcedConcreteDataFromApi,
+        /* Single dimensioning concrete data for API and handle errors & data from API */
+        singleDimensioningData,
+        setSingleDimensioningData,
+        singleDimensioningDataFromApi,
+        setSingleDimensioningDataDataFromApi,
       }}
     >
       {children}

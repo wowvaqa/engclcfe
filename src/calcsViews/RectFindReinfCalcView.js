@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_1_pio.png";
 
 import RectFindReinfResultView from "../calcsViews/RectFindReinfResultView";
+import RectFindReinfApi from "../calcsViews/RectFindReinfApi";
+
+import { useGlobalContext } from "../Context";
 
 const RectFindReinfCalcView = () => {
+  const [name, setName] = useState("My first cross sect");
+  const [b, setB] = useState(0.5);
+  const [h, setH] = useState(1.4);
+  const [cl_conc, setCl_conc] = useState("C30_37");
+  const [cl_steel, setCl_steel] = useState("BSt500S");
+  const [c, setC] = useState(30);
+  const [fi, setFi] = useState(32);
+  const [fi_s, setFi_s] = useState(12);
+  const [fi_opp, setFi_opp] = useState(16);
+  const [m_sd, setM_sd] = useState(8000);
+
+  const { setSingleDimensioningData } = useGlobalContext();
+
+  const sendDataToApi = (event) => {
+    event.preventDefault();
+    const dataToSend = {
+      name,
+      b,
+      h,
+      cl_conc,
+      cl_steel,
+      c,
+      fi,
+      fi_s,
+      fi_opp,
+      m_sd,
+    };
+    console.log("Sending data to API: " + dataToSend);
+    setSingleDimensioningData(dataToSend);
+  };
+
   return (
     <>
+      <RectFindReinfApi />
       <Container>
         <h3>Single-reinforced section dimensioning</h3>
       </Container>
@@ -17,8 +52,10 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< name >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="name_value"
-                onChange={(e) => {}}
+                controlId="name"
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
               >
                 <Form.Label>Name:</Form.Label>
                 <Form.Control type="text" placeholder="My first dimensioning" />
@@ -26,8 +63,10 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< b >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="b_value"
-                onChange={(e) => {}}
+                controlId="b"
+                onChange={(e) => {
+                  setB(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Width 'b' [m]:</Form.Label>
                 <Form.Control type="number" placeholder="1.4" />
@@ -35,8 +74,10 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< h >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="h_value"
-                onChange={(e) => {}}
+                controlId="h"
+                onChange={(e) => {
+                  setH(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Height 'h' [m]:</Form.Label>
                 <Form.Control type="number" placeholder="0.5" />
@@ -46,8 +87,10 @@ const RectFindReinfCalcView = () => {
                   {/* ------------------------< cl_conc >--- */}
                   <Form.Group
                     className="mb-3"
-                    controlId="concrete_class"
-                    onChange={(e) => {}}
+                    controlId="cl_conc"
+                    onChange={(e) => {
+                      setCl_conc(e.target.value);
+                    }}
                   >
                     <Form.Label>Concrete class :</Form.Label>
                     <Form.Select aria-label="Default select example">
@@ -59,8 +102,10 @@ const RectFindReinfCalcView = () => {
                   {/* ------------------------< cl_steel >--- */}
                   <Form.Group
                     className="mb-3"
-                    controlId="steel_type"
-                    onChange={(e) => {}}
+                    controlId="cl_steel"
+                    onChange={(e) => {
+                      setCl_steel(e.target.value);
+                    }}
                   >
                     <Form.Label>Steel class :</Form.Label>
                     <Form.Select aria-label="Default select example">
@@ -73,8 +118,10 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< c >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="c_value"
-                onChange={(e) => {}}
+                controlId="c"
+                onChange={(e) => {
+                  setC(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Concrete cover 'c' [mm]: </Form.Label>
                 <Form.Control type="number" placeholder="30" />
@@ -82,8 +129,10 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< fi >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="fi_value"
-                onChange={(e) => {}}
+                controlId="fi"
+                onChange={(e) => {
+                  setFi(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Main reinforcement diameter Ø [mm]: </Form.Label>
                 <Form.Select
@@ -104,8 +153,10 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< fi_s >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="fi_s_value"
-                onChange={(e) => {}}
+                controlId="fi_s"
+                onChange={(e) => {
+                  setFi_s(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>
                   Diameter of stirrups Ø<sub>s</sub> [mm]:
@@ -128,8 +179,10 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< fi_opp >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="fi_opp_value"
-                onChange={(e) => {}}
+                controlId="fi_opp"
+                onChange={(e) => {
+                  setFi_opp(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Opp. reinforc. diameter Ø [mm]:</Form.Label>
                 <Form.Select
@@ -150,11 +203,13 @@ const RectFindReinfCalcView = () => {
               {/* ------------------------< m_sd >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="csd_value"
-                onChange={(e) => {}}
+                controlId="m_sd"
+                onChange={(e) => {
+                  setM_sd(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>m_sd: </Form.Label>
-                <Form.Control type="number" placeholder="8000" />
+                <Form.Control type="number" placeholder="3000" />
               </Form.Group>
             </Form>
             <Button
@@ -163,7 +218,9 @@ const RectFindReinfCalcView = () => {
               className="btn btn-primary"
               aria-controls="example-collapse-text"
               aria-expanded={true}
-              onClick={(event) => {}}
+              onClick={(event) => {
+                sendDataToApi(event);
+              }}
             >
               Calculate
             </Button>
