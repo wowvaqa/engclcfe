@@ -19,14 +19,17 @@ const AppProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   /* Reinforced Concrete data for API and handle errors */
   const [reinforcedConcreteData, setReinforcedConcreteData] = useState({});
-  /* Double Reinforced Concrete data for API and handle errors */
+  /* Double Reinforced Concrete data for API and handle errors & data from API */
   const [doubleReinforcedConcreteData, setDoubleReinforcedConcreteData] =
     useState({});
-  /* Double Reinforced Concrete data from API */
   const [
     doubleReinforcedConcreteDataFromApi,
     setDoubleReinforcedConcreteDataFromApi,
   ] = useState({});
+  /* T Reinforced Concrete data for API and handle errors & data from API */
+  const [tReinforcedConcreteData, setTreinforcedConcreteData] = useState({});
+  const [tReinforcedConcreteDataFromApi, setTreinforcedConcreteDataFromApi] =
+    useState({});
 
   /**
    * Change flag of input modal OK button state
@@ -62,6 +65,10 @@ const AppProvider = ({ children }) => {
         setDoubleReinforcedConcreteData,
         doubleReinforcedConcreteDataFromApi,
         setDoubleReinforcedConcreteDataFromApi,
+        tReinforcedConcreteData,
+        setTreinforcedConcreteData,
+        tReinforcedConcreteDataFromApi,
+        setTreinforcedConcreteDataFromApi,
       }}
     >
       {children}

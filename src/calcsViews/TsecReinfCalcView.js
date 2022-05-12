@@ -1,12 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_3_pio.png";
 
 import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
+import TsecReinfApi from "./TsecReinfApi";
+
+import { useGlobalContext } from "../Context";
 
 const TsecReinfCalcView = () => {
+  const [name, setName] = useState("My first cross sect");
+  const [b, setB] = useState(0.5);
+  const [h, setH] = useState(1.2);
+  const [h_sl, setH_sl] = useState(0.2);
+  const [b_eff, setB_eff] = useState(1);
+  const [cl_conc, setCl_conc] = useState("C30_37");
+  const [cl_steel, setCl_steel] = useState("BSt500S");
+  const [c, setC] = useState(30);
+  const [fi, setFi] = useState(32);
+  const [fi_s, setFi_s] = useState(12);
+  const [fi_opp, setFi_opp] = useState(16);
+  const [m_sd, setM_sd] = useState(3000);
+
+  const { setTreinforcedConcreteData } = useGlobalContext();
+
+  const sendDataToApi = (event) => {
+    event.preventDefault();
+    const dataToSend = {
+      name,
+      b,
+      h,
+      h_sl,
+      b_eff,
+      cl_conc,
+      cl_steel,
+      c,
+      fi,
+      fi_s,
+      fi_opp,
+      m_sd,
+    };
+    console.log("Sending data to API: " + dataToSend);
+    setTreinforcedConcreteData(dataToSend);
+  };
+
   return (
     <>
+      <TsecReinfApi />
       <Container>
         <h3>T-section reinforcement calculator</h3>
       </Container>
@@ -17,8 +56,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------ name >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="name_value"
-                onChange={(e) => {}}
+                controlId="name"
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
               >
                 <Form.Label>Name:</Form.Label>
                 <Form.Control
@@ -29,8 +70,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------ b >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="b_value"
-                onChange={(e) => {}}
+                controlId="b"
+                onChange={(e) => {
+                  setB(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>b:</Form.Label>
                 <Form.Control type="number" placeholder="0.5" />
@@ -38,8 +81,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------ h >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="h_value"
-                onChange={(e) => {}}
+                controlId="h"
+                onChange={(e) => {
+                  setH(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>h:</Form.Label>
                 <Form.Control type="number" placeholder="1.2" />
@@ -47,8 +92,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------ h_sl >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="h_sl_value"
-                onChange={(e) => {}}
+                controlId="h_sl"
+                onChange={(e) => {
+                  setH_sl(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>h_sl:</Form.Label>
                 <Form.Control type="number" placeholder="0.2" />
@@ -56,8 +103,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------ b_eff >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="b_eff_value"
-                onChange={(e) => {}}
+                controlId="b_eff"
+                onChange={(e) => {
+                  setB_eff(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>b_eff:</Form.Label>
                 <Form.Control type="number" placeholder="1" />
@@ -67,8 +116,10 @@ const TsecReinfCalcView = () => {
                   {/* ------------------------ cl_conc >--- */}
                   <Form.Group
                     className="mb-3"
-                    controlId="concrete_class"
-                    onChange={(e) => {}}
+                    controlId="cl_conc"
+                    onChange={(e) => {
+                      setCl_conc(e.target.value);
+                    }}
                   >
                     <Form.Label>Concrete class :</Form.Label>
                     <Form.Select aria-label="Default select example">
@@ -80,8 +131,10 @@ const TsecReinfCalcView = () => {
                   {/* ------------------------ cl_steel >--- */}
                   <Form.Group
                     className="mb-3"
-                    controlId="steel_type"
-                    onChange={(e) => {}}
+                    controlId="cl_steel"
+                    onChange={(e) => {
+                      setCl_steel(e.target.value);
+                    }}
                   >
                     <Form.Label>Steel class :</Form.Label>
                     <Form.Select aria-label="Default select example">
@@ -94,8 +147,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------< c >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="c_value"
-                onChange={(e) => {}}
+                controlId="c"
+                onChange={(e) => {
+                  setC(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Concrete cover 'c' [mm]: </Form.Label>
                 <Form.Control type="number" placeholder="30" />
@@ -103,8 +158,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------< fi >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="fi_value"
-                onChange={(e) => {}}
+                controlId="fi"
+                onChange={(e) => {
+                  setFi(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Main reinforc. diameter Ø [mm]: </Form.Label>
                 <Form.Select
@@ -125,8 +182,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------< fi_s >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="fi_s_value"
-                onChange={(e) => {}}
+                controlId="fi_s"
+                onChange={(e) => {
+                  setFi_s(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>
                   Diameter of stirrups Ø<sub>s</sub> [mm]:
@@ -149,8 +208,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------< fi_opp >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="fi_opp_value"
-                onChange={(e) => {}}
+                controlId="fi_opp"
+                onChange={(e) => {
+                  setFi_opp(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>Opp. reinforc. diameter Ø [mm]: </Form.Label>
                 <Form.Select
@@ -171,8 +232,10 @@ const TsecReinfCalcView = () => {
               {/* ------------------------< m_sd >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="csd_value"
-                onChange={(e) => {}}
+                controlId="m_sd"
+                onChange={(e) => {
+                  setM_sd(parseFloat(e.target.value.replace(",", ".")));
+                }}
               >
                 <Form.Label>m_sd: </Form.Label>
                 <Form.Control type="number" placeholder="3000" />
@@ -184,7 +247,9 @@ const TsecReinfCalcView = () => {
               className="btn btn-primary"
               aria-controls="example-collapse-text"
               aria-expanded={true}
-              onClick={(event) => {}}
+              onClick={(event) => {
+                sendDataToApi(event);
+              }}
             >
               Calculate
             </Button>
@@ -200,14 +265,7 @@ const TsecReinfCalcView = () => {
           </Col>
         </Row>
         <br></br>
-        <TsecReinfResultView
-          isCollapseOpen={true}
-          as1={0}
-          ns1={0}
-          as2={0}
-          ns2={0}
-          remark={0}
-        />
+        <TsecReinfResultView isCollapseOpen={true} />
       </Container>
     </>
   );
