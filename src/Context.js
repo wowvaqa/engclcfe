@@ -17,6 +17,16 @@ const AppProvider = ({ children }) => {
   /* User loging & registration */
   const [auth, setAuth] = useState({});
   const [isLogged, setIsLogged] = useState(false);
+  /* Reinforced Concrete data for API and handle errors */
+  const [reinforcedConcreteData, setReinforcedConcreteData] = useState({});
+  /* Double Reinforced Concrete data for API and handle errors */
+  const [doubleReinforcedConcreteData, setDoubleReinforcedConcreteData] =
+    useState({});
+  /* Double Reinforced Concrete data from API */
+  const [
+    doubleReinforcedConcreteDataFromApi,
+    setDoubleReinforcedConcreteDataFromApi,
+  ] = useState({});
 
   /**
    * Change flag of input modal OK button state
@@ -46,6 +56,12 @@ const AppProvider = ({ children }) => {
         auth,
         isLogged,
         setIsLogged,
+        reinforcedConcreteData,
+        setReinforcedConcreteData,
+        doubleReinforcedConcreteData,
+        setDoubleReinforcedConcreteData,
+        doubleReinforcedConcreteDataFromApi,
+        setDoubleReinforcedConcreteDataFromApi,
       }}
     >
       {children}

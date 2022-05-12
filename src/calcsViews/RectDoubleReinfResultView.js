@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table, Collapse } from "react-bootstrap";
+
+import { useGlobalContext } from "../Context";
 
 const RectDoubleReinfResultView = ({
   isCollapseOpen,
-  m_rd,
-  ksi_eff,
-  x_eff,
 }) => {
+  const { doubleReinforcedConcreteDataFromApi } = useGlobalContext();
+
+  useEffect(() => {
+    console.log(
+      "Reciving data from API: " + doubleReinforcedConcreteDataFromApi
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doubleReinforcedConcreteDataFromApi]);
+
   return (
     <>
       <Collapse in={isCollapseOpen}>
@@ -29,9 +37,21 @@ const RectDoubleReinfResultView = ({
           </thead>
           <tbody>
             <tr>
-              <td>{m_rd !== 0 && <h4>{m_rd} [kN]</h4>}</td>
-              <td>{m_rd !== 0 && <h4>{ksi_eff} [-]</h4>}</td>
-              <td>{m_rd !== 0 && <h4>{x_eff} [m]</h4>}</td>
+              <td>
+                {doubleReinforcedConcreteDataFromApi.m_rd !== 0 && (
+                  <h4>{doubleReinforcedConcreteDataFromApi.m_rd} [kN]</h4>
+                )}
+              </td>
+              <td>
+                {doubleReinforcedConcreteDataFromApi.m_rd !== 0 && (
+                  <h4>{doubleReinforcedConcreteDataFromApi.ksi_eff} [-]</h4>
+                )}
+              </td>
+              <td>
+                {doubleReinforcedConcreteDataFromApi.m_rd !== 0 && (
+                  <h4>{doubleReinforcedConcreteDataFromApi.x_eff} [m]</h4>
+                )}
+              </td>
             </tr>
           </tbody>
         </Table>

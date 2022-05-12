@@ -6,6 +6,7 @@ import axios from "axios";
 
 import ReinforcedConcreteResultView from "../calcsViews/ReinforcedConcreteResultView";
 import ReinforcedConcreteDynamicDraw from "../graphics/ReinforcedConcreteDynamicDraw";
+import ReinforcedConcreteHandleError from "./ReinforcedConcreteHandleError";
 
 const ReinforcedConcreteCalcView = () => {
   const {
@@ -18,6 +19,7 @@ const ReinforcedConcreteCalcView = () => {
     setModalWaitText,
     modalInputOkState,
     inputModalOkButtonClick,
+    // setReinforcedConcreteData,
   } = useGlobalContext();
   /* JSON Input data */
   const [nameValue, setNameValue] = useState("My first cross sect");
@@ -119,6 +121,8 @@ const ReinforcedConcreteCalcView = () => {
   }
 
   const handleError = () => {
+    //setReinforcedConcreteData({ bValue, hValue, cValue });
+
     if (Number.isNaN(bValue) || bValue <= 0) {
       setModalInfoText("Invalid value : 'b'");
       setModalInfoShow(true);
@@ -175,6 +179,7 @@ const ReinforcedConcreteCalcView = () => {
 
   return (
     <>
+      <ReinforcedConcreteHandleError />
       <Container>
         <h3>Reinforced concrete calculator</h3>
       </Container>
