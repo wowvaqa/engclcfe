@@ -26,6 +26,11 @@ const AppProvider = ({ children }) => {
     doubleReinforcedConcreteDataFromApi,
     setDoubleReinforcedConcreteDataFromApi,
   ] = useState({});
+  const [doubleReinforcedDataModel, setDoubleReinforcedDataModel] = useState({
+    isButtonPressed: false,
+    isNoErrors: false,
+    isWaitForAction: false,
+  });
   /* T Reinforced Concrete data for API and handle errors & data from API */
   const [tReinforcedConcreteData, setTreinforcedConcreteData] = useState({});
   const [tReinforcedConcreteDataFromApi, setTreinforcedConcreteDataFromApi] =
@@ -70,6 +75,8 @@ const AppProvider = ({ children }) => {
         setDoubleReinforcedConcreteData,
         doubleReinforcedConcreteDataFromApi,
         setDoubleReinforcedConcreteDataFromApi,
+        doubleReinforcedDataModel,
+        setDoubleReinforcedDataModel,
         /* T Reinforced Concrete data for API and handle errors & data from API */
         tReinforcedConcreteData,
         setTreinforcedConcreteData,

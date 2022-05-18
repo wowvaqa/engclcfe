@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_2_pio.png";
 
 import { useGlobalContext } from "../Context";
 
+import RectDoubleReinfHandleErr from "../calcsViews/RectDoubleReinfHandleErr";
 import RectDoubleReinfResultView from "../calcsViews/RectDoubleReinfResultView";
 import RectDoubleReinfApi from "../calcsViews/RectDoubleReinfApi";
 
@@ -19,11 +20,30 @@ const RectDoubleReinfCalcView = () => {
   const [fi_s, setFi_s] = useState(12);
   const [fi_opp, setFi_opp] = useState(16);
   const [no_of_opp_bars, setNo_of_opp_bars] = useState(2);
+  /* JSON Api data */
+  const [m_rd, setM_rd] = useState(0);
+  const [ksi_eff, setKsi_eff] = useState(0);
+  const [x_eff, setX_eff] = useState(0);
 
-  const { setDoubleReinforcedConcreteData } = useGlobalContext();
+  const {
+    setDoubleReinforcedConcreteData,
+    doubleReinforcedDataModel,
+    setDoubleReinforcedDataModel,
+    doubleReinforcedConcreteDataFromApi,
+  } = useGlobalContext();
+
+  useEffect(() => {
+    console.log("(DoubleCalcView) Reciving data from API: ");
+    console.log(doubleReinforcedConcreteDataFromApi);
+
+    setM_rd(doubleReinforcedConcreteDataFromApi.m_rd);
+    setKsi_eff(doubleReinforcedConcreteDataFromApi.ksi_eff);
+    setX_eff(doubleReinforcedConcreteDataFromApi.x_eff);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doubleReinforcedConcreteDataFromApi]);
 
   const sendDataToApi = (event) => {
-    event.preventDefault();
     const dataToSend = {
       name,
       b,
@@ -38,11 +58,29 @@ const RectDoubleReinfCalcView = () => {
       no_of_opp_bars,
     };
     console.log("Sending data to API: " + dataToSend);
+
+    setupDataModel(true);
     setDoubleReinforcedConcreteData(dataToSend);
+    event.preventDefault();
+  };
+
+  /**
+   *
+   * @param {*} props
+   */
+  const setupDataModel = (props) => {
+    const isButtonPressed = props;
+    const isNoErrors = doubleReinforcedDataModel.isNoErrors;
+    const isWaitForAction = doubleReinforcedDataModel.isWaitForAction;
+
+    const dataModel = { isButtonPressed, isNoErrors, isWaitForAction };
+
+    setDoubleReinforcedDataModel(dataModel);
   };
 
   return (
     <>
+      <RectDoubleReinfHandleErr />
       <RectDoubleReinfApi />
       <Container>
         <h3>Double reinforced concrete calculator</h3>
@@ -274,7 +312,12 @@ const RectDoubleReinfCalcView = () => {
           </Col>
         </Row>
         <br></br>
-        <RectDoubleReinfResultView isCollapseOpen={true} />
+        <RectDoubleReinfResultView
+          isCollapseOpen={true}
+          m_rd={m_rd}
+          ksi_eff={ksi_eff}
+          x_eff={x_eff}
+        />
       </Container>
     </>
   );
