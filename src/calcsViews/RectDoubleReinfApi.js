@@ -9,8 +9,8 @@ const RectDoubleReinfApi = () => {
     setModalWaitShow,
     doubleReinforcedConcreteData,
     setDoubleReinforcedConcreteDataFromApi,
-    doubleReinforcedDataModel,
-    setDoubleReinforcedDataModel,
+    apiTrigger,
+    setApiTrigger,
   } = useGlobalContext();
 
   /* JSON Api data */
@@ -21,11 +21,11 @@ const RectDoubleReinfApi = () => {
   useEffect(() => {
     console.log("(DoubleReinAPI) Reciving data to send for API: ");
     console.log(doubleReinforcedConcreteData);
-    console.log(doubleReinforcedDataModel);
+    console.log(apiTrigger);
     if (
-      doubleReinforcedDataModel.isButtonPressed &&
-      doubleReinforcedDataModel.isNoErrors &&
-      !doubleReinforcedDataModel.isWaitForAction
+      apiTrigger.isButtonPressed &&
+      apiTrigger.isNoErrors &&
+      !apiTrigger.isWaitForAction
     ) {
       console.log(
         "(DoubleReinAPI) Data from RectDouble are ready, sending data to BackEND"
@@ -33,7 +33,7 @@ const RectDoubleReinfApi = () => {
       initSendData(doubleReinforcedConcreteData);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [doubleReinforcedConcreteData, doubleReinforcedDataModel]);
+  }, [doubleReinforcedConcreteData, apiTrigger]);
 
   useEffect(() => {
     console.log(
@@ -50,13 +50,13 @@ const RectDoubleReinfApi = () => {
   }, [m_rd, ksi_eff, x_eff]);
 
   const resetModelData = () => {
-    setDoubleReinforcedDataModel({
+    setApiTrigger({
       isButtonPressed: false,
       isNoErrors: false,
       isWaitForAction: false,
     });
     console.log("(DoubleReinAPI) doubleReinforcedDataModel: ");
-    console.log(doubleReinforcedDataModel);
+    console.log(apiTrigger);
   };
 
   async function initSendData() {

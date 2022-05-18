@@ -27,8 +27,8 @@ const RectDoubleReinfCalcView = () => {
 
   const {
     setDoubleReinforcedConcreteData,
-    doubleReinforcedDataModel,
-    setDoubleReinforcedDataModel,
+    apiTrigger,
+    setApiTrigger,
     doubleReinforcedConcreteDataFromApi,
   } = useGlobalContext();
 
@@ -70,12 +70,12 @@ const RectDoubleReinfCalcView = () => {
    */
   const setupDataModel = (props) => {
     const isButtonPressed = props;
-    const isNoErrors = doubleReinforcedDataModel.isNoErrors;
-    const isWaitForAction = doubleReinforcedDataModel.isWaitForAction;
+    const isNoErrors = apiTrigger.isNoErrors;
+    const isWaitForAction = apiTrigger.isWaitForAction;
 
     const dataModel = { isButtonPressed, isNoErrors, isWaitForAction };
 
-    setDoubleReinforcedDataModel(dataModel);
+    setApiTrigger(dataModel);
   };
 
   return (

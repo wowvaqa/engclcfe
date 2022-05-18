@@ -26,11 +26,7 @@ const AppProvider = ({ children }) => {
     doubleReinforcedConcreteDataFromApi,
     setDoubleReinforcedConcreteDataFromApi,
   ] = useState({});
-  const [doubleReinforcedDataModel, setDoubleReinforcedDataModel] = useState({
-    isButtonPressed: false,
-    isNoErrors: false,
-    isWaitForAction: false,
-  });
+
   /* T Reinforced Concrete data for API and handle errors & data from API */
   const [tReinforcedConcreteData, setTreinforcedConcreteData] = useState({});
   const [tReinforcedConcreteDataFromApi, setTreinforcedConcreteDataFromApi] =
@@ -39,6 +35,12 @@ const AppProvider = ({ children }) => {
   const [singleDimensioningData, setSingleDimensioningData] = useState({});
   const [singleDimensioningDataFromApi, setSingleDimensioningDataDataFromApi] =
     useState({});
+  /* Flag for start computing */
+  const [apiTrigger, setApiTrigger] = useState({
+    isButtonPressed: false,
+    isNoErrors: false,
+    isWaitForAction: false,
+  });
 
   /**
    * Change flag of input modal OK button state
@@ -75,8 +77,8 @@ const AppProvider = ({ children }) => {
         setDoubleReinforcedConcreteData,
         doubleReinforcedConcreteDataFromApi,
         setDoubleReinforcedConcreteDataFromApi,
-        doubleReinforcedDataModel,
-        setDoubleReinforcedDataModel,
+        apiTrigger,
+        setApiTrigger,
         /* T Reinforced Concrete data for API and handle errors & data from API */
         tReinforcedConcreteData,
         setTreinforcedConcreteData,
