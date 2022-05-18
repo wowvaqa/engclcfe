@@ -15,7 +15,27 @@ const RectFindReinfApi = () => {
   const [remark, setRemark] = useState("");
 
   useEffect(() => {
-    console.log("Reciving data to send for API: " + singleDimensioningData);
+    console.log(
+      "(RectFindAPI) as1, ns1, as2, ns2, remark IS CHANGE, BACKEND RESPONDE: " +
+        as1 +
+        " " +
+        ns1 +
+        " " +
+        as2 +
+        " " +
+        ns2 +
+        " " +
+        remark
+    );
+    const dataFromApi = { as1, ns1, as2, ns2, remark };
+    setSingleDimensioningDataDataFromApi(dataFromApi);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [as1, ns1, as2, ns2, remark]);
+
+  useEffect(() => {
+    console.log(
+      "(RectFindAPI) Reciving data to send for API: " + singleDimensioningData
+    );
     initSendData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleDimensioningData]);
@@ -47,18 +67,8 @@ const RectFindReinfApi = () => {
 
           const dataFromApi = { as1, ns1, as2, ns2, remark };
           setSingleDimensioningDataDataFromApi(dataFromApi);
-          console.log(
-            "Double calc data from API: " +
-              dataFromApi.as1 +
-              " " +
-              dataFromApi.ns1 +
-              " " +
-              dataFromApi.as2 +
-              " " +
-              dataFromApi.ns2 +
-              " " +
-              dataFromApi.remark
-          );
+          console.log("(RectFindAPI) Double calc data from API: ");
+          console.log(dataFromApi);
         },
         (error) => {
           console.log(error);

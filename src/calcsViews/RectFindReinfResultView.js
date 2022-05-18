@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Table, Collapse } from "react-bootstrap";
 
-import { useGlobalContext } from "../Context";
-
-const RectFindReinfResultView = ({ isCollapseOpen }) => {
-  const { singleDimensioningDataFromApi } = useGlobalContext();
-
-  useEffect(() => {
-    console.log("Reciving data from API: " + singleDimensioningDataFromApi);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [singleDimensioningDataFromApi]);
-
+const RectFindReinfResultView = ({
+  isCollapseOpen,
+  as1,
+  ns1,
+  as2,
+  ns2,
+  remark,
+}) => {
   return (
     <>
       <Collapse in={isCollapseOpen}>
@@ -30,19 +28,19 @@ const RectFindReinfResultView = ({ isCollapseOpen }) => {
           <tbody>
             <tr>
               <td>
-                <h4>{singleDimensioningDataFromApi.as1} [m2]</h4>
+                <h4>{as1} [m2]</h4>
               </td>
               <td>
-                <h4>{singleDimensioningDataFromApi.ns1}</h4>
+                <h4>{ns1}</h4>
               </td>
               <td>
-                <h4>{singleDimensioningDataFromApi.as2} [m2]</h4>
+                <h4>{as2} [m2]</h4>
               </td>
               <td>
-                <h4>{singleDimensioningDataFromApi.ns2}</h4>
+                <h4>{ns2}</h4>
               </td>
               <td>
-                <h4>{singleDimensioningDataFromApi.remark}</h4>
+                <h4>{remark}</h4>
               </td>
             </tr>
           </tbody>

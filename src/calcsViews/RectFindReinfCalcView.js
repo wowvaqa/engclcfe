@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_1_pio.png";
 
@@ -18,8 +18,28 @@ const RectFindReinfCalcView = () => {
   const [fi_s, setFi_s] = useState(12);
   const [fi_opp, setFi_opp] = useState(16);
   const [m_sd, setM_sd] = useState(8000);
+  /* JSON Api data */
+  const [as1, setAs1] = useState(0);
+  const [ns1, setNs1] = useState(0);
+  const [as2, setAs2] = useState(0);
+  const [ns2, setNs2] = useState(0);
+  const [remark, setRemark] = useState("");
 
-  const { setSingleDimensioningData } = useGlobalContext();
+  const { setSingleDimensioningData, singleDimensioningDataFromApi } =
+    useGlobalContext();
+
+  useEffect(() => {
+    console.log("(DoubleCalcView) Reciving data from API: ");
+    console.log(singleDimensioningDataFromApi);
+
+    setAs1(singleDimensioningDataFromApi.as1);
+    setNs1(singleDimensioningDataFromApi.ns1);
+    setAs2(singleDimensioningDataFromApi.as2);
+    setNs2(singleDimensioningDataFromApi.ns2);
+    setRemark(singleDimensioningDataFromApi.remark);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleDimensioningDataFromApi]);
 
   const sendDataToApi = (event) => {
     event.preventDefault();
@@ -238,11 +258,11 @@ const RectFindReinfCalcView = () => {
         <br></br>
         <RectFindReinfResultView
           isCollapseOpen={true}
-          as1={0}
-          ns1={0}
-          as2={0}
-          ns2={0}
-          remark={0}
+          as1={as1}
+          ns1={ns1}
+          as2={as2}
+          ns2={ns2}
+          remark={remark}
         />
       </Container>
     </>

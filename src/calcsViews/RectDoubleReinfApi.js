@@ -49,16 +49,6 @@ const RectDoubleReinfApi = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [m_rd, ksi_eff, x_eff]);
 
-  const resetModelData = () => {
-    setApiTrigger({
-      isButtonPressed: false,
-      isNoErrors: false,
-      isWaitForAction: false,
-    });
-    console.log("(DoubleReinAPI) doubleReinforcedDataModel: ");
-    console.log(apiTrigger);
-  };
-
   async function initSendData() {
     setModalWaitShow(true);
     setModalWaitText("Please wait...");
@@ -90,8 +80,18 @@ const RectDoubleReinfApi = () => {
           console.log(error);
         }
       );
-    resetModelData();
+    resetApiTrigger();
   }
+
+  const resetApiTrigger = () => {
+    setApiTrigger({
+      isButtonPressed: false,
+      isNoErrors: false,
+      isWaitForAction: false,
+    });
+    console.log("(DoubleReinAPI) doubleReinforcedDataModel: ");
+    console.log(apiTrigger);
+  };
 
   return <></>;
 };
