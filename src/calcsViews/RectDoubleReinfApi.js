@@ -37,7 +37,7 @@ const RectDoubleReinfApi = () => {
 
   useEffect(() => {
     console.log(
-      "(DoubleReinAPI) m_rd, ksi_eff, x_eff IS CHANGE: " +
+      "(DoubleReinAPI) m_rd, ksi_eff, x_eff IS CHANGE, BACKEND RESPONDE: " +
         m_rd +
         " " +
         ksi_eff +

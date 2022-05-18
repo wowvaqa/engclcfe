@@ -6,6 +6,8 @@ const RectDoubleReinfHandleErr = () => {
   const {
     setModalInfoShow,
     setModalInfoText,
+    setModalInputText,
+    setModalInputShow,
     doubleReinforcedConcreteData,
     doubleReinforcedDataModel,
     setDoubleReinforcedDataModel,
@@ -22,6 +24,7 @@ const RectDoubleReinfHandleErr = () => {
 
   const handleErrors = () => {
     var dataReady = true;
+    var waitForDataConfirm = false;
 
     if (doubleReinforcedConcreteData.name === "") {
       setModalInfoText("Invalid value : 'name'");
@@ -92,17 +95,49 @@ const RectDoubleReinfHandleErr = () => {
       dataReady = false;
     }
 
-    setupDataModel(dataReady);
+    if (doubleReinforcedConcreteData.b > 2) {
+      setModalInputText(
+        "Value 'b', are you sure you entered the given values in meters?"
+      );
+      setModalInputShow(true);
+      waitForDataConfirm = true;
+    }
+
+    if (doubleReinforcedConcreteData.h > 4) {
+      setModalInputText(
+        "Value 'h', are you sure you entered the given values in meters?"
+      );
+      setModalInputShow(true);
+      waitForDataConfirm = true;
+    }
+
+    if (doubleReinforcedConcreteData.c < 20) {
+      setModalInputText(
+        "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
+      );
+      setModalInputShow(true);
+      waitForDataConfirm = true;
+    }
+
+    if (doubleReinforcedConcreteData.c > 70) {
+      setModalInputText(
+        "the concrete cover is rarely grater than 70 mm, are you sure of this decision?"
+      );
+      setModalInputShow(true);
+      waitForDataConfirm = true;
+    }
+
+    setupDataModel(dataReady, waitForDataConfirm);
   };
 
   /**
    *
    * @param {*} props
    */
-  const setupDataModel = (props) => {
+  const setupDataModel = (dataReady, waitForDataConfirm) => {
     const isButtonPressed = doubleReinforcedDataModel.isButtonPressed;
-    const isNoErrors = props;
-    const isWaitForAction = doubleReinforcedDataModel.isWaitForAction;
+    const isNoErrors = dataReady;
+    const isWaitForAction = waitForDataConfirm;
 
     const dataModel = { isButtonPressed, isNoErrors, isWaitForAction };
 

@@ -3,10 +3,21 @@ import { Modal, Button } from "react-bootstrap";
 import { useGlobalContext } from "../Context";
 
 const AppModalInput = (props) => {
-  const { inputModalOkButtonClick } = useGlobalContext();
+  const {
+    inputModalOkButtonClick,
+    doubleReinforcedDataModel,
+    setDoubleReinforcedDataModel,
+  } = useGlobalContext();
 
   const hideModal = (event) => {
     props.onHide();
+    setDoubleReinforcedDataModel({
+      isButtonPressed: doubleReinforcedDataModel.isButtonPressed,
+      isNoErrors: doubleReinforcedDataModel.isNoErrors,
+      isWaitForAction: false,
+    });
+    console.log("(AppModalInput)");
+    console.log(doubleReinforcedDataModel);
     event.preventDefault();
   };
 
