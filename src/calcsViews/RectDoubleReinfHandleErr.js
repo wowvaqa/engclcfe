@@ -25,6 +25,7 @@ const RectDoubleReinfHandleErr = () => {
   const handleErrors = () => {
     var dataReady = true;
     var waitForDataConfirm = false;
+    var confirmationText = "";
 
     if (doubleReinforcedConcreteData.name === "") {
       setModalInfoText("Invalid value : 'name'");
@@ -79,30 +80,35 @@ const RectDoubleReinfHandleErr = () => {
       setModalInfoText("Invalid value : 'no_of_opp_bars'");
       setModalInfoShow(true);
       dataReady = false;
-    } else if (doubleReinforcedConcreteData.b > 2) {
-      setModalInputText(
-        "Value 'b', are you sure you entered the given values in meters?"
-      );
-      setModalInputShow(true);
+    }
+
+    if (doubleReinforcedConcreteData.b > 2) {
+      confirmationText =
+        confirmationText +
+        "Value 'b', are you sure you entered the given values in meters? \n";
       waitForDataConfirm = true;
-    } else if (doubleReinforcedConcreteData.h > 4) {
-      setModalInputText(
-        "Value 'h', are you sure you entered the given values in meters?"
-      );
-      setModalInputShow(true);
+    }
+    if (doubleReinforcedConcreteData.h > 4) {
+      confirmationText =
+        confirmationText +
+        "Value 'h', are you sure you entered the given values in meters? \n";
       waitForDataConfirm = true;
-    } else if (doubleReinforcedConcreteData.c < 20) {
-      setModalInputText(
-        "The concrete cover is rarely smaller than 20 mm, are you sure of this decision?"
-      );
-      setModalInputShow(true);
+    }
+    if (doubleReinforcedConcreteData.c < 20) {
+      confirmationText =
+        confirmationText +
+        "The concrete cover is rarely smaller than 20 mm, are you sure of this decision? \n";
       waitForDataConfirm = true;
     } else if (doubleReinforcedConcreteData.c > 70) {
-      setModalInputText(
-        "the concrete cover is rarely grater than 70 mm, are you sure of this decision?"
-      );
-      setModalInputShow(true);
+      confirmationText =
+        confirmationText +
+        "the concrete cover is rarely grater than 70 mm, are you sure of this decision? \n";
       waitForDataConfirm = true;
+    }
+
+    if (waitForDataConfirm) {
+      setModalInputText(confirmationText);
+      setModalInputShow(true);
     }
 
     setupDataModel(dataReady, waitForDataConfirm);
