@@ -14,10 +14,8 @@ const RectDoubleReinfHandleErr = () => {
   } = useGlobalContext();
 
   useEffect(() => {
-    console.log(
-      "Reciving data to send for error handling: " +
-        doubleReinforcedConcreteData
-    );
+    console.log("Reciving data to send for error handling: ");
+    console.log(doubleReinforcedConcreteData);
     handleErrors();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [doubleReinforcedConcreteData]);

@@ -181,7 +181,7 @@ const ReinforcedConcreteCalcView = () => {
     <>
       <ReinforcedConcreteHandleError />
       <Container>
-        <h3>Reinforced concrete calculator</h3>
+        <h3>Single reinforced concrete calculator</h3>
       </Container>
       <Container fluid="md">
         <Row>
