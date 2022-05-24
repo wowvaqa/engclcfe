@@ -1,4 +1,5 @@
 import React from "react";
+import { roundNumber } from "../utils/Utils";
 import { Table, Collapse } from "react-bootstrap";
 
 const RectDoubleReinfResultView = ({
@@ -30,13 +31,13 @@ const RectDoubleReinfResultView = ({
           <tbody>
             <tr>
               <td>
-                <h4>{m_rd} [kN]</h4>
+                <h4>{roundNumber(m_rd, 4)} [kN]</h4>
               </td>
               <td>
-                <h4>{ksi_eff} [-]</h4>
+                <h4>{roundNumber(ksi_eff, 4)} [-]</h4>
               </td>
               <td>
-                <h4>{x_eff} [m]</h4>
+                <h4>{roundNumber(x_eff, 4)} [m]</h4>
               </td>
             </tr>
           </tbody>

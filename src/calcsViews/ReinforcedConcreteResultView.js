@@ -1,5 +1,6 @@
 import React from "react";
 import { Table, Collapse } from "react-bootstrap";
+import { roundNumber } from "../utils/Utils";
 
 const ReinforcedConcreteResultView = ({
   isCollapseOpen,
@@ -29,9 +30,9 @@ const ReinforcedConcreteResultView = ({
           </thead>
           <tbody>
             <tr>
-              <td>{m_rd !== 0 && <h4>{m_rd} [kN]</h4>}</td>
-              <td>{m_rd !== 0 && <h4>{ksi_eff} [-]</h4>}</td>
-              <td>{m_rd !== 0 && <h4>{x_eff} [m]</h4>}</td>
+              <td>{m_rd !== 0 && <h4>{roundNumber(m_rd, 4)} [kN]</h4>}</td>
+              <td>{m_rd !== 0 && <h4>{roundNumber(ksi_eff, 4)} [-]</h4>}</td>
+              <td>{m_rd !== 0 && <h4>{roundNumber(x_eff, 4)} [m]</h4>}</td>
             </tr>
           </tbody>
         </Table>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Table, Collapse } from "react-bootstrap";
+import { roundNumber } from "../utils/Utils";
 
 import { useGlobalContext } from "../Context";
 
@@ -31,16 +32,20 @@ const TsecReinfResultView = ({ isCollapseOpen }) => {
           <tbody>
             <tr>
               <td>
-                <h4>{tReinforcedConcreteDataFromApi.as1} [m2]</h4>
+                <h4>
+                  {roundNumber(tReinforcedConcreteDataFromApi.as1, 4)} [m2]
+                </h4>
               </td>
               <td>
-                <h4>{tReinforcedConcreteDataFromApi.ns1} </h4>
+                <h4>{roundNumber(tReinforcedConcreteDataFromApi.ns1, 4)} </h4>
               </td>
               <td>
-                <h4>{tReinforcedConcreteDataFromApi.as2} [m2]</h4>
+                <h4>
+                  {roundNumber(tReinforcedConcreteDataFromApi.as2, 4)} [m2]
+                </h4>
               </td>
               <td>
-                <h4>{tReinforcedConcreteDataFromApi.ns2} </h4>
+                <h4>{roundNumber(tReinforcedConcreteDataFromApi.ns2, 4)} </h4>
               </td>
               <td>
                 <h4>{tReinforcedConcreteDataFromApi.remark} </h4>
