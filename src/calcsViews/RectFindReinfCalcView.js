@@ -4,6 +4,7 @@ import image from "../assets/API_1_pio.png";
 
 import RectFindReinfResultView from "../calcsViews/RectFindReinfResultView";
 import RectFindReinfApi from "../calcsViews/RectFindReinfApi";
+import RectFindReinfErrHandler from "../calcsViews/RectFindReinfErrHandler";
 
 import { useGlobalContext } from "../Context";
 
@@ -25,11 +26,15 @@ const RectFindReinfCalcView = () => {
   const [ns2, setNs2] = useState(0);
   const [remark, setRemark] = useState("");
 
-  const { setSingleDimensioningData, singleDimensioningDataFromApi } =
-    useGlobalContext();
+  const {
+    setSingleDimensioningData,
+    apiTrigger,
+    setApiTrigger,
+    singleDimensioningDataFromApi,
+  } = useGlobalContext();
 
   useEffect(() => {
-    console.log("(DoubleCalcView) Reciving data from API: ");
+    console.log("(RectFindView) Reciving data from API: ");
     console.log(singleDimensioningDataFromApi);
 
     setAs1(singleDimensioningDataFromApi.as1);
@@ -55,12 +60,28 @@ const RectFindReinfCalcView = () => {
       fi_opp,
       m_sd,
     };
-    console.log("Sending data to API: " + dataToSend);
+    console.log("(RectFindView) Sending data to API: " + dataToSend);
+    setupDataModel(true);
     setSingleDimensioningData(dataToSend);
+  };
+
+  /**
+   *
+   * @param {*} props
+   */
+  const setupDataModel = (props) => {
+    const isButtonPressed = props;
+    const isNoErrors = apiTrigger.isNoErrors;
+    const isWaitForAction = apiTrigger.isWaitForAction;
+
+    const dataModel = { isButtonPressed, isNoErrors, isWaitForAction };
+
+    setApiTrigger(dataModel);
   };
 
   return (
     <>
+      <RectFindReinfErrHandler />
       <RectFindReinfApi />
       <Container>
         <h3>Single-reinforced section dimensioning</h3>

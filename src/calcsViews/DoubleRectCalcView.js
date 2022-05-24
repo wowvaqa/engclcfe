@@ -57,7 +57,7 @@ const DoubleRectCalcView = () => {
       fi_opp,
       no_of_opp_bars,
     };
-    console.log("Sending data to API: " + dataToSend);
+    console.log("(DoubleCalcView) Sending data to API: " + dataToSend);
 
     setupDataModel(true);
     setDoubleReinforcedConcreteData(dataToSend);
