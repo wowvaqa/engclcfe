@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import TestApiView from "./views/TestApiView";
 import ReinforcedConcreteCalcView from "./calcsViews/ReinforcedConcreteCalcView";
-import RectDoubleReinfCalcView from "./calcsViews/RectDoubleReinfCalcView";
+import DoubleRectCalcView from "./calcsViews/DoubleRectCalcView";
 import RectFindReinfCalcView from "./calcsViews/RectFindReinfCalcView";
 import TsecReinfCalcView from "./calcsViews/TsecReinfCalcView";
 
@@ -59,8 +59,8 @@ function App() {
             element={<ReinforcedConcreteCalcView />}
           />
           <Route
-            path="/calcs/rectdoublereinfcalc"
-            element={<RectDoubleReinfCalcView />}
+            path="/calcs/doublerectcalc"
+            element={<DoubleRectCalcView />}
           />
           <Route
             path="/calcs/rectfindreinfcalc"

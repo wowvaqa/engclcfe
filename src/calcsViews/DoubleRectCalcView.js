@@ -4,11 +4,11 @@ import image from "../assets/API_2_pio.png";
 
 import { useGlobalContext } from "../Context";
 
-import RectDoubleReinfHandleErr from "../calcsViews/RectDoubleReinfHandleErr";
-import RectDoubleReinfResultView from "../calcsViews/RectDoubleReinfResultView";
-import RectDoubleReinfApi from "../calcsViews/RectDoubleReinfApi";
+import DoubleRectCalcErrHandler from "./DoubleRectCalcErrHandler";
+import DoubleRectCalcResultView from "./DoubleRectCalcResultView";
+import DoubleRectCalcApi from "./DoubleRectCalcApi";
 
-const RectDoubleReinfCalcView = () => {
+const DoubleRectCalcView = () => {
   const [name, setName] = useState("My first cross sect");
   const [b, setB] = useState(0.5);
   const [h, setH] = useState(1.2);
@@ -80,8 +80,8 @@ const RectDoubleReinfCalcView = () => {
 
   return (
     <>
-      <RectDoubleReinfHandleErr />
-      <RectDoubleReinfApi />
+      <DoubleRectCalcErrHandler />
+      <DoubleRectCalcApi />
       <Container>
         <h3>Double reinforced concrete calculator</h3>
       </Container>
@@ -312,7 +312,7 @@ const RectDoubleReinfCalcView = () => {
           </Col>
         </Row>
         <br></br>
-        <RectDoubleReinfResultView
+        <DoubleRectCalcResultView
           isCollapseOpen={true}
           m_rd={m_rd}
           ksi_eff={ksi_eff}
@@ -323,4 +323,4 @@ const RectDoubleReinfCalcView = () => {
   );
 };
 
-export default RectDoubleReinfCalcView;
+export default DoubleRectCalcView;

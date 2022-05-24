@@ -51,10 +51,7 @@ const NavigationBar = () => {
               >
                 Single reinforced concrete calculator
               </NavDropdown.Item>
-              <NavDropdown.Item
-                eventKey="4.3"
-                href="/calcs/rectdoublereinfcalc"
-              >
+              <NavDropdown.Item eventKey="4.3" href="/calcs/doublerectcalc">
                 Double reinforced concrete calculator
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="4.4" href="/calcs/rectfindreinfcalc">

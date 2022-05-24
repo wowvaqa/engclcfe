@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { useGlobalContext } from "../Context";
 
-const RectDoubleReinfApi = () => {
+const DoubleRectCalcApi = () => {
   const {
     setModalWaitText,
     setModalWaitShow,
@@ -96,4 +96,4 @@ const RectDoubleReinfApi = () => {
   return <></>;
 };
 
-export default RectDoubleReinfApi;
+export default DoubleRectCalcApi;

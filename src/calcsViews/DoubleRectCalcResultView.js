@@ -2,7 +2,7 @@ import React from "react";
 import { roundNumber } from "../utils/Utils";
 import { Table, Collapse } from "react-bootstrap";
 
-const RectDoubleReinfResultView = ({
+const DoubleRectCalcResultView = ({
   isCollapseOpen,
   m_rd,
   ksi_eff,
@@ -47,4 +47,4 @@ const RectDoubleReinfResultView = ({
   );
 };
 
-export default RectDoubleReinfResultView;
+export default DoubleRectCalcResultView;

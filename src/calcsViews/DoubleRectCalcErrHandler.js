@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { useGlobalContext } from "../Context";
 
-const RectDoubleReinfHandleErr = () => {
+const DoubleRectCalcErrHandler = () => {
   const {
     setModalInfoShow,
     setModalInfoText,
@@ -129,4 +129,4 @@ const RectDoubleReinfHandleErr = () => {
   return <></>;
 };
 
-export default RectDoubleReinfHandleErr;
+export default DoubleRectCalcErrHandler;
