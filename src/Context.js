@@ -32,9 +32,15 @@ const AppProvider = ({ children }) => {
     useState({});
   /* Single dimensioning concrete data for API and handle errors & data from API */
   const [singleDimensioningData, setSingleDimensioningData] = useState({});
-  const [singleDimensioningDataFromApi, setSingleDimensioningDataDataFromApi] =
+  const [singleDimensioningDataFromApi, setSingleDimensioningDataFromApi] =
     useState({});
-  /* Flag for start computing */
+
+  /* 
+      A flag indicating that the calculation is ready to begin.
+      isButtonPressed - Button 'Calculate' from calc view 
+      isNoErrors - There is no errrs from ErrorHandler
+      isWaitForAction - Waiting for user action (./modals/AppModalWait)
+  */
   const [apiTrigger, setApiTrigger] = useState({
     isButtonPressed: false,
     isNoErrors: false,
@@ -76,8 +82,6 @@ const AppProvider = ({ children }) => {
         setDoubleReinforcedConcreteData,
         doubleReinforcedConcreteDataFromApi,
         setDoubleReinforcedConcreteDataFromApi,
-        apiTrigger,
-        setApiTrigger,
         /* T Reinforced Concrete data for API and handle errors & data from API */
         tReinforcedConcreteData,
         setTreinforcedConcreteData,
@@ -87,7 +91,10 @@ const AppProvider = ({ children }) => {
         singleDimensioningData,
         setSingleDimensioningData,
         singleDimensioningDataFromApi,
-        setSingleDimensioningDataDataFromApi,
+        setSingleDimensioningDataFromApi,
+        /* A flag indicating that the calculation is ready to begin. */
+        apiTrigger,
+        setApiTrigger,
       }}
     >
       {children}
