@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Table, Collapse } from "react-bootstrap";
 import { roundNumber } from "../utils/Utils";
 
-import { useGlobalContext } from "../Context";
-
-const TsecReinfResultView = ({ isCollapseOpen }) => {
-  const { tReinforcedConcreteDataFromApi } = useGlobalContext();
-
-  useEffect(() => {
-    console.log("Reciving data from API: " + tReinforcedConcreteDataFromApi);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tReinforcedConcreteDataFromApi]);
-
+const TsecReinfResultView = ({
+  isCollapseOpen,
+  as1,
+  ns1,
+  as2,
+  ns2,
+  remark,
+  remark2,
+}) => {
   return (
     <>
       <Collapse in={isCollapseOpen}>
@@ -32,26 +31,22 @@ const TsecReinfResultView = ({ isCollapseOpen }) => {
           <tbody>
             <tr>
               <td>
-                <h4>
-                  {roundNumber(tReinforcedConcreteDataFromApi.as1, 4)} [m2]
-                </h4>
+                <h4>{roundNumber(as1, 4)} [m2]</h4>
               </td>
               <td>
-                <h4>{roundNumber(tReinforcedConcreteDataFromApi.ns1, 4)} </h4>
+                <h4>{roundNumber(ns1, 4)} </h4>
               </td>
               <td>
-                <h4>
-                  {roundNumber(tReinforcedConcreteDataFromApi.as2, 4)} [m2]
-                </h4>
+                <h4>{roundNumber(as2, 4)} [m2]</h4>
               </td>
               <td>
-                <h4>{roundNumber(tReinforcedConcreteDataFromApi.ns2, 4)} </h4>
+                <h4>{roundNumber(ns2, 4)} </h4>
               </td>
               <td>
-                <h4>{tReinforcedConcreteDataFromApi.remark} </h4>
+                <h4>{remark} </h4>
               </td>
               <td>
-                <h4>{tReinforcedConcreteDataFromApi.remark2} </h4>
+                <h4>{remark2} </h4>
               </td>
             </tr>
           </tbody>

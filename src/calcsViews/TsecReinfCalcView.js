@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_3_pio.png";
 
 import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
 import TsecReinfApi from "./TsecReinfApi";
+import TsecReinfErrHandler from "./TsecReinfErrHandler";
 
 import { useGlobalContext } from "../Context";
 
@@ -20,8 +21,34 @@ const TsecReinfCalcView = () => {
   const [fi_s, setFi_s] = useState(12);
   const [fi_opp, setFi_opp] = useState(16);
   const [m_sd, setM_sd] = useState(3000);
+  /* JSON Api data */
+  const [as1, setAs1] = useState(0);
+  const [ns1, setNs1] = useState(0);
+  const [as2, setAs2] = useState(0);
+  const [ns2, setNs2] = useState(0);
+  const [remark, setRemark] = useState("");
+  const [remark2, setRemark2] = useState("");
 
-  const { setTreinforcedConcreteData } = useGlobalContext();
+  const {
+    setTreinforcedConcreteData,
+    apiTrigger,
+    setApiTrigger,
+    tReinforcedConcreteDataFromApi,
+  } = useGlobalContext();
+
+  useEffect(() => {
+    console.log("(TSecView) Reciving data from API: ");
+    console.log(tReinforcedConcreteDataFromApi);
+
+    setAs1(tReinforcedConcreteDataFromApi.as1);
+    setNs1(tReinforcedConcreteDataFromApi.ns1);
+    setAs2(tReinforcedConcreteDataFromApi.ns1);
+    setNs2(tReinforcedConcreteDataFromApi.ns1);
+    setRemark(tReinforcedConcreteDataFromApi.remark);
+    setRemark2(tReinforcedConcreteDataFromApi.remark2);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tReinforcedConcreteDataFromApi]);
 
   const sendDataToApi = (event) => {
     event.preventDefault();
@@ -39,12 +66,30 @@ const TsecReinfCalcView = () => {
       fi_opp,
       m_sd,
     };
-    console.log("Sending data to API: " + dataToSend);
+    console.log("(TSecView) Sending data to API: " + dataToSend);
+
+    setupDataModel(true);
     setTreinforcedConcreteData(dataToSend);
+    event.preventDefault();
+  };
+
+  /**
+   *
+   * @param {*} props
+   */
+  const setupDataModel = (props) => {
+    const isButtonPressed = props;
+    const isNoErrors = apiTrigger.isNoErrors;
+    const isWaitForAction = apiTrigger.isWaitForAction;
+
+    const dataModel = { isButtonPressed, isNoErrors, isWaitForAction };
+
+    setApiTrigger(dataModel);
   };
 
   return (
     <>
+      <TsecReinfErrHandler />
       <TsecReinfApi />
       <Container>
         <h3>T-section reinforcement calculator</h3>
@@ -265,7 +310,15 @@ const TsecReinfCalcView = () => {
           </Col>
         </Row>
         <br></br>
-        <TsecReinfResultView isCollapseOpen={true} />
+        <TsecReinfResultView
+          isCollapseOpen={true}
+          as1={as1}
+          ns1={ns1}
+          as2={as2}
+          ns2={ns2}
+          remark={remark}
+          remark2={remark2}
+        />
       </Container>
     </>
   );

@@ -26,7 +26,6 @@ const AppProvider = ({ children }) => {
     doubleReinforcedConcreteDataFromApi,
     setDoubleReinforcedConcreteDataFromApi,
   ] = useState({});
-
   /* T Reinforced Concrete data for API and handle errors & data from API */
   const [tReinforcedConcreteData, setTreinforcedConcreteData] = useState({});
   const [tReinforcedConcreteDataFromApi, setTreinforcedConcreteDataFromApi] =

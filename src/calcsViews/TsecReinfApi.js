@@ -4,8 +4,14 @@ import axios from "axios";
 import { useGlobalContext } from "../Context";
 
 const TsecReinfApi = () => {
-  const { tReinforcedConcreteData, setTreinforcedConcreteDataFromApi } =
-    useGlobalContext();
+  const {
+    setModalWaitText,
+    setModalWaitShow,
+    tReinforcedConcreteData,
+    setTreinforcedConcreteDataFromApi,
+    apiTrigger,
+    setApiTrigger,
+  } = useGlobalContext();
 
   /* JSON Api data */
   const [as1, setAs1] = useState(0);
@@ -16,12 +22,47 @@ const TsecReinfApi = () => {
   const [remark2, setRemark2] = useState("");
 
   useEffect(() => {
-    console.log("Reciving data to send for API: " + tReinforcedConcreteData);
-    initSendData();
+    console.log(
+      "(TSecApi) Reciving data to send for API: " + tReinforcedConcreteData
+    );
+    console.log(tReinforcedConcreteData);
+    console.log(apiTrigger);
+    if (
+      apiTrigger.isButtonPressed &&
+      apiTrigger.isNoErrors &&
+      !apiTrigger.isWaitForAction
+    ) {
+      console.log(
+        "(TSecApi) Data from RectDouble are ready, sending data to BackEND"
+      );
+      initSendData(tReinforcedConcreteData);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tReinforcedConcreteData]);
+  }, [tReinforcedConcreteData, apiTrigger]);
+
+  useEffect(() => {
+    console.log(
+      "(TSecApi) as1, ns1, as2, ns2, remark, remark2 IS CHANGE, BACKEND RESPONDE: " +
+        as1 +
+        " " +
+        ns1 +
+        " " +
+        as2 +
+        " " +
+        ns2 +
+        " " +
+        remark +
+        " " +
+        remark2
+    );
+    const dataFromApi = { as1, ns1, as2, ns2, remark, remark2 };
+    setTreinforcedConcreteDataFromApi(dataFromApi);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [as1, ns1, as2, ns2, remark, remark2]);
 
   async function initSendData() {
+    setModalWaitShow(true);
+    setModalWaitText("Please wait...");
     await axios
       .post(
         "https://django-civil-85.herokuapp.com/api/civil_calcs/t_sect_ben_reinf",
@@ -48,29 +89,24 @@ const TsecReinfApi = () => {
           setNs2(response.data.ns2);
           setRemark(response.data.remark);
           setRemark2(response.data.remark2);
-
-          const dataFromApi = { as1, ns1, as2, ns2, remark, remark2 };
-          setTreinforcedConcreteDataFromApi(dataFromApi);
-          console.log(
-            "Double calc data from API: " +
-              dataFromApi.as1 +
-              " " +
-              dataFromApi.ns1 +
-              " " +
-              dataFromApi.as2 +
-              " " +
-              dataFromApi.ns2 +
-              " " +
-              dataFromApi.remark +
-              " " +
-              dataFromApi.remark2
-          );
+          setModalWaitShow(false);
         },
         (error) => {
           console.log(error);
         }
       );
+    resetApiTrigger();
   }
+
+  const resetApiTrigger = () => {
+    setApiTrigger({
+      isButtonPressed: false,
+      isNoErrors: false,
+      isWaitForAction: false,
+    });
+    console.log("(TSecApi) apiTrigger: ");
+    console.log(apiTrigger);
+  };
 
   return <></>;
 };
