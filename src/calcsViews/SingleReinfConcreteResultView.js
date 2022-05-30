@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Collapse } from "react-bootstrap";
 import { roundNumber } from "../utils/Utils";
 
-const ReinforcedConcreteResultView = ({
+const SingleReinfConcreteResultView = ({
   isCollapseOpen,
   m_rd,
   ksi_eff,
@@ -41,4 +41,4 @@ const ReinforcedConcreteResultView = ({
   );
 };
 
-export default ReinforcedConcreteResultView;
+export default SingleReinfConcreteResultView;

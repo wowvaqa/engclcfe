@@ -5,7 +5,7 @@
 import React, { useEffect, useRef } from "react";
 import { useGlobalContext } from "../Context";
 
-const ReinforcedConcreteHandleError = () => {
+const SingleReinfConcreteHandleError = () => {
   const {
     setModalInputText,
     setModalInfoShow,
@@ -99,4 +99,4 @@ const ReinforcedConcreteHandleError = () => {
 
   return <></>;
 };
-export default ReinforcedConcreteHandleError;
+export default SingleReinfConcreteHandleError;

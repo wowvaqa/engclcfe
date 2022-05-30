@@ -4,11 +4,11 @@ import { useGlobalContext } from "../Context";
 import axios from "axios";
 //import image from "../assets/API_1_pio.png";
 
-import ReinforcedConcreteResultView from "../calcsViews/ReinforcedConcreteResultView";
+import SingleReinfConcreteResultView from "./SingleReinfConcreteResultView";
 import ReinforcedConcreteDynamicDraw from "../graphics/ReinforcedConcreteDynamicDraw";
-import ReinforcedConcreteHandleError from "./ReinforcedConcreteHandleError";
+import ReinforcedConcreteHandleError from "./SingleReinfConcreteHandleError";
 
-const ReinforcedConcreteCalcView = () => {
+const SingleReinfConcreteCalcView = () => {
   const {
     setModalInfoShow,
     setModalInfoText,
@@ -352,7 +352,7 @@ const ReinforcedConcreteCalcView = () => {
           </Col>
         </Row>
         <br></br>
-        <ReinforcedConcreteResultView
+        <SingleReinfConcreteResultView
           isCollapseOpen={true}
           m_rd={m_rd}
           ksi_eff={ksi_eff}
@@ -363,4 +363,4 @@ const ReinforcedConcreteCalcView = () => {
   );
 };
 
-export default ReinforcedConcreteCalcView;
+export default SingleReinfConcreteCalcView;
