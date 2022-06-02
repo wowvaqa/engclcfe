@@ -2,7 +2,7 @@
 
 import DynamicDrawInput from "./DynamicDrawInput";
 import React, { useState, useEffect } from "react";
-import { Stage, Layer, Line } from "react-konva";
+import { Stage, Layer, Line, Rect } from "react-konva";
 
 import { useGlobalContext } from "../Context";
 
@@ -14,8 +14,9 @@ import { useGlobalContext } from "../Context";
 const DynamicDraw = (props) => {
   const [outlineData, setOutlineData] = useState([]);
   const [coordsForDraw, setCoordsForDraw] = useState([]);
+  const [strokeWidth, setStrokeWidth] = useState(2);
 
-  const { dynamicDrawData } = useGlobalContext();
+  const { dynamicDrawData, drawProperties } = useGlobalContext();
 
   var coords = [];
 
@@ -24,6 +25,12 @@ const DynamicDraw = (props) => {
     setOutlineData(dynamicDrawData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dynamicDrawData]);
+
+  useEffect(() => {
+    console.log("(Dynamic Draw) draw properties has change ", drawProperties);
+    setStrokeWidth(drawProperties.strokeWidth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [drawProperties]);
 
   useEffect(() => {
     convertData();
@@ -49,9 +56,12 @@ const DynamicDraw = (props) => {
 
   return (
     <>
-      <Stage width={400} height={400}>
+      <Stage width={800} height={400}>
         <Layer>
-          <ConcreteRect coordsForDraw={coordsForDraw} />
+          <ConcreteRect
+            coordsForDraw={coordsForDraw}
+            strokeWidth={strokeWidth}
+          />
         </Layer>
       </Stage>
       <DynamicDrawInput />
@@ -64,10 +74,23 @@ const DynamicDraw = (props) => {
  * @param {hValue, bValue, xyOffset, thickness} props
  */
 const ConcreteRect = (props) => {
-  console.log("PROPS: ", props.coordsForDraw);
+  console.log("PROPS: ", props.coordsForDraw, " width: ", props.strokeWidth);
   return (
     <>
-      <Line points={props.coordsForDraw} stroke={"black"} strokeWidth={2} />
+      <Rect
+        x={1}
+        y={1}
+        width={797}
+        height={397}
+        stroke={"green"}
+        strokeWidth={1}
+        cornerRadius={0}
+      />
+      <Line
+        points={props.coordsForDraw}
+        stroke={"black"}
+        strokeWidth={props.strokeWidth}
+      />
     </>
   );
 };

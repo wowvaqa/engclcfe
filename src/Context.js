@@ -5,6 +5,8 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   /* Dynamic draw data */
   const [dynamicDrawData, setDynamicDrawData] = useState({});
+  /* Stroke Width, bleeding of figure on dynamic draw */
+  const [drawProperties, setDrawProperties] = useState({});
   /* Modal to show text */
   const [modalInfoShow, setModalInfoShow] = useState(false);
   const [modalInfoText, setModalInfoText] = useState("no text");
@@ -61,6 +63,8 @@ const AppProvider = ({ children }) => {
       value={{
         dynamicDrawData,
         setDynamicDrawData,
+        drawProperties,
+        setDrawProperties,
         modalInfoShow,
         setModalInfoShow,
         modalInfoText,

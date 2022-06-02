@@ -11,15 +11,30 @@ const DynamicDrawInput = () => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [key, setKey] = useState(1);
+
+  const [strokeWidth, setStrokeWidth] = useState(2);
+  const [bleeding, setBleeding] = useState(10);
+
   const [outlineData, setOutlineData] = useState([]);
 
-  const { setDynamicDrawData } = useGlobalContext();
+  const { setDynamicDrawData, setDrawProperties } = useGlobalContext();
 
   useEffect(() => {
     console.log("outlineData has change", outlineData);
     setDynamicDrawData(outlineData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [outlineData]);
+
+  /**
+   * Updating line stroke width & edge bleeding of dynamic draw
+   * @param {*} event
+   */
+  const updateDrawProperties = (event) => {
+    const drawPropertiesData = { strokeWidth, bleeding };
+    // setDrawProps(drawPropertiesData);
+    setDrawProperties(drawPropertiesData)
+    event.preventDefault();
+  };
 
   const addData = (event) => {
     const dataForDraw = { key, x, y };
@@ -67,20 +82,78 @@ const DynamicDrawInput = () => {
                     <Form.Control type="number" placeholder="0" />
                   </Form.Group>
                 </Col>
+                <Col>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="strokeWidth"
+                    onChange={(e) => {
+                      setStrokeWidth(
+                        parseFloat(e.target.value.replace(",", "."))
+                      );
+                    }}
+                  >
+                    <Form.Label>StrokeWidth:</Form.Label>
+                    <Form.Control type="number" placeholder="2" />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="bleeding"
+                    onChange={(e) => {
+                      setBleeding(parseFloat(e.target.value.replace(",", ".")));
+                    }}
+                  >
+                    <Form.Label>Bleeding:</Form.Label>
+                    <Form.Control type="number" placeholder="10" />
+                  </Form.Group>
+                </Col>
               </Row>
             </Form>
-            <Button
-              variant="primary"
-              type="button"
-              className="btn btn-primary"
-              aria-controls="example-collapse-text"
-              aria-expanded={true}
-              onClick={(event) => {
-                addData(event);
-              }}
-            >
-              ADD
-            </Button>
+            <Row>
+              <Col>
+                <Button
+                  variant="primary"
+                  type="button"
+                  className="btn btn-primary"
+                  aria-controls="example-collapse-text"
+                  aria-expanded={true}
+                  onClick={(event) => {
+                    addData(event);
+                  }}
+                >
+                  ADD
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  variant="primary"
+                  type="button"
+                  className="btn btn-primary"
+                  aria-controls="example-collapse-text"
+                  aria-expanded={true}
+                  onClick={(event) => {
+                    clearData(event);
+                  }}
+                >
+                  CLEAR
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  variant="primary"
+                  type="button"
+                  className="btn btn-primary"
+                  aria-controls="example-collapse-text"
+                  aria-expanded={true}
+                  onClick={(event) => {
+                    updateDrawProperties(event);
+                  }}
+                >
+                  UPDATE
+                </Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>
@@ -107,18 +180,6 @@ const DynamicDrawInput = () => {
             ))}
           </tbody>
         </Table>
-        <Button
-          variant="primary"
-          type="button"
-          className="btn btn-primary"
-          aria-controls="example-collapse-text"
-          aria-expanded={true}
-          onClick={(event) => {
-            clearData(event);
-          }}
-        >
-          CLEAR
-        </Button>
       </Container>
     </>
   );
