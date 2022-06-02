@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
+  /* Dynamic draw data */
+  const [dynamicDrawData, setDynamicDrawData] = useState({});
   /* Modal to show text */
   const [modalInfoShow, setModalInfoShow] = useState(false);
   const [modalInfoText, setModalInfoText] = useState("no text");
@@ -57,6 +59,8 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        dynamicDrawData,
+        setDynamicDrawData,
         modalInfoShow,
         setModalInfoShow,
         modalInfoText,

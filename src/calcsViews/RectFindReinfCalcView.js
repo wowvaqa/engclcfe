@@ -24,7 +24,7 @@ const RectFindReinfCalcView = () => {
   const [ns1, setNs1] = useState(0);
   const [as2, setAs2] = useState(0);
   const [ns2, setNs2] = useState(0);
-  const [remark, setRemark] = useState("");
+  const [remark, setRemark] = useState("no remarks");
 
   const {
     setSingleDimensioningData,

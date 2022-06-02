@@ -8,7 +8,7 @@ const RectFindReinfApi = () => {
     setModalWaitText,
     setModalWaitShow,
     singleDimensioningData,
-    setSingleDimensioningDataDataFromApi,
+    setSingleDimensioningDataFromApi,
     apiTrigger,
     setApiTrigger,
   } = useGlobalContext();
@@ -18,7 +18,7 @@ const RectFindReinfApi = () => {
   const [ns1, setNs1] = useState(0);
   const [as2, setAs2] = useState(0);
   const [ns2, setNs2] = useState(0);
-  const [remark, setRemark] = useState("");
+  const [remark, setRemark] = useState("-");
 
   useEffect(() => {
     console.log("(RectFindAPI) Reciving data to send for API: ");
@@ -51,7 +51,7 @@ const RectFindReinfApi = () => {
         remark
     );
     const dataFromApi = { as1, ns1, as2, ns2, remark };
-    setSingleDimensioningDataDataFromApi(dataFromApi);
+    setSingleDimensioningDataFromApi(dataFromApi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [as1, ns1, as2, ns2, remark]);
 
