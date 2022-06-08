@@ -13,8 +13,6 @@ const DynamicDrawInput = () => {
   const [key, setKey] = useState(1);
 
   const [strokeWidth, setStrokeWidth] = useState(2);
-  const [bleeding, setBleeding] = useState(10);
-
   const [outlineData, setOutlineData] = useState([]);
 
   const { setDynamicDrawData, setDrawProperties } = useGlobalContext();
@@ -26,13 +24,28 @@ const DynamicDrawInput = () => {
   }, [outlineData]);
 
   /**
-   * Updating line stroke width & edge bleeding of dynamic draw
+   * Figura wyświetlana po uruchomieniu widoku testowania dynamicznego rysunku
+   */
+  useEffect(() => {
+    setOutlineData([
+      { key: 1, x: 100, y: 100 },
+      { key: 2, x: 400, y: 100 },
+      { key: 3, x: 400, y: 175 },
+      { key: 4, x: 300, y: 175 },
+      { key: 5, x: 300, y: 350 },
+      { key: 6, x: 200, y: 350 },
+      { key: 7, x: 200, y: 175 },
+      { key: 8, x: 100, y: 175 },
+    ]);
+  }, []);
+
+  /**
+   * Updating line stroke width & edge indent of dynamic draw
    * @param {*} event
    */
   const updateDrawProperties = (event) => {
-    const drawPropertiesData = { strokeWidth, bleeding };
-    // setDrawProps(drawPropertiesData);
-    setDrawProperties(drawPropertiesData)
+    const drawPropertiesData = { strokeWidth };
+    setDrawProperties(drawPropertiesData);
     event.preventDefault();
   };
 
@@ -94,18 +107,6 @@ const DynamicDrawInput = () => {
                   >
                     <Form.Label>StrokeWidth:</Form.Label>
                     <Form.Control type="number" placeholder="2" />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="bleeding"
-                    onChange={(e) => {
-                      setBleeding(parseFloat(e.target.value.replace(",", ".")));
-                    }}
-                  >
-                    <Form.Label>Bleeding:</Form.Label>
-                    <Form.Control type="number" placeholder="10" />
                   </Form.Group>
                 </Col>
               </Row>
