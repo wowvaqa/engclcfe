@@ -1,58 +1,32 @@
-import DynamicDrawInput from "./DynamicDrawInput";
 import React, { useState, useEffect, useRef } from "react";
 import { Stage, Layer, Line, Rect } from "react-konva";
 
-import { useGlobalContext } from "../Context";
+const Inline = (props) => {
 
-import Outline from "./Outline";
-import Inline from "./Inline";
+    const [coordsForDraw, setCoordsForDraw] = useState([]);
+
+    /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych*/
+    const [outlineData, setOutlineData] = useState([]);
+    
+    var coords = [];
+    var coordsFinal = [];
+
+    /* Wcięcie krawędzi figury */
+    const edgeIndent = useRef(10);
+
+    useEffect(() => {
+        console.log("[Inline] props has changed: ", props)
+        setCoordsForDraw(props.inlineData);
+        setOutlineData(props.inlineData.outlineData);
+        console.log("[Inline] Coords: ", coords);  
+        convertData();      
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [props]);
 
 /**
- * Dynamiczny skalowalny rysunek figury. 
- * @param {*} props
- * @returns
- */
-const DynamicDraw = (props) => {
-  /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych*/
-  const [outlineData, setOutlineData] = useState([]);
-  /* Tablica zawierająca współrzędne punktów rysunku otrzymana po przekonwertowaniu outlineData */
-  const [coordsForDraw, setCoordsForDraw] = useState([]);
-  /* Grubość linii rysunku */
-  const [strokeWidth, setStrokeWidth] = useState(2);
-  /* Data for Inline draw*/
-  const [inlineData, setInlineData] = useState({});
-  
-  /* Wcięcie krawędzi figury */
-  const edgeIndent = useRef(10);
-
-  const { dynamicDrawData, drawProperties } = useGlobalContext();
-
-  var coords = [];
-  var coordsFinal = [];
-
-  useEffect(() => {
-    console.log("(Dynamic Draw) Dynamic draw data changed! ", dynamicDrawData);
-    setOutlineData(dynamicDrawData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dynamicDrawData]);
-
-  useEffect(() => {
-    console.log("(Dynamic Draw) draw properties has change ", drawProperties);
-    setStrokeWidth(drawProperties.strokeWidth);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [drawProperties]);
-
-  useEffect(() => {
-    convertData();
-    const simpleLine = [100, 100, 200, 100, 200, 200, 200, 100];
-    setInlineData({simpleLine, outlineData});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [outlineData]);
-
-  /**
    * Convert data from callback function (DynamicDrawInput view) into figure coords array
    */
-  const convertData = () => {
+ const convertData = () => {
     if (outlineData.length > 0) {
       setCoordsForDraw([]);
       coords = [];
@@ -133,47 +107,17 @@ const DynamicDraw = (props) => {
     }
   };
 
-  return (
-    <>
-      <Stage width={800} height={400}>
-        <Layer>
-          {/* <Outline /> */}
-          <Inline inlineData={inlineData}/>
-          <ConcreteRect
-            coordsForDraw={coordsForDraw}
-            strokeWidth={strokeWidth}
-          />
-        </Layer>
-      </Stage>
-      <DynamicDrawInput />
-    </>
-  );
-};
 
-/**
- * Overall cross-section of reinforced concrete
- * @param {hValue, bValue, xyOffset, thickness} props
- */
-const ConcreteRect = (props) => {
-  console.log("PROPS: ", props.coordsForDraw, " width: ", props.strokeWidth);
-  return (
-    <>
-      <Rect
-        x={1}
-        y={1}
-        width={797}
-        height={397}
-        stroke={"green"}
-        strokeWidth={1}
-        cornerRadius={0}
-      />
-      <Line
-        points={props.coordsForDraw}
+    return (
+      <>
+        <Line
+        points={coordsForDraw}
         stroke={"black"}
-        strokeWidth={props.strokeWidth}
+        strokeWidth={15}
       />
-    </>
-  );
-};
-
-export default DynamicDraw;
+      </>
+    );
+  };
+  
+  export default Inline;
+  
