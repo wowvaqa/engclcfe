@@ -1,32 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Stage, Layer, Line, Rect } from "react-konva";
+import { Line } from "react-konva";
 
 const Inline = (props) => {
 
-    const [coordsForDraw, setCoordsForDraw] = useState([]);
+  /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych*/
+  const [outlineData, setOutlineData] = useState([]);
+  /* Tablica zawierająca współrzędne punktów rysunku otrzymana po przekonwertowaniu outlineData */
+  const [coordsForDraw, setCoordsForDraw] = useState([]);
+  /* Grubość linii rysunku */
+  const [strokeWidth, setStrokeWidth] = useState(2);
 
-    /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych*/
-    const [outlineData, setOutlineData] = useState([]);
-    
-    var coords = [];
-    var coordsFinal = [];
+  /* Wcięcie krawędzi figury */
+  const edgeIndent = useRef(10);
 
-    /* Wcięcie krawędzi figury */
-    const edgeIndent = useRef(10);
+  var coords = [];
+  var coordsFinal = [];
 
-    useEffect(() => {
-        console.log("[Inline] props has changed: ", props)
-        setCoordsForDraw(props.inlineData);
-        setOutlineData(props.inlineData.outlineData);
-        console.log("[Inline] Coords: ", coords);  
-        convertData();      
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [props]);
+  useEffect(() => {
+    console.log("[Inline.js] props has changed ", props);    
+    convertData();
+    setOutlineData(props.dynamicDrawData);
+    setStrokeWidth(props.strokeWidth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props]);
 
-/**
+  /**
    * Convert data from callback function (DynamicDrawInput view) into figure coords array
    */
- const convertData = () => {
+   const convertData = () => {
     if (outlineData.length > 0) {
       setCoordsForDraw([]);
       coords = [];
@@ -103,21 +104,19 @@ const Inline = (props) => {
       coordsFinal.push(coordsFinal[1]);
 
       setCoordsForDraw(coordsFinal);
-      console.log("coorArray for dynamic drawing: ", coordsForDraw);
+      console.log("[Ouline.js] coordForDraw: ", coordsForDraw);
     }
   };
 
-
-    return (
-      <>
-        <Line
+  return (
+    <>
+      <Line
         points={coordsForDraw}
         stroke={"black"}
-        strokeWidth={15}
+        strokeWidth={strokeWidth}
       />
-      </>
-    );
-  };
-  
-  export default Inline;
-  
+    </>
+  );
+};
+
+export default Inline;

@@ -7,6 +7,8 @@ const Outline = (props) => {
   const [outlineData, setOutlineData] = useState([]);
   /* Tablica zawierająca współrzędne punktów rysunku otrzymana po przekonwertowaniu outlineData */
   const [coordsForDraw, setCoordsForDraw] = useState([]);
+  /* Grubość linii rysunku */
+  const [strokeWidth, setStrokeWidth] = useState(2);
 
   /* Wcięcie krawędzi figury */
   const edgeIndent = useRef(10);
@@ -16,9 +18,10 @@ const Outline = (props) => {
 
   useEffect(() => {
     console.log("[Outline.js] props has changed ", props);    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     convertData();
     setOutlineData(props.dynamicDrawData);
+    setStrokeWidth(props.strokeWidth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   /**
@@ -110,7 +113,7 @@ const Outline = (props) => {
       <Line
         points={coordsForDraw}
         stroke={"black"}
-        strokeWidth={10}
+        strokeWidth={strokeWidth}
       />
     </>
   );
