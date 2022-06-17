@@ -11,7 +11,7 @@ const Inline = (props) => {
   const [strokeWidth, setStrokeWidth] = useState(2);
 
   /* Wcięcie krawędzi figury */
-  const edgeIndent = useRef(10);
+  const edgeIndent = useRef(5);
 
   var coords = [];
   var coordsFinal = [];
@@ -37,6 +37,58 @@ const Inline = (props) => {
         coords.push(prop.x);
         coords.push(prop.y);
       });
+
+      var tmpCoords = [];
+
+      for (var i = 0; i < coords.length - 1; i++) {
+        /* nX, nY => następna współrzędna X i Y; pX, pY => poprzednia współrzędna X i Y */
+        var x, y, nX, nY, pX, pY;
+
+        if (i % 2 === 0) {
+          x = coords[i];
+          y = coords[i + 1];
+          console.log("(" + i + ")", "X: ", x, " Y: ", y);
+
+          /* Ustalenie współrzędnych następnego wierzchołka figury */
+          if (i + 2 < coords.length - 1) {
+            nX = coords[i + 2];
+            nY = coords[i + 3];
+          } else {
+            nX = coords[0];
+            nY = coords[1];
+          }
+          console.log("(" + i + ")", "nX: ", nX, " nY: ", nY);
+
+          /* Ustalenie współrzędnych poprzedniego wierzchołka figury */
+          if (i > 1) {
+            pX = coords[i - 2];
+            pY = coords[i - 1];
+          } else {
+            pX = coords[coords.length - 2];
+            pY = coords[coords.length - 1];
+          }
+
+          if (nX > x) x = x + 5;
+          if (nX < x) x = x - 5;
+          if (nX === x) {
+            if (pX < x) x = x - 5;
+            if (pX > x) x = x + 5;
+            
+          }
+          tmpCoords.push(x);
+
+          if (nY > y) y = y + 5;
+          if (nY < y) y = y - 5;
+          if (nY === y) {
+            if (pY < y) y = y - 5;
+            if (pY > y) y = y + 5;
+          }
+          tmpCoords.push(y);
+        }
+      }
+
+      console.log("[Inline] tmpCoords: ", tmpCoords);
+      coords = tmpCoords;
 
       for (var i = 0; i < coords.length - 1; i++) {
         /* nX, nY => następna współrzędna X i Y; pX, pY => poprzednia współrzędna X i Y */
