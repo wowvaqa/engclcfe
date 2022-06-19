@@ -7,7 +7,8 @@ import Outline from "./Outline";
 import Inline from "./Inline";
 
 /* Mnożnik wymiarów z rysunków - jednostka wymiaru na rysunku = m */
-var multiplyRatio = 250;
+var wRatio = 250;
+var hRatio = 250;
 
 /**
  * Dynamiczny skalowalny rysunek figury T.
@@ -15,14 +16,11 @@ var multiplyRatio = 250;
  * @returns
  */
 const TDraw = (props) => {
-
   /* Szerokość i wysokość rysunku */
-  const [drawDimension, setDrawDimension] = useState({width: 800, height: 400});
+  const [imgDimension, setImgDimension] = useState({ width: 800, height: 400 });
 
   /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych*/
   const [outlineData, setOutlineData] = useState([]);
-  /* Grubość linii rysunku */
-  const [strokeWidth, setStrokeWidth] = useState(2);
 
   /* Wymiar h z rysunku zbrojenia T */
   const [dimH, setDimH] = useState(400);
@@ -34,7 +32,7 @@ const TDraw = (props) => {
   const [dimB, setDimB] = useState(50);
   const [tLength, setTLength] = useState((dimBeff - dimB) / 2); // Długość górengo ramienia litery T
 
-  /* Punkty obrysu zewnętrznego i wewnętrznego */
+  /* Tablica punktów obrysu zewnętrznego i wewnętrznego */
   const [outlineCoords, setOutlineCoords] = useState([]);
   const [inlineCoords, setInlineCoords] = useState([]);
 
@@ -53,19 +51,20 @@ const TDraw = (props) => {
 
   useEffect(() => {
     console.log("[TDraw] draw properties has change: ", drawProperties);
-    setStrokeWidth(drawProperties.strokeWidth);
     recalulatePoints();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [drawProperties]);
 
   useEffect(() => {
     console.log("[TDraw] Props change: ", props);
-    setDimH(props.h * multiplyRatio);
-    setDimHsl(props.h_sl * multiplyRatio);
-    setDimB(props.b * multiplyRatio);
-    setDimBeff(props.b_eff * multiplyRatio);
-    setTLength(((props.b_eff - props.b) / 2) * multiplyRatio);
+    setImgDimension({width: props.imgWidth, height: props.imgHeight})
+    setDimH(props.h * hRatio);
+    setDimHsl(props.h_sl * hRatio);
+    setDimB(props.b * wRatio);
+    setDimBeff(props.b_eff * wRatio);
+    setTLength(((props.b_eff - props.b) / 2) * wRatio);
     recalulatePoints();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
 
   /* Odunięcie lini wewnętrzenej od lini zewnętrznej */
@@ -75,7 +74,13 @@ const TDraw = (props) => {
   var sp = { x: 10, y: 10 };
 
   const recalulatePoints = () => {
-    console.log("[TDraw] b, beff, h, hsl: "+ dimB, dimBeff, dimH, dimHsl, tLength)
+    console.log(
+      "[TDraw] b, beff, h, hsl: " + dimB,
+      dimBeff,
+      dimH,
+      dimHsl,
+      tLength
+    );
     /** Punkty obrysu zewnętrznego */
     var olP00 = { key: 1, x: sp.x + 0, y: sp.y + 0 };
     var olP01 = { key: 2, x: sp.x + dimBeff, y: sp.y + 0 };
@@ -119,7 +124,7 @@ const TDraw = (props) => {
 
   return (
     <>
-      <Stage width={drawDimension.width} height={drawDimension.height}>
+      <Stage width={imgDimension.width} height={imgDimension.height}>
         <Layer>
           <Inline dynamicDrawData={inlineCoords} strokeWidth={1} />
           <Outline dynamicDrawData={outlineCoords} strokeWidth={2} />
