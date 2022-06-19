@@ -302,8 +302,7 @@ const TsecReinfCalcView = () => {
             </Button>
           </Col>
           <Col>
-              <TDraw 
-               h = {h}/>
+            <TDraw h={h} />
             <img
               src={image}
               width={332}
