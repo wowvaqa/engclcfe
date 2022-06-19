@@ -58,6 +58,8 @@ const AppProvider = ({ children }) => {
     setModalInputOkState(!modalInputOkState);
   };
 
+  const [reRenderComponent, setReRenderComponent] = useState(false);
+
   return (
     <AppContext.Provider
       value={{
@@ -103,6 +105,9 @@ const AppProvider = ({ children }) => {
         /* A flag indicating that the calculation is ready to begin. */
         apiTrigger,
         setApiTrigger,
+        /* Flag for reRendering component */
+        reRenderComponent,
+        setReRenderComponent
       }}
     >
       {children}

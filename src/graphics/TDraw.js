@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Stage, Layer } from "react-konva";
 
-//import { useGlobalContext } from "../Context";
-
-// import Outline from "./Outline";
-// import Inline from "./Inline";
+// import { useGlobalContext } from "../Context";
 
 import TInline from "./TInline";
 import TOutline from "./TOutline";
@@ -37,10 +34,10 @@ const TDraw = (props) => {
   const [inlineCoords, setInlineCoords] = useState([]);
 
   //const { } = useGlobalContext();
-  
+
   useEffect(() => {
     console.log("[TDraw] Props change: ", props);
-    setImgDimension({width: props.imgWidth, height: props.imgHeight})
+    setImgDimension({ width: props.imgWidth, height: props.imgHeight });
     setDimH(props.h * hRatio);
     setDimHsl(props.h_sl * hRatio);
     setDimB(props.b * wRatio);

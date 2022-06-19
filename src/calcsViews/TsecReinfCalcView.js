@@ -31,12 +31,15 @@ const TsecReinfCalcView = () => {
   const [remark, setRemark] = useState("");
   const [remark2, setRemark2] = useState("");
 
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
+
   const {
     setTreinforcedConcreteData,
     apiTrigger,
     setApiTrigger,
     tReinforcedConcreteDataFromApi,
-  } = useGlobalContext();
+    } = useGlobalContext();
 
   useEffect(() => {
     console.log("(TSecView) Reciving data from API: ");
@@ -309,6 +312,7 @@ const TsecReinfCalcView = () => {
               h_sl={h_sl}
               b={b}
               b_eff={b_eff}
+              reRender={forceUpdate}
             />
             <img
               src={image}
