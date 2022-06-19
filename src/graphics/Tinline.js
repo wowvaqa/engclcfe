@@ -3,7 +3,7 @@ import { Line } from "react-konva";
 
 const TInline = (props) => {
 
-  /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych*/
+  /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych */
   const [outlineData, setOutlineData] = useState([]);
   /* Tablica zawierająca współrzędne punktów rysunku otrzymana po przekonwertowaniu outlineData */
   const [coordsForDraw, setCoordsForDraw] = useState([]);
@@ -11,15 +11,15 @@ const TInline = (props) => {
   const [strokeWidth, setStrokeWidth] = useState(2);
 
   /* Wcięcie krawędzi figury */
-  const edgeIndent = useRef(8);
+  const edgeIndent = useRef(4);
 
   var coords = [];
   var coordsFinal = [];
 
   useEffect(() => {
-    console.log("[Tinline.js] props has changed ", props);    
+    console.log("[Tinline] props has changed ", props);    
     convertData();
-    setOutlineData(props.dynamicDrawData);
+    setOutlineData(props.data);
     setStrokeWidth(props.strokeWidth);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
@@ -45,7 +45,7 @@ const TInline = (props) => {
         if (i % 2 === 0) {
           x = coords[i];
           y = coords[i + 1];
-          console.log("(" + i + ")", "X: ", x, " Y: ", y);
+          //console.log("[TInline] (" + i + ")", "X: ", x, " Y: ", y);
 
           /* Ustalenie współrzędnych następnego wierzchołka figury */
           if (i + 2 < coords.length - 1) {
@@ -55,7 +55,7 @@ const TInline = (props) => {
             nX = coords[0];
             nY = coords[1];
           }
-          console.log("(" + i + ")", "nX: ", nX, " nY: ", nY);
+          //console.log("[TInline] (" + i + ")", "nX: ", nX, " nY: ", nY);
 
           /* Ustalenie współrzędnych poprzedniego wierzchołka figury */
           if (i > 1) {
@@ -65,7 +65,7 @@ const TInline = (props) => {
             pX = coords[coords.length - 2];
             pY = coords[coords.length - 1];
           }
-          console.log("(" + i + ")", "pX: ", pX, " pY: ", pY);
+          //console.log("[TInline] (" + i + ")", "pX: ", pX, " pY: ", pY);
 
           /* Ustawienie współrzędnych wcięcia dla wierzchołka (x,y) figury na podstawie wierzchołka poprzedzającego (pX, pY) i  następnego (nX, nY) */
 
@@ -104,7 +104,7 @@ const TInline = (props) => {
       coordsFinal.push(coordsFinal[1]);
 
       setCoordsForDraw(coordsFinal);
-      console.log("[Tinline.js] coordForDraw: ", coordsForDraw);
+      console.log("[TInline] coordForDraw: ", coordsForDraw);
     }
   };
 

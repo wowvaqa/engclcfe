@@ -11,15 +11,15 @@ const TOutline = (props) => {
   const [strokeWidth, setStrokeWidth] = useState(5);
 
   /* Wcięcie krawędzi figury */
-  const edgeIndent = useRef(2);
+  const edgeIndent = useRef(5);
 
   var coords = [];
   var coordsFinal = [];
 
   useEffect(() => {
-    console.log("[Toutline.js] props has changed ", props);    
+    console.log("[Toutline] New Props: ", props);    
     convertData();
-    setOutlineData(props.dynamicDrawData);
+    setOutlineData(props.data);
     setStrokeWidth(props.strokeWidth);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props]);
@@ -45,7 +45,7 @@ const TOutline = (props) => {
         if (i % 2 === 0) {
           x = coords[i];
           y = coords[i + 1];
-          console.log("(" + i + ")", "X: ", x, " Y: ", y);
+          //console.log("[Toutline] (" + i + ")", "X: ", x, " Y: ", y);
 
           /* Ustalenie współrzędnych następnego wierzchołka figury */
           if (i + 2 < coords.length - 1) {
@@ -55,7 +55,7 @@ const TOutline = (props) => {
             nX = coords[0];
             nY = coords[1];
           }
-          console.log("(" + i + ")", "nX: ", nX, " nY: ", nY);
+          //console.log("[Toutline] (" + i + ")", "nX: ", nX, " nY: ", nY);
 
           /* Ustalenie współrzędnych poprzedniego wierzchołka figury */
           if (i > 1) {
@@ -65,7 +65,7 @@ const TOutline = (props) => {
             pX = coords[coords.length - 2];
             pY = coords[coords.length - 1];
           }
-          console.log("(" + i + ")", "pX: ", pX, " pY: ", pY);
+          //console.log("[Toutline] (" + i + ")", "pX: ", pX, " pY: ", pY);
 
           /* Ustawienie współrzędnych wcięcia dla wierzchołka (x,y) figury na podstawie wierzchołka poprzedzającego (pX, pY) i  następnego (nX, nY) */
 
@@ -104,7 +104,7 @@ const TOutline = (props) => {
       coordsFinal.push(coordsFinal[1]);
 
       setCoordsForDraw(coordsFinal);
-      console.log("[Toutline.js] coordForDraw: ", coordsForDraw);
+      console.log("[Toutline] coordForDraw: ", coordsForDraw);
     }
   };
 

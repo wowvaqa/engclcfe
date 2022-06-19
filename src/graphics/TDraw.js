@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Stage, Layer } from "react-konva";
 
-import { useGlobalContext } from "../Context";
+//import { useGlobalContext } from "../Context";
 
-import Outline from "./Outline";
-import Inline from "./Inline";
+// import Outline from "./Outline";
+// import Inline from "./Inline";
+
+import TInline from "./TInline";
+import TOutline from "./TOutline";
 
 /* Mnożnik wymiarów z rysunków - jednostka wymiaru na rysunku = m */
 var wRatio = 250;
@@ -18,9 +21,6 @@ var hRatio = 250;
 const TDraw = (props) => {
   /* Szerokość i wysokość rysunku */
   const [imgDimension, setImgDimension] = useState({ width: 800, height: 400 });
-
-  /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych*/
-  const [outlineData, setOutlineData] = useState([]);
 
   /* Wymiar h z rysunku zbrojenia T */
   const [dimH, setDimH] = useState(400);
@@ -36,25 +36,8 @@ const TDraw = (props) => {
   const [outlineCoords, setOutlineCoords] = useState([]);
   const [inlineCoords, setInlineCoords] = useState([]);
 
-  const { dynamicDrawData, drawProperties } = useGlobalContext();
-
-  useEffect(() => {
-    console.log(
-      "[TDraw] Dynamic draw data changed: ",
-      dynamicDrawData,
-      outlineData
-    );
-    setOutlineData(dynamicDrawData);
-    recalulatePoints();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dynamicDrawData]);
-
-  useEffect(() => {
-    console.log("[TDraw] draw properties has change: ", drawProperties);
-    recalulatePoints();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [drawProperties]);
-
+  //const { } = useGlobalContext();
+  
   useEffect(() => {
     console.log("[TDraw] Props change: ", props);
     setImgDimension({width: props.imgWidth, height: props.imgHeight})
@@ -126,8 +109,8 @@ const TDraw = (props) => {
     <>
       <Stage width={imgDimension.width} height={imgDimension.height}>
         <Layer>
-          <Inline dynamicDrawData={inlineCoords} strokeWidth={1} />
-          <Outline dynamicDrawData={outlineCoords} strokeWidth={2} />
+          <TInline data={inlineCoords} strokeWidth={1} />
+          <TOutline data={outlineCoords} strokeWidth={2} />
         </Layer>
       </Stage>
     </>
