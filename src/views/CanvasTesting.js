@@ -1,12 +1,12 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 // import RectTest from "../graphics/ReinforcedConcreteDynamicDraw";
-import DynamicDraw from "../graphics/DynamicDraw";
+import TDraw from "../graphics/TDraw";
 
 const CanvasTesting = () => {
   return (
     <Container>
-      <DynamicDraw />
+      <TDraw />
       {/* <RectTest /> */}
     </Container>
   );

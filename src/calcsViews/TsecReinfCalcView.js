@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_3_pio.png";
 
+import TDraw from "../graphics/TDraw";
+
 import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
 import TsecReinfApi from "./TsecReinfApi";
 import TsecReinfErrHandler from "./TsecReinfErrHandler";
@@ -300,10 +302,12 @@ const TsecReinfCalcView = () => {
             </Button>
           </Col>
           <Col>
+              <TDraw 
+               h = {h}/>
             <img
               src={image}
-              width={732}
-              height={800}
+              width={332}
+              height={400}
               alt="cocktail db logo"
               className="weightElement"
             />
