@@ -8,10 +8,10 @@ const TOutline = (props) => {
   /* Tablica zawierająca współrzędne punktów rysunku otrzymana po przekonwertowaniu outlineData */
   const [coordsForDraw, setCoordsForDraw] = useState([]);
   /* Grubość linii rysunku */
-  const [strokeWidth, setStrokeWidth] = useState(2);
+  const [strokeWidth, setStrokeWidth] = useState(5);
 
   /* Wcięcie krawędzi figury */
-  const edgeIndent = useRef(10);
+  const edgeIndent = useRef(2);
 
   var coords = [];
   var coordsFinal = [];

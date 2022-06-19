@@ -11,7 +11,7 @@ const TInline = (props) => {
   const [strokeWidth, setStrokeWidth] = useState(2);
 
   /* Wcięcie krawędzi figury */
-  const edgeIndent = useRef(10);
+  const edgeIndent = useRef(8);
 
   var coords = [];
   var coordsFinal = [];
