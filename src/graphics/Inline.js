@@ -68,22 +68,25 @@ const Inline = (props) => {
             pY = coords[coords.length - 1];
           }
 
-          if (nX > x) x = x + 5;
-          if (nX < x) x = x - 5;
-          if (nX === x) {
-            if (pX < x) x = x - 5;
-            if (pX > x) x = x + 5;
-            
+          if (nX > x) {
+            console.log("RIGHT");
           }
-          tmpCoords.push(x);
 
-          if (nY > y) y = y + 5;
-          if (nY < y) y = y - 5;
-          if (nY === y) {
-            if (pY < y) y = y - 5;
-            if (pY > y) y = y + 5;
+          if (nX < x) {
+            console.log("LEFT");
           }
+
+          if (nY > y) {
+            console.log("DOWN");
+          }
+
+          if (nY < y) {
+            console.log("UP");
+          }
+
+          tmpCoords.push(x);
           tmpCoords.push(y);
+
         }
       }
 
@@ -164,7 +167,7 @@ const Inline = (props) => {
     <>
       <Line
         points={coordsForDraw}
-        stroke={"black"}
+        stroke={"red"}
         strokeWidth={strokeWidth}
       />
     </>
