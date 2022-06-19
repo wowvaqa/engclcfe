@@ -4,6 +4,11 @@ import { Container } from "react-bootstrap";
 import TDraw from "../graphics/TDraw";
 
 const CanvasTesting = () => {
+
+ 
+
+ console.log("rendering...");
+
   return (
     <Container>
       <TDraw />
