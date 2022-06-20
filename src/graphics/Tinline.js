@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Line } from "react-konva";
 
-const TInline = (props) => {
+const Tinline = (props) => {
 
   /* Tablica zawierająca wspórzędne rysunku z widoku wprowadzania danych */
   const [outlineData, setOutlineData] = useState([]);
@@ -119,4 +119,4 @@ const TInline = (props) => {
   );
 };
 
-export default TInline;
+export default Tinline;
