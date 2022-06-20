@@ -4,7 +4,7 @@ import { Stage, Layer } from "react-konva";
 // import { useGlobalContext } from "../Context";
 
 import Tinline from "./Tinline";
-import TOutline from "./TOutline";
+import Toutline from "./Toutline";
 
 /* Mnożnik wymiarów z rysunków - jednostka wymiaru na rysunku = m */
 var wRatio = 250;
@@ -107,7 +107,7 @@ const TDraw = (props) => {
       <Stage width={imgDimension.width} height={imgDimension.height}>
         <Layer>
           <Tinline data={inlineCoords} strokeWidth={1} />
-          <TOutline data={outlineCoords} strokeWidth={2} />
+          <Toutline data={outlineCoords} strokeWidth={2} />
         </Layer>
       </Stage>
     </>
