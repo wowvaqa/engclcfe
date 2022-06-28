@@ -8,7 +8,9 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "axios": "^0.26.1",
     "bootstrap": "^5.2.0-beta1",
+    "canvas": "^2.9.3",
     "eslint": "^8.17.0",
+    "jsxgraph": "^1.4.4",
     "konva": "^8.3.5",
     "react": "^18.0.0",
     "react-bootstrap": "^2.2.3",
@@ -16,8 +18,7 @@
     "react-dom": "^18.0.0",
     "react-konva": "^18.0.0-0",
     "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4",
-    "jsxgraph": "^1.4.4"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
