@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_3_pio.png";
 
-import TDraw from "../graphics/TDraw";
+// import TDraw from "../graphics/TDraw";
+import JSXdrawT from "../graphics/JSXdrawT"
 
 import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
 import TsecReinfApi from "./TsecReinfApi";
@@ -31,15 +32,15 @@ const TsecReinfCalcView = () => {
   const [remark, setRemark] = useState("");
   const [remark2, setRemark2] = useState("");
 
-  const [, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
+  // const [, updateState] = React.useState();
+  // const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const {
     setTreinforcedConcreteData,
     apiTrigger,
     setApiTrigger,
     tReinforcedConcreteDataFromApi,
-    } = useGlobalContext();
+  } = useGlobalContext();
 
   useEffect(() => {
     console.log("(TSecView) Reciving data from API: ");
@@ -305,7 +306,8 @@ const TsecReinfCalcView = () => {
             </Button>
           </Col>
           <Col>
-            <TDraw
+            <JSXdrawT />
+            {/* <TDraw
               imgWidth={800}
               imgHeight={400}
               h={h}
@@ -313,7 +315,7 @@ const TsecReinfCalcView = () => {
               b={b}
               b_eff={b_eff}
               reRender={forceUpdate}
-            />
+            /> */}
             <img
               src={image}
               width={332}
