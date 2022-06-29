@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import JSXBoard from "../JSXBoard";
 
-const JSXdrawT = () => {
-  let gfx = (board) => {
-    var xOffset = 5.0;
+import { useGlobalContext } from "../Context";
 
+const JSXdrawT = () => {
+  const [b, setB] = useState(0.6);
+  const [b_eff, setB_eff] = useState(1);
+  const [h, setH] = useState(1.2);
+  const [h_sl, setH_sl] = useState(0.2);
+
+  /** JSXGraph objects */
+  const [sliderB, setSliderB] = useState();
+  const [sliderB_eff, setSliderB_eff] = useState();
+  const [sliderH, setSliderH] = useState();
+  const [sliderH_sl, setSliderH_sl] = useState();
+  const [jsxBoard, setJsxBoard] = useState();
+
+  const { tDrawData, setTDrawDataFromSliders, tDrawDataFromSliders } =
+    useGlobalContext();
+
+  useEffect(() => {
+    console.log("[JSXdrawT] Tdraw data: ", tDrawData);
+    setB(tDrawData.b);
+    setB_eff(tDrawData.b_eff);
+    setH(tDrawData.h);
+    setH_sl(tDrawData.h_sl);
+
+    if (sliderB !== undefined) sliderB.setValue(b);
+    if (sliderB_eff !== undefined) sliderB_eff.setValue(b_eff);
+    if (sliderH !== undefined) sliderH.setValue(h);
+    if (sliderH_sl !== undefined) sliderH_sl.setValue(h_sl);
+    if (jsxBoard !== undefined) jsxBoard.fullUpdate();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tDrawData]);
+
+  const gfx = (board) => {
+    var xOffset = 0.5;
+    setJsxBoard(board);
+
+    /** SLIDER VALUE B */
     var sliderVal_B = board.create(
       "slider",
       [
-        [10, 18],
-        [15, 18],
-        [2, 5, 9],
+        [1, 1.8],
+        [1.5, 1.8],
+        [0.1, b, 2],
       ],
       {
         baseline: { strokeColor: "blue" },
@@ -23,13 +58,24 @@ const JSXdrawT = () => {
         postLabel: " m",
       }
     );
+    setSliderB(sliderVal_B);
+    sliderVal_B.on("drag", function () {
+      setB(sliderVal_B.Value());
+      setTDrawDataFromSliders({
+        b: sliderVal_B.Value(),
+        h: tDrawDataFromSliders.h,
+        b_eff: tDrawDataFromSliders.b_eff,
+        h_sl: tDrawDataFromSliders.h_sl,
+      });
+    });
 
+    /** SLIDER VALUE B_eff */
     var sliderVal_Beff = board.create(
       "slider",
       [
-        [10, 19],
-        [15, 19],
-        [5, 10, 15],
+        [1.0, 1.9],
+        [1.5, 1.9],
+        [0.1, b_eff, 5],
       ],
       {
         baseline: { strokeColor: "blue" },
@@ -41,13 +87,24 @@ const JSXdrawT = () => {
         postLabel: " m",
       }
     );
+    setSliderB_eff(sliderVal_Beff);
+    sliderVal_Beff.on("drag", function () {
+      setB_eff(sliderVal_Beff.Value());
+      setTDrawDataFromSliders({
+        b: tDrawDataFromSliders.b,
+        h: tDrawDataFromSliders.h,
+        b_eff: sliderVal_Beff.Value(),
+        h_sl: tDrawDataFromSliders.h_sl,
+      });
+    });
 
+    /** SLIDER VALUE H */
     var sliderVal_H = board.create(
       "slider",
       [
-        [1, 19],
-        [5, 19],
-        [3, 15, 17],
+        [0.1, 1.9],
+        [0.5, 1.9],
+        [0.5, h, 5],
       ],
       {
         baseline: { strokeColor: "blue" },
@@ -59,13 +116,24 @@ const JSXdrawT = () => {
         postLabel: " m",
       }
     );
+    setSliderH(sliderVal_H);
+    sliderVal_H.on("drag", function () {
+      setH(sliderVal_H.Value());
+      setTDrawDataFromSliders({
+        b: tDrawDataFromSliders.b,
+        h: sliderVal_H.Value(),
+        b_eff: tDrawDataFromSliders.b_eff,
+        h_sl: tDrawDataFromSliders.h_sl,
+      });
+    });
 
+    /** SLIDER VALUE H_sl */
     var sliderVal_Hsl = board.create(
       "slider",
       [
-        [1, 18],
-        [5, 18],
-        [1, 2, 10],
+        [0.1, 1.8],
+        [0.5, 1.8],
+        [0.1, h_sl, 2],
       ],
       {
         baseline: { strokeColor: "blue" },
@@ -77,6 +145,16 @@ const JSXdrawT = () => {
         postLabel: " m",
       }
     );
+    setSliderH_sl(sliderVal_Hsl);
+    sliderVal_Hsl.on("drag", function () {
+      setH_sl(sliderVal_Hsl.Value());
+      setTDrawDataFromSliders({
+        b: tDrawDataFromSliders.b,
+        h: tDrawDataFromSliders.h,
+        b_eff: tDrawDataFromSliders.b_eff,
+        h_sl: sliderVal_Hsl.Value(),
+      });
+    });
 
     /** Długość ramienia T */
     var tVal = function () {
@@ -163,7 +241,7 @@ const JSXdrawT = () => {
     <Container>
       <JSXBoard
         logic={gfx}
-        boardAttributes={{ axis: true, boundingbox: [-1, 20, 22, -1] }}
+        boardAttributes={{ axis: true, boundingbox: [-0.1, 2, 2, -0.25] }}
         style={{
           border: "1px solid black",
         }}

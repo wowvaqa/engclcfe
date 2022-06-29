@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
 import image from "../assets/API_3_pio.png";
 
-// import TDraw from "../graphics/TDraw";
-import JSXdrawT from "../graphics/JSXdrawT"
+import JSXdrawT from "../graphics/JSXdrawT";
 
 import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
 import TsecReinfApi from "./TsecReinfApi";
@@ -32,15 +31,25 @@ const TsecReinfCalcView = () => {
   const [remark, setRemark] = useState("");
   const [remark2, setRemark2] = useState("");
 
-  // const [, updateState] = React.useState();
-  // const forceUpdate = React.useCallback(() => updateState({}), []);
+  /** DOM elements for input */
+  const inputB = useRef(null);
+  const inputH = useRef(null);
+  const inputB_eff = useRef(null);
+  const inputH_sl = useRef(null);
 
   const {
     setTreinforcedConcreteData,
     apiTrigger,
     setApiTrigger,
     tReinforcedConcreteDataFromApi,
+    setTDrawData,
+    tDrawDataFromSliders,
   } = useGlobalContext();
+
+  useEffect(() => {
+    setTDrawData({ b: b, b_eff: b_eff, h: h, h_sl: h_sl });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [b, h, h_sl, b_eff]);
 
   useEffect(() => {
     console.log("(TSecView) Reciving data from API: ");
@@ -55,6 +64,22 @@ const TsecReinfCalcView = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tReinforcedConcreteDataFromApi]);
+
+  useEffect(() => {
+    console.log(
+      "[TsecReinfCalcView] tDrawDataFromSliders: ",
+      tDrawDataFromSliders
+    );
+    console.log("Use REF          : ", inputB.current);
+    inputB.current.setAttribute("value", tDrawDataFromSliders.b);
+    inputH.current.setAttribute("value", tDrawDataFromSliders.h);
+    inputB_eff.current.setAttribute("value", tDrawDataFromSliders.b_eff);
+    inputH_sl.current.setAttribute("value", tDrawDataFromSliders.h_sl);
+    setB(tDrawDataFromSliders.b);
+    setH(tDrawDataFromSliders.h);
+    setB_eff(tDrawDataFromSliders.b_eff);
+    setH_sl(tDrawDataFromSliders.h_sl);
+  }, [tDrawDataFromSliders]);
 
   const sendDataToApi = (event) => {
     event.preventDefault();
@@ -121,13 +146,13 @@ const TsecReinfCalcView = () => {
               {/* ------------------------ b >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="b"
+                controlId="bValue"
                 onChange={(e) => {
                   setB(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
                 <Form.Label>b:</Form.Label>
-                <Form.Control type="number" placeholder="0.5" />
+                <Form.Control ref={inputB} type="number" placeholder="0.5" />
               </Form.Group>
               {/* ------------------------ h >--- */}
               <Form.Group
@@ -138,7 +163,7 @@ const TsecReinfCalcView = () => {
                 }}
               >
                 <Form.Label>h:</Form.Label>
-                <Form.Control type="number" placeholder="1.2" />
+                <Form.Control ref={inputH} type="number" placeholder="1.2" />
               </Form.Group>
               {/* ------------------------ h_sl >--- */}
               <Form.Group
@@ -149,7 +174,7 @@ const TsecReinfCalcView = () => {
                 }}
               >
                 <Form.Label>h_sl:</Form.Label>
-                <Form.Control type="number" placeholder="0.2" />
+                <Form.Control ref={inputH_sl} type="number" placeholder="0.2" />
               </Form.Group>
               {/* ------------------------ b_eff >--- */}
               <Form.Group
@@ -160,7 +185,7 @@ const TsecReinfCalcView = () => {
                 }}
               >
                 <Form.Label>b_eff:</Form.Label>
-                <Form.Control type="number" placeholder="1" />
+                <Form.Control ref={inputB_eff} type="number" placeholder="1" />
               </Form.Group>
               <Row>
                 <Col>
@@ -307,15 +332,6 @@ const TsecReinfCalcView = () => {
           </Col>
           <Col>
             <JSXdrawT />
-            {/* <TDraw
-              imgWidth={800}
-              imgHeight={400}
-              h={h}
-              h_sl={h_sl}
-              b={b}
-              b_eff={b_eff}
-              reRender={forceUpdate}
-            /> */}
             <img
               src={image}
               width={332}

@@ -38,6 +38,20 @@ const AppProvider = ({ children }) => {
   const [singleDimensioningData, setSingleDimensioningData] = useState({});
   const [singleDimensioningDataFromApi, setSingleDimensioningDataFromApi] =
     useState({});
+  /* Data for T Draw */
+  const [tDrawData, setTDrawData] = useState({
+    b: 0.5,
+    h: 1.2,
+    b_eff: 1,
+    h_sl: 0.2,
+  });
+  /* Data for T Draw */
+  const [tDrawDataFromSliders, setTDrawDataFromSliders] = useState({
+    b: 0.5,
+    h: 1.2,
+    b_eff: 1,
+    h_sl: 0.2,
+  });
 
   /* 
       A flag indicating that the calculation is ready to begin.
@@ -107,7 +121,13 @@ const AppProvider = ({ children }) => {
         setApiTrigger,
         /* Flag for reRendering component */
         reRenderComponent,
-        setReRenderComponent
+        setReRenderComponent,
+        /* Data for T Draw */
+        tDrawData,
+        setTDrawData,
+        /* Data from JSXDrawT sliders */
+        tDrawDataFromSliders,
+        setTDrawDataFromSliders,
       }}
     >
       {children}
