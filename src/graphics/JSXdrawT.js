@@ -4,8 +4,10 @@ import JSXBoard from "../JSXBoard";
 
 import { useGlobalContext } from "../Context";
 
+import { roundNumber } from "../utils/Utils";
+
 const JSXdrawT = () => {
-  const [b, setB] = useState(0.6);
+  const [b, setB] = useState(0.5);
   const [b_eff, setB_eff] = useState(1);
   const [h, setH] = useState(1.2);
   const [h_sl, setH_sl] = useState(0.2);
@@ -60,12 +62,11 @@ const JSXdrawT = () => {
     );
     setSliderB(sliderVal_B);
     sliderVal_B.on("drag", function () {
-      setB(sliderVal_B.Value());
       setTDrawDataFromSliders({
-        b: sliderVal_B.Value(),
-        h: tDrawDataFromSliders.h,
-        b_eff: tDrawDataFromSliders.b_eff,
-        h_sl: tDrawDataFromSliders.h_sl,
+        b: roundNumber(sliderVal_B.Value(), 4),
+        h: -1,
+        b_eff: -1,
+        h_sl: -1,
       });
     });
 
@@ -89,12 +90,11 @@ const JSXdrawT = () => {
     );
     setSliderB_eff(sliderVal_Beff);
     sliderVal_Beff.on("drag", function () {
-      setB_eff(sliderVal_Beff.Value());
       setTDrawDataFromSliders({
-        b: tDrawDataFromSliders.b,
-        h: tDrawDataFromSliders.h,
-        b_eff: sliderVal_Beff.Value(),
-        h_sl: tDrawDataFromSliders.h_sl,
+        b: -1,
+        h: -1,
+        b_eff: roundNumber(sliderVal_Beff.Value(), 4),
+        h_sl: -1
       });
     });
 
@@ -118,12 +118,11 @@ const JSXdrawT = () => {
     );
     setSliderH(sliderVal_H);
     sliderVal_H.on("drag", function () {
-      setH(sliderVal_H.Value());
       setTDrawDataFromSliders({
-        b: tDrawDataFromSliders.b,
-        h: sliderVal_H.Value(),
-        b_eff: tDrawDataFromSliders.b_eff,
-        h_sl: tDrawDataFromSliders.h_sl,
+        b: -1,
+        h: roundNumber(sliderVal_H.Value(), 4),
+        b_eff: -1,
+        h_sl: -1,
       });
     });
 
@@ -147,12 +146,11 @@ const JSXdrawT = () => {
     );
     setSliderH_sl(sliderVal_Hsl);
     sliderVal_Hsl.on("drag", function () {
-      setH_sl(sliderVal_Hsl.Value());
       setTDrawDataFromSliders({
-        b: tDrawDataFromSliders.b,
-        h: tDrawDataFromSliders.h,
-        b_eff: tDrawDataFromSliders.b_eff,
-        h_sl: sliderVal_Hsl.Value(),
+        b: -1,
+        h: -1,
+        b_eff: -1,
+        h_sl: roundNumber(sliderVal_Hsl.Value(), 4),
       });
     });
 
@@ -234,8 +232,6 @@ const JSXdrawT = () => {
     board.create("segment", [pG, pH]);
     board.create("segment", [pH, pA]);
   };
-
-  console.log("rendering...");
 
   return (
     <Container>

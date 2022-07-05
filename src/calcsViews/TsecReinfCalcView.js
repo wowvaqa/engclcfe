@@ -37,6 +37,9 @@ const TsecReinfCalcView = () => {
   const inputB_eff = useRef(null);
   const inputH_sl = useRef(null);
 
+  /** Flaga informująca czy dane pochodzą z suwaków i tym samym czy wymagana jest aktualizacja stanów */
+  const [dataFromSlidersFlag, setDataFromSlidersFlag] = useState(false);
+
   const {
     setTreinforcedConcreteData,
     apiTrigger,
@@ -47,7 +50,9 @@ const TsecReinfCalcView = () => {
   } = useGlobalContext();
 
   useEffect(() => {
-    setTDrawData({ b: b, b_eff: b_eff, h: h, h_sl: h_sl });
+    /* Dane z suwaków - nie wymagana aktualizacja stanów. */
+    if (!dataFromSlidersFlag) setTDrawData({ b: b, b_eff: b_eff, h: h, h_sl: h_sl });
+    setDataFromSlidersFlag(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [b, h, h_sl, b_eff]);
 
@@ -70,15 +75,28 @@ const TsecReinfCalcView = () => {
       "[TsecReinfCalcView] tDrawDataFromSliders: ",
       tDrawDataFromSliders
     );
-    console.log("Use REF          : ", inputB.current);
-    inputB.current.setAttribute("value", tDrawDataFromSliders.b);
-    inputH.current.setAttribute("value", tDrawDataFromSliders.h);
-    inputB_eff.current.setAttribute("value", tDrawDataFromSliders.b_eff);
-    inputH_sl.current.setAttribute("value", tDrawDataFromSliders.h_sl);
-    setB(tDrawDataFromSliders.b);
-    setH(tDrawDataFromSliders.h);
-    setB_eff(tDrawDataFromSliders.b_eff);
-    setH_sl(tDrawDataFromSliders.h_sl);
+
+    if (tDrawDataFromSliders.b !== -1) {
+      inputB.current.setAttribute("value", tDrawDataFromSliders.b);
+      setB(tDrawDataFromSliders.b);
+    }
+
+    if (tDrawDataFromSliders.h !== -1) {
+      inputH.current.setAttribute("value", tDrawDataFromSliders.h);
+      setH(tDrawDataFromSliders.h);
+    }
+
+    if (tDrawDataFromSliders.b_eff !== -1) {
+      inputB_eff.current.setAttribute("value", tDrawDataFromSliders.b_eff);
+      setB_eff(tDrawDataFromSliders.b_eff);
+    }
+
+    if (tDrawDataFromSliders.h_sl !== -1) {
+      inputH_sl.current.setAttribute("value", tDrawDataFromSliders.h_sl);
+      setH_sl(tDrawDataFromSliders.h_sl);
+    }
+    
+    setDataFromSlidersFlag(true);
   }, [tDrawDataFromSliders]);
 
   const sendDataToApi = (event) => {
