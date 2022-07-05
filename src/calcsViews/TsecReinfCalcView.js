@@ -31,12 +31,6 @@ const TsecReinfCalcView = () => {
   const [remark, setRemark] = useState("");
   const [remark2, setRemark2] = useState("");
 
-  /** DOM elements for input */
-  const inputB = useRef(null);
-  const inputH = useRef(null);
-  const inputB_eff = useRef(null);
-  const inputH_sl = useRef(null);
-
   /** Flaga informująca czy dane pochodzą z suwaków i tym samym czy wymagana jest aktualizacja stanów */
   const [dataFromSlidersFlag, setDataFromSlidersFlag] = useState(false);
 
@@ -77,22 +71,22 @@ const TsecReinfCalcView = () => {
     );
 
     if (tDrawDataFromSliders.b !== -1) {
-      inputB.current.setAttribute("value", tDrawDataFromSliders.b);
+      document.getElementById("inputB").value=tDrawDataFromSliders.b
       setB(tDrawDataFromSliders.b);
     }
 
     if (tDrawDataFromSliders.h !== -1) {
-      inputH.current.setAttribute("value", tDrawDataFromSliders.h);
+      document.getElementById("inputH").value=tDrawDataFromSliders.h
       setH(tDrawDataFromSliders.h);
     }
 
     if (tDrawDataFromSliders.b_eff !== -1) {
-      inputB_eff.current.setAttribute("value", tDrawDataFromSliders.b_eff);
+      document.getElementById("inputB_eff").value=tDrawDataFromSliders.b_eff
       setB_eff(tDrawDataFromSliders.b_eff);
     }
 
     if (tDrawDataFromSliders.h_sl !== -1) {
-      inputH_sl.current.setAttribute("value", tDrawDataFromSliders.h_sl);
+      document.getElementById("inputH_sl").value=tDrawDataFromSliders.h_sl
       setH_sl(tDrawDataFromSliders.h_sl);
     }
     
@@ -115,7 +109,7 @@ const TsecReinfCalcView = () => {
       fi_opp,
       m_sd,
     };
-    console.log("(TSecView) Sending data to API: " + dataToSend);
+    console.log("[TsecReinfCalcView] sendDataToApi() " + dataToSend);
 
     setupDataModel(true);
     setTreinforcedConcreteData(dataToSend);
@@ -164,46 +158,42 @@ const TsecReinfCalcView = () => {
               {/* ------------------------ b >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="bValue"
                 onChange={(e) => {
                   setB(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
                 <Form.Label>b:</Form.Label>
-                <Form.Control ref={inputB} type="number" placeholder="0.5" />
+                <Form.Control id="inputB" type="number" placeholder="0.5" />
               </Form.Group>
               {/* ------------------------ h >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="h"
                 onChange={(e) => {
                   setH(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
                 <Form.Label>h:</Form.Label>
-                <Form.Control ref={inputH} type="number" placeholder="1.2" />
+                <Form.Control id="inputH" type="number" placeholder="1.2" />
               </Form.Group>
               {/* ------------------------ h_sl >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="h_sl"
                 onChange={(e) => {
                   setH_sl(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
                 <Form.Label>h_sl:</Form.Label>
-                <Form.Control ref={inputH_sl} type="number" placeholder="0.2" />
+                <Form.Control id="inputH_sl" type="number" placeholder="0.2" />
               </Form.Group>
               {/* ------------------------ b_eff >--- */}
               <Form.Group
                 className="mb-3"
-                controlId="b_eff"
                 onChange={(e) => {
                   setB_eff(parseFloat(e.target.value.replace(",", ".")));
                 }}
               >
                 <Form.Label>b_eff:</Form.Label>
-                <Form.Control ref={inputB_eff} type="number" placeholder="1" />
+                <Form.Control id="inputB_eff" type="number" placeholder="1" />
               </Form.Group>
               <Row>
                 <Col>
