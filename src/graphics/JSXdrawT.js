@@ -19,7 +19,7 @@ const JSXdrawT = () => {
   const [sliderH_sl, setSliderH_sl] = useState();
   const [jsxBoard, setJsxBoard] = useState();
 
-  const { tDrawData, setTDrawDataFromSliders, tDrawDataFromSliders } =
+  const { tDrawData, setTDrawDataFromSliders } =
     useGlobalContext();
 
   useEffect(() => {
