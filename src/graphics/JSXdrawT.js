@@ -52,7 +52,7 @@ const JSXdrawT = () => {
       [
         [1, 1.8],
         [1.5, 1.8],
-        [0.1, b, 2],
+        [0.1, b, 4],
       ],
       {
         baseline: { strokeColor: "blue" },
@@ -81,7 +81,7 @@ const JSXdrawT = () => {
       [
         [1.0, 1.9],
         [1.5, 1.9],
-        [0.1, b_eff, 5],
+        [0.1, b_eff, 4],
       ],
       {
         baseline: { strokeColor: "blue" },
@@ -110,7 +110,7 @@ const JSXdrawT = () => {
       [
         [0.1, 1.9],
         [0.5, 1.9],
-        [0.5, h, 5],
+        [0.1, h, 4],
       ],
       {
         baseline: { strokeColor: "blue" },
@@ -139,7 +139,7 @@ const JSXdrawT = () => {
       [
         [0.1, 1.8],
         [0.5, 1.8],
-        [0.1, h_sl, 2],
+        [0.1, h_sl, 4],
       ],
       {
         baseline: { strokeColor: "blue" },
