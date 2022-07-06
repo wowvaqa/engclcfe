@@ -176,8 +176,8 @@ const TsecReinfCalcView = () => {
                   <RangeSlider
                     size="lg"
                     tooltip="off"
-                    min={0}
-                    max={2}
+                    min={0.1}
+                    max={4}
                     step={0.01}
                     value={b}
                     onChange={(changeEvent) => {
@@ -204,8 +204,8 @@ const TsecReinfCalcView = () => {
                   <RangeSlider
                     size="lg"
                     tooltip="off"
-                    min={0}
-                    max={2}
+                    min={0.1}
+                    max={4}
                     step={0.01}
                     value={h}
                     onChange={(changeEvent) => {
@@ -236,8 +236,8 @@ const TsecReinfCalcView = () => {
                   <RangeSlider
                     size="lg"
                     tooltip="off"
-                    min={0}
-                    max={2}
+                    min={0.1}
+                    max={4}
                     step={0.01}
                     value={h_sl}
                     onChange={(changeEvent) => {
@@ -269,8 +269,8 @@ const TsecReinfCalcView = () => {
                   <RangeSlider
                     size="lg"
                     tooltip="off"
-                    min={0}
-                    max={2}
+                    min={0.1}
+                    max={4}
                     step={0.01}
                     value={b_eff}
                     onChange={(changeEvent) => {
