@@ -43,7 +43,7 @@ const JSXdrawT = () => {
   }, [tDrawData]);
 
   const gfx = (board) => {
-    var xOffset = 0.5;
+    var xOffset = 0;
     setJsxBoard(board);
 
     /** SLIDER VALUE B */
@@ -62,6 +62,7 @@ const JSXdrawT = () => {
         name: "b", // Not shown, if suffixLabel is set
         suffixLabel: "b = ",
         postLabel: " m",
+        visible: false,
       }
     );
     setSliderB(sliderVal_B);
@@ -90,6 +91,7 @@ const JSXdrawT = () => {
         name: "h", // Not shown, if suffixLabel is set
         suffixLabel: "bEff = ",
         postLabel: " m",
+        visible: false,
       }
     );
     setSliderB_eff(sliderVal_Beff);
@@ -118,6 +120,7 @@ const JSXdrawT = () => {
         name: "h", // Not shown, if suffixLabel is set test
         suffixLabel: "h = ",
         postLabel: " m",
+        visible: false,
       }
     );
     setSliderH(sliderVal_H);
@@ -146,6 +149,7 @@ const JSXdrawT = () => {
         name: "hsl", // Not shown, if suffixLabel is set
         suffixLabel: "hsl = ",
         postLabel: " m",
+        visible: false,
       }
     );
     setSliderH_sl(sliderVal_Hsl);
@@ -171,7 +175,14 @@ const JSXdrawT = () => {
           return sliderVal_H.Value();
         },
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     var pB = board.create(
@@ -184,7 +195,14 @@ const JSXdrawT = () => {
           return sliderVal_H.Value();
         },
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     var pC = board.create(
@@ -197,7 +215,14 @@ const JSXdrawT = () => {
           return sliderVal_H.Value() - sliderVal_Hsl.Value();
         },
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     var pD = board.create(
@@ -210,7 +235,14 @@ const JSXdrawT = () => {
           return sliderVal_H.Value() - sliderVal_Hsl.Value();
         },
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     var pE = board.create(
@@ -221,7 +253,14 @@ const JSXdrawT = () => {
         },
         0,
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     var pF = board.create(
@@ -232,7 +271,14 @@ const JSXdrawT = () => {
         },
         0,
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     var pG = board.create(
@@ -245,7 +291,14 @@ const JSXdrawT = () => {
           return sliderVal_H.Value() - sliderVal_Hsl.Value();
         },
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     var pH = board.create(
@@ -256,7 +309,14 @@ const JSXdrawT = () => {
           return sliderVal_H.Value() - sliderVal_Hsl.Value();
         },
       ],
-      { visible: pointVisibile }
+      {
+        visible: pointVisibile,
+        withLabel: false,
+        size: 1,
+        fillColor: "black",
+        strokeColor: "black",
+        strokeWidth: 0,
+      }
     );
 
     /* board.create("segment", [pA, pB], {strokeWidth: strokeWidth}, {color: 'black'}); */
