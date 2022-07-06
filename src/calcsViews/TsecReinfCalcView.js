@@ -8,6 +8,8 @@ import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
 import TsecReinfApi from "./TsecReinfApi";
 import TsecReinfErrHandler from "./TsecReinfErrHandler";
 
+import RangeSlider from "react-bootstrap-range-slider";
+
 import { useGlobalContext } from "../Context";
 
 const TsecReinfCalcView = () => {
@@ -45,7 +47,8 @@ const TsecReinfCalcView = () => {
 
   useEffect(() => {
     /* Dane z suwaków - nie wymagana aktualizacja stanów. */
-    if (!dataFromSlidersFlag) setTDrawData({ b: b, b_eff: b_eff, h: h, h_sl: h_sl });
+    if (!dataFromSlidersFlag)
+      setTDrawData({ b: b, b_eff: b_eff, h: h, h_sl: h_sl });
     setDataFromSlidersFlag(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [b, h, h_sl, b_eff]);
@@ -71,25 +74,25 @@ const TsecReinfCalcView = () => {
     );
 
     if (tDrawDataFromSliders.b !== -1) {
-      document.getElementById("inputB").value=tDrawDataFromSliders.b
+      document.getElementById("inputB").value = tDrawDataFromSliders.b;
       setB(tDrawDataFromSliders.b);
     }
 
     if (tDrawDataFromSliders.h !== -1) {
-      document.getElementById("inputH").value=tDrawDataFromSliders.h
+      document.getElementById("inputH").value = tDrawDataFromSliders.h;
       setH(tDrawDataFromSliders.h);
     }
 
     if (tDrawDataFromSliders.b_eff !== -1) {
-      document.getElementById("inputB_eff").value=tDrawDataFromSliders.b_eff
+      document.getElementById("inputB_eff").value = tDrawDataFromSliders.b_eff;
       setB_eff(tDrawDataFromSliders.b_eff);
     }
 
     if (tDrawDataFromSliders.h_sl !== -1) {
-      document.getElementById("inputH_sl").value=tDrawDataFromSliders.h_sl
+      document.getElementById("inputH_sl").value = tDrawDataFromSliders.h_sl;
       setH_sl(tDrawDataFromSliders.h_sl);
     }
-    
+
     setDataFromSlidersFlag(true);
   }, [tDrawDataFromSliders]);
 
@@ -156,45 +159,128 @@ const TsecReinfCalcView = () => {
                 />
               </Form.Group>
               {/* ------------------------ b >--- */}
-              <Form.Group
-                className="mb-3"
-                onChange={(e) => {
-                  setB(parseFloat(e.target.value.replace(",", ".")));
-                }}
-              >
-                <Form.Label>b:</Form.Label>
-                <Form.Control id="inputB" type="number" placeholder="0.5" />
-              </Form.Group>
+              <Row>
+                <h6>b:</h6>
+                <Col>
+                  <Form.Group
+                    className="mb-3"
+                    onChange={(e) => {
+                      setB(parseFloat(e.target.value.replace(",", ".")));
+                    }}
+                  >
+                    {/* <Form.Label>b:</Form.Label> */}
+                    <Form.Control id="inputB" type="number" placeholder="0.5" />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <RangeSlider
+                    size="lg"
+                    tooltip="off"
+                    min={0}
+                    max={2}
+                    step={0.01}
+                    value={b}
+                    onChange={(changeEvent) => {
+                      setB(changeEvent.target.value);
+                      document.getElementById("inputB").value = b;
+                    }}
+                  />
+                </Col>
+              </Row>
               {/* ------------------------ h >--- */}
-              <Form.Group
-                className="mb-3"
-                onChange={(e) => {
-                  setH(parseFloat(e.target.value.replace(",", ".")));
-                }}
-              >
-                <Form.Label>h:</Form.Label>
-                <Form.Control id="inputH" type="number" placeholder="1.2" />
-              </Form.Group>
+              <Row>
+                <h6>h:</h6>
+                <Col>
+                  <Form.Group
+                    className="mb-3"
+                    onChange={(e) => {
+                      setH(parseFloat(e.target.value.replace(",", ".")));
+                    }}
+                  >
+                    <Form.Control id="inputH" type="number" placeholder="1.2" />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <RangeSlider
+                    size="lg"
+                    tooltip="off"
+                    min={0}
+                    max={2}
+                    step={0.01}
+                    value={h}
+                    onChange={(changeEvent) => {
+                      setH(changeEvent.target.value);
+                      document.getElementById("inputH").value = h;
+                    }}
+                  />
+                </Col>
+              </Row>
               {/* ------------------------ h_sl >--- */}
-              <Form.Group
-                className="mb-3"
-                onChange={(e) => {
-                  setH_sl(parseFloat(e.target.value.replace(",", ".")));
-                }}
-              >
-                <Form.Label>h_sl:</Form.Label>
-                <Form.Control id="inputH_sl" type="number" placeholder="0.2" />
-              </Form.Group>
+              <Row>
+                <h6>h_sl:</h6>
+                <Col>
+                  <Form.Group
+                    className="mb-3"
+                    onChange={(e) => {
+                      setH_sl(parseFloat(e.target.value.replace(",", ".")));
+                    }}
+                  >
+                    <Form.Control
+                      id="inputH_sl"
+                      type="number"
+                      placeholder="0.2"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <RangeSlider
+                    size="lg"
+                    tooltip="off"
+                    min={0}
+                    max={2}
+                    step={0.01}
+                    value={h_sl}
+                    onChange={(changeEvent) => {
+                      setH_sl(changeEvent.target.value);
+                      document.getElementById("inputH_sl").value = h_sl;
+                    }}
+                  />
+                </Col>
+              </Row>
+
               {/* ------------------------ b_eff >--- */}
-              <Form.Group
-                className="mb-3"
-                onChange={(e) => {
-                  setB_eff(parseFloat(e.target.value.replace(",", ".")));
-                }}
-              >
-                <Form.Label>b_eff:</Form.Label>
-                <Form.Control id="inputB_eff" type="number" placeholder="1" />
-              </Form.Group>
+              <Row>
+                <h6>b_eff:</h6>
+                <Col>
+                  <Form.Group
+                    className="mb-3"
+                    onChange={(e) => {
+                      setB_eff(parseFloat(e.target.value.replace(",", ".")));
+                    }}
+                  >
+                    <Form.Control
+                      id="inputB_eff"
+                      type="number"
+                      placeholder="1"
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <RangeSlider
+                    size="lg"
+                    tooltip="off"
+                    min={0}
+                    max={2}
+                    step={0.01}
+                    value={b_eff}
+                    onChange={(changeEvent) => {
+                      setB_eff(changeEvent.target.value);
+                      document.getElementById("inputB_eff").value = b_eff;
+                    }}
+                  />
+                </Col>
+              </Row>
+
               <Row>
                 <Col>
                   {/* ------------------------ cl_conc >--- */}

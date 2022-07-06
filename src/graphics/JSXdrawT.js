@@ -6,6 +6,8 @@ import { useGlobalContext } from "../Context";
 
 import { roundNumber } from "../utils/Utils";
 
+let pointVisibile = true;
+
 const JSXdrawT = () => {
   const [b, setB] = useState(0.5);
   const [b_eff, setB_eff] = useState(1);
@@ -19,8 +21,7 @@ const JSXdrawT = () => {
   const [sliderH_sl, setSliderH_sl] = useState();
   const [jsxBoard, setJsxBoard] = useState();
 
-  const { tDrawData, setTDrawDataFromSliders } =
-    useGlobalContext();
+  const { tDrawData, setTDrawDataFromSliders } = useGlobalContext();
 
   useEffect(() => {
     console.log("[JSXdrawT] Tdraw data: ", tDrawData);
@@ -33,7 +34,10 @@ const JSXdrawT = () => {
     if (sliderB_eff !== undefined) sliderB_eff.setValue(b_eff);
     if (sliderH !== undefined) sliderH.setValue(h);
     if (sliderH_sl !== undefined) sliderH_sl.setValue(h_sl);
-    if (jsxBoard !== undefined) jsxBoard.fullUpdate();
+    if (jsxBoard !== undefined) {
+      jsxBoard.zoomAllPoints();
+      jsxBoard.fullUpdate();
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tDrawData]);
@@ -94,7 +98,7 @@ const JSXdrawT = () => {
         b: -1,
         h: -1,
         b_eff: roundNumber(sliderVal_Beff.Value(), 4),
-        h_sl: -1
+        h_sl: -1,
       });
     });
 
@@ -159,85 +163,118 @@ const JSXdrawT = () => {
       return (sliderVal_Beff.Value() - sliderVal_B.Value()) / 2;
     };
 
-    var pA = board.create("point", [
-      xOffset,
-      function () {
-        return sliderVal_H.Value();
-      },
-    ]);
+    var pA = board.create(
+      "point",
+      [
+        xOffset,
+        function () {
+          return sliderVal_H.Value();
+        },
+      ],
+      { visible: pointVisibile }
+    );
 
-    var pB = board.create("point", [
-      function () {
-        return pA.X() + sliderVal_Beff.Value();
-      },
-      function () {
-        return sliderVal_H.Value();
-      },
-    ]);
+    var pB = board.create(
+      "point",
+      [
+        function () {
+          return pA.X() + sliderVal_Beff.Value();
+        },
+        function () {
+          return sliderVal_H.Value();
+        },
+      ],
+      { visible: pointVisibile }
+    );
 
-    var pC = board.create("point", [
-      function () {
-        return pA.X() + sliderVal_Beff.Value();
-      },
-      function () {
-        return sliderVal_H.Value() - sliderVal_Hsl.Value();
-      },
-    ]);
+    var pC = board.create(
+      "point",
+      [
+        function () {
+          return pA.X() + sliderVal_Beff.Value();
+        },
+        function () {
+          return sliderVal_H.Value() - sliderVal_Hsl.Value();
+        },
+      ],
+      { visible: pointVisibile }
+    );
 
-    var pD = board.create("point", [
-      function () {
-        return pA.X() + sliderVal_Beff.Value() - tVal();
-      },
-      function () {
-        return sliderVal_H.Value() - sliderVal_Hsl.Value();
-      },
-    ]);
+    var pD = board.create(
+      "point",
+      [
+        function () {
+          return pA.X() + sliderVal_Beff.Value() - tVal();
+        },
+        function () {
+          return sliderVal_H.Value() - sliderVal_Hsl.Value();
+        },
+      ],
+      { visible: pointVisibile }
+    );
 
-    var pE = board.create("point", [
-      function () {
-        return pA.X() + sliderVal_Beff.Value() - tVal();
-      },
-      0,
-    ]);
+    var pE = board.create(
+      "point",
+      [
+        function () {
+          return pA.X() + sliderVal_Beff.Value() - tVal();
+        },
+        0,
+      ],
+      { visible: pointVisibile }
+    );
 
-    var pF = board.create("point", [
-      function () {
-        return pA.X() + sliderVal_Beff.Value() - tVal() - sliderVal_B.Value();
-      },
-      0,
-    ]);
+    var pF = board.create(
+      "point",
+      [
+        function () {
+          return pA.X() + sliderVal_Beff.Value() - tVal() - sliderVal_B.Value();
+        },
+        0,
+      ],
+      { visible: pointVisibile }
+    );
 
-    var pG = board.create("point", [
-      function () {
-        return pA.X() + sliderVal_Beff.Value() - tVal() - sliderVal_B.Value();
-      },
-      function () {
-        return sliderVal_H.Value() - sliderVal_Hsl.Value();
-      },
-    ]);
+    var pG = board.create(
+      "point",
+      [
+        function () {
+          return pA.X() + sliderVal_Beff.Value() - tVal() - sliderVal_B.Value();
+        },
+        function () {
+          return sliderVal_H.Value() - sliderVal_Hsl.Value();
+        },
+      ],
+      { visible: pointVisibile }
+    );
 
-    var pH = board.create("point", [
-      xOffset,
-      function () {
-        return sliderVal_H.Value() - sliderVal_Hsl.Value();
-      },
-    ]);
+    var pH = board.create(
+      "point",
+      [
+        xOffset,
+        function () {
+          return sliderVal_H.Value() - sliderVal_Hsl.Value();
+        },
+      ],
+      { visible: pointVisibile }
+    );
 
-    board.create("segment", [pA, pB]);
-    board.create("segment", [pB, pC]);
-    board.create("segment", [pC, pD]);
-    board.create("segment", [pD, pE]);
-    board.create("segment", [pE, pF]);
-    board.create("segment", [pF, pG]);
-    board.create("segment", [pG, pH]);
-    board.create("segment", [pH, pA]);
+    /* board.create("segment", [pA, pB], {strokeWidth: strokeWidth}, {color: 'black'}); */
+
+    board.create("polygon", [pA, pB, pC, pD, pE, pF, pG, pH], {
+      borders: { strokeWidth: 5, strokeColor: "black" },
+    });
   };
 
   return (
     <Container>
       <JSXBoard
         logic={gfx}
-        boardAttributes={{ axis: true, boundingbox: [-0.1, 2, 2, -0.25] }}
+        boardAttributes={{
+          axis: false,
+          boundingbox: [-0.1, 2, 2, -0.25],
+          showCopyright: false,
+        }}
         style={{
           border: "1px solid black",
         }}
