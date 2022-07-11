@@ -426,13 +426,13 @@ const TsecReinfCalcView = () => {
           </Col>
           <Col>
             <JSXdrawT />
-            <img
-              // src={image}
+            {/* <img
+              src={image}
               width={332}
               height={400}
               alt="cocktail db logo"
               className="weightElement"
-            />
+            /> */}
           </Col>
         </Row>
         <br></br>

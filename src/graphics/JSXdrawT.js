@@ -5,8 +5,10 @@ import JSXBoard from "../JSXBoard";
 import { useGlobalContext } from "../Context";
 
 import { roundNumber } from "../utils/Utils";
+import { drawDimensionLines } from "./drawData/TsecDrawDimensionLines"
 
 let pointVisibile = true;
+let showLabel = false;
 
 const JSXdrawT = () => {
   const [b, setB] = useState(0.5);
@@ -177,7 +179,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -197,7 +199,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -217,7 +219,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -237,7 +239,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -255,7 +257,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -273,7 +275,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -293,7 +295,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -311,7 +313,7 @@ const JSXdrawT = () => {
       ],
       {
         visible: pointVisibile,
-        withLabel: false,
+        withLabel: showLabel,
         size: 1,
         fillColor: "black",
         strokeColor: "black",
@@ -324,6 +326,8 @@ const JSXdrawT = () => {
     board.create("polygon", [pA, pB, pC, pD, pE, pF, pG, pH], {
       borders: { strokeWidth: 5, strokeColor: "black" },
     });
+
+    drawDimensionLines(board, pA, pB, pC, pE, pF);
   };
 
   return (
