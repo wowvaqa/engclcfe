@@ -5,7 +5,8 @@ import JSXBoard from "../JSXBoard";
 import { useGlobalContext } from "../Context";
 
 import { roundNumber } from "../utils/Utils";
-import { drawDimensionLines } from "./drawData/TsecDrawDimensionLines"
+import { drawDimensionLines } from "./drawData/TsecDrawDimensionLines";
+import { drawDimensionTexts } from "./drawData/TsecDrawTexts";
 
 let pointVisibile = true;
 let showLabel = false;
@@ -328,6 +329,18 @@ const JSXdrawT = () => {
     });
 
     drawDimensionLines(board, pA, pB, pC, pE, pF);
+    drawDimensionTexts(
+      board,
+      sliderVal_Beff,
+      sliderVal_H,
+      sliderVal_Hsl,
+      sliderVal_B,
+      pA,
+      pB,
+      pC,
+      pE,
+      pF
+    );
   };
 
   return (
