@@ -181,8 +181,10 @@ const TsecReinfCalcView = () => {
                     step={0.01}
                     value={b}
                     onChange={(changeEvent) => {
-                      setB(changeEvent.target.value);
-                      document.getElementById("inputB").value = b;
+                      if (changeEvent.target.value < b_eff) {
+                        setB(changeEvent.target.value);
+                        document.getElementById("inputB").value = b;
+                      }
                     }}
                   />
                 </Col>
@@ -209,8 +211,10 @@ const TsecReinfCalcView = () => {
                     step={0.01}
                     value={h}
                     onChange={(changeEvent) => {
-                      setH(changeEvent.target.value);
-                      document.getElementById("inputH").value = h;
+                      if (changeEvent.target.value > h_sl) {
+                        setH(changeEvent.target.value);
+                        document.getElementById("inputH").value = h;
+                      }
                     }}
                   />
                 </Col>
@@ -241,8 +245,10 @@ const TsecReinfCalcView = () => {
                     step={0.01}
                     value={h_sl}
                     onChange={(changeEvent) => {
-                      setH_sl(changeEvent.target.value);
-                      document.getElementById("inputH_sl").value = h_sl;
+                      if (changeEvent.target.value < h) {
+                        setH_sl(changeEvent.target.value);
+                        document.getElementById("inputH_sl").value = h_sl;
+                      }
                     }}
                   />
                 </Col>
@@ -274,8 +280,10 @@ const TsecReinfCalcView = () => {
                     step={0.01}
                     value={b_eff}
                     onChange={(changeEvent) => {
-                      setB_eff(changeEvent.target.value);
-                      document.getElementById("inputB_eff").value = b_eff;
+                      if (changeEvent.target.value > b) {
+                        setB_eff(changeEvent.target.value);
+                        document.getElementById("inputB_eff").value = b_eff;
+                      }
                     }}
                   />
                 </Col>
