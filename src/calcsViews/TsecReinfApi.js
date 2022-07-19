@@ -3,6 +3,13 @@ import axios from "axios";
 
 import { useGlobalContext } from "../Context";
 
+import { log, jsClasses } from "../utils/Utils";
+
+/** Show log in console if true */
+const showLogs = true;
+/** Class name for log */
+const cls = jsClasses.TsecReinfApi;
+
 const TsecReinfApi = () => {
   const {
     setModalWaitText,
@@ -22,18 +29,19 @@ const TsecReinfApi = () => {
   const [remark2, setRemark2] = useState("");
 
   useEffect(() => {
-    console.log(
-      "(TSecApi) Reciving data to send for API: " + tReinforcedConcreteData
-    );
-    console.log(tReinforcedConcreteData);
-    console.log(apiTrigger);
+    log(cls, "Reciving data from view", tReinforcedConcreteData, showLogs);
+    log(cls, "apiTrigger", apiTrigger, showLogs);
+
     if (
       apiTrigger.isButtonPressed &&
       apiTrigger.isNoErrors &&
       !apiTrigger.isWaitForAction
     ) {
-      console.log(
-        "(TSecApi) Data from RectDouble are ready, sending data to BackEND"
+      log(
+        cls,
+        "Data are ready, sending them to BackEND",
+        tReinforcedConcreteData,
+        showLogs
       );
       initSendData(tReinforcedConcreteData);
     }
@@ -41,20 +49,13 @@ const TsecReinfApi = () => {
   }, [tReinforcedConcreteData, apiTrigger]);
 
   useEffect(() => {
-    console.log(
-      "(TSecApi) as1, ns1, as2, ns2, remark, remark2 IS CHANGE, BACKEND RESPONDE: " +
-        as1 +
-        " " +
-        ns1 +
-        " " +
-        as2 +
-        " " +
-        ns2 +
-        " " +
-        remark +
-        " " +
-        remark2
+    log(
+      cls,
+      "Backend respond",
+      { as1, ns1, as2, ns2, remark, remark2 },
+      showLogs
     );
+
     const dataFromApi = { as1, ns1, as2, ns2, remark, remark2 };
     setTreinforcedConcreteDataFromApi(dataFromApi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,8 +105,7 @@ const TsecReinfApi = () => {
       isNoErrors: false,
       isWaitForAction: false,
     });
-    console.log("(TSecApi) apiTrigger: ");
-    console.log(apiTrigger);
+    log(cls, "apiTrigger", apiTrigger, showLogs);
   };
 
   return <></>;
