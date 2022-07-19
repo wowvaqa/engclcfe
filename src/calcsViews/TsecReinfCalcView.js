@@ -189,7 +189,7 @@ const TsecReinfCalcView = () => {
                     value={b}
                     onChange={(changeEvent) => {
                       if (changeEvent.target.value < b_eff) {
-                        setB(changeEvent.target.value);
+                        setB(parseFloat(changeEvent.target.value.replace(",", ".")));
                         document.getElementById("inputB").value = b;
                       }
                     }}
@@ -219,7 +219,7 @@ const TsecReinfCalcView = () => {
                     value={h}
                     onChange={(changeEvent) => {
                       if (changeEvent.target.value > h_sl) {
-                        setH(changeEvent.target.value);
+                        setH(parseFloat(changeEvent.target.value.replace(",", ".")));
                         document.getElementById("inputH").value = h;
                       }
                     }}
@@ -253,7 +253,7 @@ const TsecReinfCalcView = () => {
                     value={h_sl}
                     onChange={(changeEvent) => {
                       if (changeEvent.target.value < h) {
-                        setH_sl(changeEvent.target.value);
+                        setH_sl(parseFloat(changeEvent.target.value.replace(",", ".")));
                         document.getElementById("inputH_sl").value = h_sl;
                       }
                     }}
@@ -288,7 +288,7 @@ const TsecReinfCalcView = () => {
                     value={b_eff}
                     onChange={(changeEvent) => {
                       if (changeEvent.target.value > b) {
-                        setB_eff(changeEvent.target.value);
+                        setB_eff(parseFloat(changeEvent.target.value.replace(",", ".")));
                         document.getElementById("inputB_eff").value = b_eff;
                       }
                     }}
