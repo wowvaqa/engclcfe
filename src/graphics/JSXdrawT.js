@@ -8,6 +8,13 @@ import { roundNumber } from "../utils/Utils";
 import { drawDimensionLines } from "./drawData/TsecDrawDimensionLines";
 import { drawDimensionTexts } from "./drawData/TsecDrawTexts";
 
+import { log, jsClasses } from "../utils/Utils";
+
+/** Show log in console if true */
+const showLogs = false;
+/** Class name for log */
+const cls = jsClasses.JSXdrawT;
+
 let pointVisibile = true;
 let showLabel = false;
 
@@ -27,7 +34,7 @@ const JSXdrawT = () => {
   const { tDrawData, setTDrawDataFromSliders } = useGlobalContext();
 
   useEffect(() => {
-    console.log("[JSXdrawT] Tdraw data: ", tDrawData);
+    log(cls, "Tdraw data", tDrawData, showLogs)
     setB(tDrawData.b);
     setB_eff(tDrawData.b_eff);
     setH(tDrawData.h);

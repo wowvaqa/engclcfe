@@ -28,6 +28,7 @@ export function log(jsClass, msg, obj, visibility) {
 export const jsClasses = {
   TsecReinfApi: "TsecReinfApi",
   TsecReinfCalcView: "TsecReinfCalcView",
+  JSXdrawT: "JSXdrawT",
 };
 
 export default Utlis;
