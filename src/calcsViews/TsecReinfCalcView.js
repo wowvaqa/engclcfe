@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
+import RangeSlider from "react-bootstrap-range-slider";
 //  import image from "../assets/API_3_pio.png";
 
 import JSXdrawT from "../graphics/JSXdrawT";
@@ -8,9 +9,14 @@ import TsecReinfResultView from "../calcsViews/TsecReinfResultView";
 import TsecReinfApi from "./TsecReinfApi";
 import TsecReinfErrHandler from "./TsecReinfErrHandler";
 
-import RangeSlider from "react-bootstrap-range-slider";
+import { log, jsClasses } from "../utils/Utils";
 
 import { useGlobalContext } from "../Context";
+
+/** Show log in console if true */
+const showLogs = true;
+/** Class name for log */
+const cls = jsClasses.TsecReinfCalcView;
 
 const TsecReinfCalcView = () => {
   const [name, setName] = useState("My first cross sect");
@@ -54,8 +60,12 @@ const TsecReinfCalcView = () => {
   }, [b, h, h_sl, b_eff]);
 
   useEffect(() => {
-    console.log("(TSecView) Reciving data from API: ");
-    console.log(tReinforcedConcreteDataFromApi);
+    log(
+      cls,
+      "Reciving data from API",
+      tReinforcedConcreteDataFromApi,
+      showLogs
+    );
 
     setAs1(tReinforcedConcreteDataFromApi.as1);
     setNs1(tReinforcedConcreteDataFromApi.ns1);
@@ -68,10 +78,7 @@ const TsecReinfCalcView = () => {
   }, [tReinforcedConcreteDataFromApi]);
 
   useEffect(() => {
-    console.log(
-      "[TsecReinfCalcView] tDrawDataFromSliders: ",
-      tDrawDataFromSliders
-    );
+    log(cls, "tDrawDataFromSliders", tDrawDataFromSliders, showLogs);
 
     if (tDrawDataFromSliders.b !== -1) {
       document.getElementById("inputB").value = tDrawDataFromSliders.b;
@@ -112,7 +119,7 @@ const TsecReinfCalcView = () => {
       fi_opp,
       m_sd,
     };
-    console.log("[TsecReinfCalcView] sendDataToApi() " + dataToSend);
+    log(cls, "sendDataToApi", dataToSend, showLogs);
 
     setupDataModel(true);
     setTreinforcedConcreteData(dataToSend);
